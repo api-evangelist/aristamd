@@ -1,0 +1,151 @@
+generated: '2026-08-06'
+method: derived
+source: >-
+  openapi/aristamd-openapi-original.json plus anonymous live probes of
+  api.aristamd.com on 2026-08-06. AristaMD publishes no developer documentation,
+  so nothing here comes from a docs page — every convention is read off the
+  contract or observed on the wire.
+
+base_url: https://api.aristamd.com
+media_type: application/json
+
+authentication:
+  style: OAuth 2.0 bearer token (Laravel Passport), plus SAML 2.0 SSO for
+    federated human login
+  documented_in_spec: false
+  detail: authentication/aristamd-authentication.yml
+
+idempotency:
+  supported: false
+  header: null
+  evidence: >-
+    No Idempotency-Key parameter, header, or extension appears anywhere in the
+    Swagger document, and no idempotency guidance is published. Of the 42
+    operations, 21 are unsafe writes (POST/PUT/PATCH/DELETE), including
+    POST /econsults and POST /patients.
+  consequence: >-
+    A client that retries a timed-out POST /econsults or POST /patients has no
+    contract-level protection against creating a duplicate clinical record. This
+    is the single highest-value gap in the API for agent and integration use.
+  # No `type: Idempotency` pointer is wired in apis.yml — the provider has no
+  # idempotency contract, and emitting one would be false credit.
+
+pagination:
+  style: offset-limit (DataTables server-side convention)
+  supported_on: [GET /patients, GET /users]
+  parameters:
+  - {name: start, in: query, type: integer, meaning: offset of records}
+  - {name: length, in: query, type: integer, meaning: page size}
+  - {name: orderColumn, in: query, type: string, meaning: column to sort by}
+  - {name: orderDir, in: query, type: string, meaning: sort direction}
+  - {name: searchValue, in: query, type: string, meaning: free-text search term}
+  response_fields:
+    documented: false
+    note: >-
+      No total-count, page-count or next-page field is declared in any response
+      schema, so a client cannot tell from the contract when it has reached the
+      end of a collection. The `DT_RowId` field on WorkupChecklist confirms the
+      DataTables lineage.
+  gaps:
+  - >-
+    Only 2 of the 11 collection-returning operations expose pagination at all.
+    GET /econsults, GET /panelists and GET /reviews take filters but no
+    start/length, so their result sets are unbounded from the caller's side.
+  - No cursor pagination anywhere.
+
+filtering:
+  style: query parameters, per-operation, with bracket notation for ranges and
+    nested filters
+  examples:
+  - 'GET /econsults?status=&site=&request_date[from]=&request_date[to]=&panelistId='
+  - 'GET /patients/search?data[last_name]=&data[q]='
+  note: >-
+    PHP-style bracket parameters (`request_date[from]`, `data[q]`) are used
+    rather than a uniform filter grammar. Naming is inconsistent across
+    operations — `panelistId` (camelCase) sits beside `specialty_code`
+    (snake_case) and `site` (bare).
+
+field_expansion:
+  supported: false
+  note: >-
+    Related objects are embedded unconditionally in the EConsult schema with no
+    expand/fields parameter to control them. See data-model observations.
+
+metadata:
+  supported: false
+
+request_tracing:
+  request_id_header: null
+  evidence: >-
+    No X-Request-Id, X-Correlation-Id or trace header was returned on any probed
+    response. Response headers observed were Server, Content-Type, Cache-Control,
+    Date, Access-Control-Allow-Origin, Strict-Transport-Security, P3P and
+    Referrer-Policy only.
+
+versioning:
+  scheme: none
+  current: 1.0.0
+  evidence: >-
+    `info.version` in the Swagger document is 1.0.0, but no version appears in
+    the URL path, in a header, or in a media type. Every path sits at the host
+    root (/econsults, /patients). Probes of /v1/* returned 404.
+  consequence: There is no mechanism by which a breaking change could be shipped
+    without breaking every existing caller.
+  detail: lifecycle/aristamd-lifecycle.yml
+
+error_envelope:
+  shape: '{"message": "<string>"}'
+  rfc9457: false
+  machine_readable_code: false
+  detail: errors/aristamd-problem-types.yml
+  note: The /oauth/token endpoint uses a different, RFC 6749-conformant envelope.
+
+rate_limiting:
+  signalled: false
+  evidence: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After headers were returned on any
+    probed response, and no rate-limit policy is published. Absence of a signal
+    is not proof there is no limit — only that a client cannot see one.
+
+cors:
+  access_control_allow_origin: '*'
+  note: >-
+    The API returns a wildcard CORS origin. Observed on 401 responses; whether it
+    is also sent on authenticated responses could not be determined anonymously.
+
+http_semantics:
+  methods_used: [GET, POST, PUT, PATCH, DELETE]
+  patch_style: >-
+    Non-standard. PATCH /patients/{patientId} takes an `operation` query
+    parameter plus an `assets` array rather than a JSON Patch or JSON Merge Patch
+    body, and PATCH /users/update takes the target id as a query parameter rather
+    than in the path. (The GitHub org publishes a fork of php-jsonpatch, but the
+    public API does not use it.)
+  status_codes:
+    success: [200, 201, 204]
+    client_error: [400, 402, 403, 404]
+    server_error: [500]
+    note: 401 is returned by the running service but declared on no operation;
+      402 is used where 422 is described.
+
+naming:
+  paths: mixed — kebab-case (/workup-checklists, /top-patients), camelCase
+    (/logAvailability, /getNextAvailable, /withAvailablePanelists) and uppercase
+    (/HL7/messages) all appear
+  fields: snake_case throughout the schemas
+  operation_ids:
+    unique: false
+    note: >-
+      Only 14 distinct operationIds across 42 operations. Laravel resource
+      controller defaults repeat heavily — `index` x8, `show` x5, `store` x4,
+      `update` x4, `post` x3, `events` x3, `patch` x3. Non-unique operationIds
+      break SDK generation, Arazzo workflow references and any tooling that
+      addresses operations by id. This is the most consequential contract defect
+      in the document.
+
+cross_references:
+  authentication: authentication/aristamd-authentication.yml
+  errors: errors/aristamd-problem-types.yml
+  lifecycle: lifecycle/aristamd-lifecycle.yml
+  data_model: data-model/aristamd-data-model.yml
+  conformance: conformance/aristamd-conformance.yml

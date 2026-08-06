@@ -1,0 +1,66 @@
+generated: '2026-08-06'
+method: searched
+source: registry searches on 2026-08-06
+result: none
+packages: []
+summary: >-
+  AristaMD publishes no client library for its own API in any public package
+  registry. No `SDKs` pointer is wired in apis.yml — there is no SDK to point at,
+  and emitting one would credit an integration surface that does not exist.
+
+registries_searched:
+- {registry: npm, query: aristamd, results: 0}
+- {registry: PyPI, package: aristamd, status: 404}
+- {registry: RubyGems, package: aristamd, status: 404}
+- {registry: Packagist, vendor: aristamd, results: 0, note: 'packageNames: [] —
+    notable, because the API itself is PHP/Laravel'}
+- {registry: crates.io, searched: true, results: 0}
+- {registry: Hex, package: ribbonex, status: 404}
+- {registry: Maven Central, searched: true, results: 0}
+- {registry: NuGet, searched: true, results: 0}
+- {registry: pkg.go.dev, searched: true, results: 0}
+
+github_organization:
+  url: https://github.com/aristamd
+  status: 200
+  public_repos: 38
+  first_party_but_not_client_libraries: true
+  note: >-
+    The org is active and public, but it is almost entirely forks of third-party
+    projects (lumen-framework, entrust, ui-grid, DataTables, toastify-js,
+    puppet-jenkins, Purifier, plato, php-jsonpatch, siiimple-toast,
+    ex_oauth2_provider, mixpanel_api_ex, Swaggervel) pinned for internal use.
+    Each npm name checked below resolves to another author's repository, so none
+    is an AristaMD publication.
+  npm_names_checked:
+  - {name: applicationstate, latest: 0.3.0, repository: github.com/claytongulick/applicationstate,
+    first_party: false}
+  - {name: react-pullable, latest: 1.0.5, repository: github.com/sconstantinides/react-pullable,
+    first_party: false}
+  - {name: siiimple-toast, latest: 3.1.7, repository: github.com/ooyun0/siiimple-toast,
+    first_party: false}
+  repos_of_interest:
+  # Genuinely relevant to the API surface, but none is a client for AristaMD's API.
+  - {name: mllparty, description: 'Send HL7 over MLLP by making an HTTP call to
+      this service', relevance: 'corroborates the HL7 v2 intake at POST /HL7/messages'}
+  - {name: elixir-mllp, description: 'Elixir library for transporting HL7 messages
+      via MLLP', relevance: HL7 transport tooling}
+  - {name: Swaggervel, description: 'Swagger for Laravel', relevance: 'this is
+      what generates the Swagger 2.0 document served at api.aristamd.com/api-docs'}
+  - {name: intergy-laravel, description: 'bridge for Laravel and Intergy''s API',
+    relevance: 'a client for Greenway Intergy — a third-party EHR — not for
+      AristaMD; matches the GET /intergy/patients/{id} operation in the spec'}
+  - {name: laravel-saml2, description: SAML2 authentication package, relevance:
+      'corroborates the SAML SP at api.aristamd.com/saml2/metadata'}
+  - {name: ex_oauth2_provider, description: 'OAuth 2 for Elixir/Phoenix',
+    relevance: OAuth tooling}
+  - {name: ribbonex, description: Elixir client for the Ribbon Health API,
+    relevance: third-party provider-data client}
+
+gap: >-
+  AristaMD's integration story is EHR-embedded and HL7-based rather than
+  SDK-based, which is consistent with the healthcare market. But an integrator
+  who finds the live Swagger document has no generated client to start from, and
+  because the document's operationIds are not unique (14 distinct ids across 42
+  operations), standard code generators will not produce a usable client from it
+  either. Fixing operationId uniqueness would make an SDK generatable for free.

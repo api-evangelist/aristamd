@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+                     validUntil="2026-08-08T18:54:35Z"
+                     cacheDuration="PT604800S"
+                     entityID="https://api.aristamd.com/saml2/metadata">
+    <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+        <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+                                Location="https://api.aristamd.com/saml2/sls" />
+        <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</md:NameIDFormat>
+        <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+                                     Location="https://api.aristamd.com/saml2/acs"
+                                     index="1" />
+        
+    </md:SPSSODescriptor>
+    <md:Organization>
+       <md:OrganizationName xml:lang="en-US">aristamd</md:OrganizationName>
+       <md:OrganizationDisplayName xml:lang="en-US">AristaMD</md:OrganizationDisplayName>
+       <md:OrganizationURL xml:lang="en-US">http://aristamd.com</md:OrganizationURL>
+    </md:Organization>
+    <md:ContactPerson contactType="technical">
+        <md:GivenName>Support</md:GivenName>
+        <md:EmailAddress>support@aristamd.com</md:EmailAddress>
+    </md:ContactPerson>
+    <md:ContactPerson contactType="support">
+        <md:GivenName>Support</md:GivenName>
+        <md:EmailAddress>support@aristamd.com</md:EmailAddress>
+    </md:ContactPerson>
+</md:EntityDescriptor>

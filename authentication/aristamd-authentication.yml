@@ -1,0 +1,154 @@
+generated: '2026-08-06'
+method: probed
+source: >-
+  Anonymous live probes of https://api.aristamd.com — the published Swagger 2.0
+  definition at /api-docs declares NO securityDefinitions and NO security
+  requirements, so nothing here is derived from the spec. Every fact below is an
+  observed HTTP response recorded on 2026-08-06.
+
+summary:
+  types: [oauth2, saml2]
+  api_key_in: []
+  oauth2_flows: [authorizationCode, clientCredentials, password, refreshToken]
+  spec_declares_auth: false
+  note: >-
+    This is a documentation gap, not an absence of authentication. The Swagger
+    document ships zero securityDefinitions, so a machine reading only the spec
+    would conclude the API is open. It is not: all 32 documented paths return
+    401 without credentials. The real auth model had to be recovered by probing.
+
+# ---------------------------------------------------------------------------
+# What the spec says
+# ---------------------------------------------------------------------------
+spec:
+  file: openapi/aristamd-openapi-original.json
+  swagger: '2.0'
+  securityDefinitions: null
+  security: null
+  header_parameters_declared: 0
+  gap: >-
+    No securityDefinitions object, no global `security`, and not one operation
+    declares an Authorization header parameter. Adding a single
+    securityDefinitions entry plus a global security requirement would make the
+    contract self-describing for SDK generators and agents.
+
+# ---------------------------------------------------------------------------
+# What the running service actually does
+# ---------------------------------------------------------------------------
+schemes:
+- name: oauth2
+  type: oauth2
+  method: probed
+  server: Laravel Passport (league/oauth2-server) — inferred from the RFC 6749
+    error envelope, which carries the league/oauth2-server `hint` and `message`
+    fields alongside the standard `error`/`error_description` pair.
+  token_url: https://api.aristamd.com/oauth/token
+  authorization_url: https://api.aristamd.com/oauth/authorize
+  discovery:
+    oauth_authorization_server: 404
+    oauth_protected_resource: 404
+    openid_configuration: 404
+    note: >-
+      No RFC 8414 / RFC 9728 / OIDC discovery document is published. The
+      endpoints below were found by direct probe, not by discovery.
+  grant_types_supported:
+  # Determined by POSTing each grant_type with no other parameters and reading
+  # which RFC 6749 error came back. `invalid_request` means the server knows the
+  # grant and is asking for the missing parameters; `unsupported_grant_type`
+  # means it does not implement it. No credentials were used or guessed.
+  - grant: authorization_code
+    supported: true
+    evidence: 'POST /oauth/token grant_type=authorization_code -> 400 invalid_request'
+  - grant: client_credentials
+    supported: true
+    evidence: 'POST /oauth/token grant_type=client_credentials -> 400 invalid_request'
+  - grant: password
+    supported: true
+    evidence: 'POST /oauth/token grant_type=password -> 400 invalid_request'
+  - grant: refresh_token
+    supported: true
+    evidence: 'POST /oauth/token grant_type=refresh_token -> 400 invalid_request'
+  - grant: implicit
+    supported: false
+    evidence: 'POST /oauth/token grant_type=implicit -> 400 unsupported_grant_type'
+  - grant: urn:ietf:params:oauth:grant-type:jwt-bearer
+    supported: false
+    evidence: 'POST /oauth/token grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
+      -> 400 unsupported_grant_type'
+  scopes:
+    published: false
+    note: >-
+      No scope reference is published and the Swagger document carries no scope
+      map, so no scopes/ artifact is emitted. Whether this deployment uses
+      Passport scopes at all cannot be determined anonymously.
+
+- name: saml2
+  type: saml2
+  method: probed
+  role: service-provider
+  metadata_url: https://api.aristamd.com/saml2/metadata
+  metadata_file: aristamd-saml2-metadata.xml
+  entity_id: https://api.aristamd.com/saml2/metadata
+  assertion_consumer_service:
+    binding: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST
+    location: https://api.aristamd.com/saml2/acs
+    index: 1
+  single_logout_service:
+    binding: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect
+    location: https://api.aristamd.com/saml2/sls
+  name_id_format: urn:oasis:names:tc:SAML:2.0:nameid-format:persistent
+  authn_requests_signed: false
+  want_assertions_signed: false
+  technical_contact: support@aristamd.com
+  evidence: 'GET /saml2/metadata -> 200 text/xml, 1622 bytes, valid SAML 2.0
+    EntityDescriptor'
+  note: >-
+    A real, machine-readable federation artifact — this is how an identity
+    provider at a health plan or health system would federate clinicians into
+    AristaMD. Worth flagging that the SP advertises AuthnRequestsSigned="false"
+    and WantAssertionsSigned="false"; for a HIPAA-regulated workload most
+    identity teams would expect signed assertions to be required.
+
+# ---------------------------------------------------------------------------
+# Observed enforcement
+# ---------------------------------------------------------------------------
+enforcement:
+  unauthenticated_response:
+    status: 401
+    body: '{"message":"Unauthorized"}'
+    content_type: application/json
+  paths_probed_anonymously: [/econsults, /users, /panelists, /reviews, /comments,
+    /workup-checklists/specialties, '/specialties/withAvailablePanelists/{filter}']
+  result: >-
+    All returned 401. Undocumented control paths (/NOT-A-REAL-PATH, /foo/bar)
+    returned 404 with a different body, which confirms the 401s are real
+    authentication rejections on routed endpoints and not a catch-all.
+  anomaly:
+    path: /patients
+    status: 500
+    body: '{"message":"An error has occurred while processing your request"}'
+    note: >-
+      GET /patients returns 500 rather than 401 when called anonymously. The
+      handler appears to dereference the authenticated user before the auth
+      middleware rejects the request. No data was returned; recorded as an
+      observation for the provider, not as an access finding.
+
+docs:
+  published: false
+  note: >-
+    No public authentication documentation was found. www.aristamd.com has no
+    developer or API section (/developers, /api both 404), and app.aristamd.com,
+    developer.aristamd.com and help.aristamd.com are all the same Angular
+    single-page app, which answers 200 with an identical 1820-byte shell for
+    every path including control paths.
+
+x-evidence:
+  fetched: '2026-08-06'
+  probes:
+  - {url: 'https://api.aristamd.com/api-docs', status: 200}
+  - {url: 'https://api.aristamd.com/oauth/token', status: 400}
+  - {url: 'https://api.aristamd.com/oauth/authorize', status: 401}
+  - {url: 'https://api.aristamd.com/saml2/metadata', status: 200}
+  - {url: 'https://api.aristamd.com/econsults', status: 401}
+  - {url: 'https://api.aristamd.com/.well-known/oauth-authorization-server', status: 404}
+  - {url: 'https://api.aristamd.com/.well-known/openid-configuration', status: 404}

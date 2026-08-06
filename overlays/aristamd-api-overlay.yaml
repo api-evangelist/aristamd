@@ -1,0 +1,143 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the AristaMD API
+  version: 1.0.0
+extends: openapi/aristamd-openapi-original.json
+
+# This Overlay records API Evangelist's enhancements to AristaMD's published
+# Swagger 2.0 document. The harvested original at
+# openapi/aristamd-openapi-original.json is never mutated.
+#
+# Everything added below is either (a) an observed fact from an anonymous probe
+# of api.aristamd.com on 2026-08-06, or (b) a pointer to an artifact in this
+# repository. No operation, parameter, schema or example is invented.
+
+actions:
+
+# --- Provenance and the missing server block -------------------------------
+- target: $.info
+  update:
+    x-apievangelist-source: https://api.aristamd.com/api-docs
+    x-apievangelist-harvested: '2026-08-06'
+    x-apievangelist-profile: https://github.com/api-evangelist/aristamd
+    x-apievangelist-note: >-
+      The published document declares no host, basePath or schemes. The base URL
+      was established by probe: every documented path returns 401 on
+      https://api.aristamd.com while undocumented control paths return 404.
+
+- target: $
+  update:
+    host: api.aristamd.com
+    schemes: [https]
+    x-apievangelist-base-url-evidence:
+      method: probe
+      date: '2026-08-06'
+      routed_401: [/econsults, /users, /panelists, /reviews, /comments,
+        /workup-checklists/specialties]
+      control_404: [/NOT-A-REAL-PATH, /foo/bar]
+
+# --- The authentication the document omits entirely ------------------------
+- target: $
+  update:
+    x-apievangelist-securityDefinitions:
+      # Proposed, NOT present in the original. The original declares no
+      # securityDefinitions at all, which makes the contract read as an open API.
+      oauth2:
+        type: oauth2
+        flow: application
+        tokenUrl: https://api.aristamd.com/oauth/token
+        authorizationUrl: https://api.aristamd.com/oauth/authorize
+        x-grant-types-observed: [authorization_code, client_credentials, password,
+          refresh_token]
+        x-evidence: authentication/aristamd-authentication.yml
+    x-apievangelist-auth-artifact: authentication/aristamd-authentication.yml
+    x-apievangelist-saml-sp: https://api.aristamd.com/saml2/metadata
+
+# --- Observed runtime error contract ---------------------------------------
+- target: $.info
+  update:
+    x-apievangelist-error-envelope:
+      shape: '{"message": "<string>"}'
+      rfc9457: false
+      observed_401: '{"message":"Unauthorized"}'
+      observed_404: '{"message":"The resource you requested could not be found"}'
+      artifact: errors/aristamd-problem-types.yml
+      note: >-
+        The service returns 401 for missing credentials. No operation in the
+        original document declares a 401 — they declare 400 "Invalid Credentials"
+        and 403 "Unauthorized" instead.
+
+# --- Cross-cutting semantics recovered by derivation ------------------------
+- target: $.info
+  update:
+    x-apievangelist-conventions:
+      artifact: conventions/aristamd-conventions.yml
+      pagination: {style: offset-limit, params: [start, length, orderColumn,
+          orderDir, searchValue], supported_on: [/patients, /users]}
+      idempotency: {supported: false, unsafe_operations: 21}
+      versioning: {scheme: none, current: 1.0.0}
+      rate_limit_signal: none observed
+    x-apievangelist-data-model: data-model/aristamd-data-model.yml
+    x-apievangelist-conformance: conformance/aristamd-conformance.yml
+
+# --- Contract defects worth fixing, recorded against the document -----------
+- target: $.info
+  update:
+    x-apievangelist-contract-defects:
+    - id: non-unique-operation-ids
+      severity: high
+      detail: >-
+        14 distinct operationIds across 42 operations (index x8, show x5,
+        store x4, update x4, post x3, events x3, patch x3, destroy x2, get x2).
+        Breaks SDK generation, Arazzo references and any id-addressed tooling.
+    - id: no-security-definitions
+      severity: high
+      detail: The API is fully authenticated but the contract declares no
+        securityDefinitions and no security requirement.
+    - id: undeclared-401
+      severity: medium
+      detail: 401 is the actual authentication failure status; it is declared on
+        zero operations.
+    - id: status-402-for-422
+      severity: medium
+      detail: 'PUT /specialties/{specialtyId} and POST /specialties declare 402
+        (Payment Required) with the description "Unprocessable entity".'
+    - id: no-host-or-schemes
+      severity: medium
+      detail: Document is not self-locating; a client cannot resolve a base URL
+        from the spec alone.
+    - id: typos-in-response-descriptions
+      severity: low
+      detail: '"Specilaty not found" on GET /specialties/{specialtyId}; "Invalid
+        Credentials" / "Invalid credentials" / "Internal Error" / "Internal
+        Server error" inconsistently cased.'
+    - id: unpaginated-collections
+      severity: medium
+      detail: 'GET /econsults, GET /panelists and GET /reviews return collections
+        with no pagination parameters.'
+
+# --- Tag descriptions the original omits (it declares no tags block) --------
+- target: $
+  update:
+    tags:
+    - {name: EConsults, description: 'eConsult lifecycle — create, retrieve,
+        update, assign, search by status, drive state transitions, and log
+        panelist availability. The core aggregate of the platform.'}
+    - {name: Patients, description: 'Patient records, including creation from an
+        HL7 message, patient history, external identifiers and top-referral
+        reporting.'}
+    - {name: Panelists, description: 'Specialist discovery, including
+        next-available routing for a given specialty and patient.'}
+    - {name: Specialties, description: 'Specialty and subspecialty registry, and
+        the filtered view of specialties that currently have available panelists.'}
+    - {name: Reviews, description: Structured question/answer reviews attached to
+        a request.}
+    - {name: Workup Checklists, description: 'Clinical workup guidance keyed on
+        specialty and chief complaint.'}
+    - {name: Comments, description: Free-text comments attached polymorphically to
+        a request.}
+    - {name: Users, description: User directory, search and field-level update.}
+    - {name: Diagnostic, description: Diagnostic records attached to a request.}
+    - {name: Requests, description: Generic request-scoped diagnostic event handler.}
+    - {name: Intergy/Patients, description: 'Patient lookup passthrough to the
+        Greenway Intergy EHR API.'}

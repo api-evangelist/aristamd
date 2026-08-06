@@ -1,0 +1,613 @@
+generated: '2026-08-06'
+method: generated
+source: openapi/aristamd-openapi-original.json
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 42
+  by_action_class:
+    acting: 21
+    connected: 21
+  by_consequence:
+    write: 21
+    read: 21
+  human_in_the_loop_required: 0
+x-apievangelist-review:
+  # The per-operation contracts below are the UNMODIFIED mechanical output of
+  # derive-agentic-access.py. This block records where the generic heuristic is
+  # under-calibrated for this specific API. It does not override the generated
+  # classifications; it tells a reviewer what to change before deploying them.
+  reviewed: '2026-08-06'
+  domain: clinical / US protected health information
+  findings:
+  - id: consequence-underrated
+    detail: >-
+      The heuristic classifies all 21 writes as consequence "write" because none
+      matches its payment/order/transfer or control/stop/dispatch keyword sets.
+      In this API a write creates or alters a clinical record — a patient, an
+      eConsult, a specialist recommendation, a state transition on a care
+      episode. For a healthcare deployment these warrant a consequence tier at
+      least equivalent to "physical", not the default write tier.
+    affects: [POST /econsults, POST /patients, POST /HL7/messages,
+      'PUT /econsults/{econsultId}', 'PATCH /econsults/{econsultId}',
+      'DELETE /econsults/{econsultId}', 'POST /econsults/{eConsultId}/events',
+      'PUT /patients/{patientId}', 'PATCH /patients/{patientId}',
+      'DELETE /diagnostics/{diagnosticId}',
+      'POST /{request}/{requestId}/diagnostics/{diagnosticId}/events']
+  - id: human-in-the-loop-zero
+    detail: >-
+      human_in_the_loop_required is 0. For clinical record creation and care-state
+      transitions the correct value is "required", not the "conditional" the
+      heuristic assigned. Ten operations should be raised before any agent is
+      pointed at this API.
+  - id: reads-are-phi
+    detail: >-
+      Nine of the 21 read operations return protected health information
+      (patients, patient history, patient identifiers, top-referral patients,
+      Intergy passthrough, and any eConsult read, which embeds the patient). The
+      heuristic treats reads as low-consequence "connected"; here a read is a PHI
+      disclosure and needs audit and purpose-binding on a par with a write.
+    affects: [GET /patients, 'GET /patients/{patientId}', GET /patients/search,
+      'GET /patients/{patientId}/history', 'GET /patients/{patientId}/identifiers',
+      'GET /patients/top-patients/{length}', 'GET /intergy/patients/{id}',
+      GET /econsults, 'GET /econsults/{econsultId}']
+  - id: no-idempotency-backstop
+    detail: >-
+      The API publishes no idempotency key, so an agent retry on any acting
+      operation can duplicate a clinical record. Any deployment must supply
+      idempotency at the gateway; the API will not supply it.
+  - id: audience-unbound
+    detail: >-
+      `audience` is null on every operation, as designed. It must be bound per
+      deployment before these contracts mean anything.
+  disposition: >-
+    Treat this file as a starting point that needs clinical review, not as a
+    ready-to-apply policy. It is an API Evangelist artifact, not an AristaMD one.
+operations:
+- path: /comments
+  method: post
+  operationId: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /diagnostics/{diagnosticId}
+  method: delete
+  operationId: destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /{request}/{requestId}/diagnostics/{diagnosticId}/events
+  method: post
+  operationId: events
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /econsults
+  method: get
+  operationId: index
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /econsults
+  method: post
+  operationId: store
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /econsults/{econsultId}
+  method: get
+  operationId: show
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /econsults/{econsultId}
+  method: put
+  operationId: update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /econsults/{econsultId}
+  method: delete
+  operationId: destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /econsults/{econsultId}
+  method: patch
+  operationId: patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /econsults/{econsultId}/assign-to-me
+  method: patch
+  operationId: patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /econsults/search
+  method: get
+  operationId: searchByStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /econsults/logAvailability
+  method: post
+  operationId: LogPanelistAvailability
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /econsults/{eConsultId}/events
+  method: post
+  operationId: events
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /econsults/{eConsultId}/heartbeat
+  method: post
+  operationId: events
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /HL7/messages
+  method: post
+  operationId: store
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /intergy/patients/{id}
+  method: get
+  operationId: index
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /panelists
+  method: get
+  operationId: index
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /panelists/getNextAvailable/{code}/{patient_id}
+  method: get
+  operationId: index
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /patients
+  method: get
+  operationId: index
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /patients
+  method: post
+  operationId: store
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /patients/{patientId}
+  method: get
+  operationId: show
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /patients/{patientId}
+  method: put
+  operationId: update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /patients/{patientId}
+  method: patch
+  operationId: patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /patients/search
+  method: get
+  operationId: show
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /patients/top-patients/{length}
+  method: get
+  operationId: getTopReferralPatients
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /patients/{patientId}/history
+  method: get
+  operationId: history
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /patients/{patientId}/identifiers
+  method: get
+  operationId: identifiers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /reviews
+  method: get
+  operationId: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /reviews
+  method: post
+  operationId: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /reviews/{id}
+  method: get
+  operationId: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /reviews/{id}
+  method: put
+  operationId: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /specialties/{specialtyId}
+  method: get
+  operationId: show
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /specialties/{specialtyId}
+  method: put
+  operationId: update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /specialties
+  method: post
+  operationId: store
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /specialties/withAvailablePanelists/{filter}
+  method: get
+  operationId: index
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /users
+  method: get
+  operationId: index
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /users/{user_id}
+  method: get
+  operationId: show
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /users/search
+  method: post
+  operationId: index
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /users/update
+  method: patch
+  operationId: update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /workup-checklists/specialties
+  method: get
+  operationId: specialties
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /workup-checklists/specialties/{specialtyCode}/chief-complaints
+  method: get
+  operationId: chiefComplaints
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /workup-checklists/specialties/{specialtyCode}/chief-complaints/{chiefComplaintCode}
+  method: get
+  operationId: searchBySpecialtyAndChiefComplaint
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none

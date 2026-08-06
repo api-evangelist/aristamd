@@ -1,0 +1,92 @@
+generated: '2026-08-06'
+method: searched
+probe: true
+url: https://www.aristamd.com/security/
+source: https://www.aristamd.com/security/
+status: 200
+note: >-
+  The automated probe (probe-security-programs.py) reported trust=none because it
+  looks for trust.<domain> / security.<domain> subdomains and a /trust or
+  /compliance path, none of which exist. AristaMD does publish a substantive
+  security posture page at /security/ on the marketing host; this artifact was
+  written by hand from that page after the probe missed it.
+
+certifications:
+# Recorded exactly as AristaMD states them. AristaMD describes SOC 2 as the
+# FRAMEWORK its Information Security Program follows and cites independent
+# third-party assessments — it does not publish an attestation report, a
+# certificate, a report date or a named auditor on the public page. That
+# distinction is preserved here rather than flattened into "SOC 2 certified".
+- name: SOC 2
+  claim_type: framework-followed
+  attestation_published: false
+  verbatim: >-
+    "Our Information Security Program follows the criteria set forth by the SOC 2
+    Framework. SOC 2 is a widely known information security auditing procedure
+    created by the American Institute of Certified Public Accountants."
+
+program:
+  organizational:
+  - Information Security Program communicated throughout the organization
+  - Independent third-party assessments of security and compliance controls
+  - Independent third-party penetration testing performed at least annually
+  - Defined and documented roles and responsibilities; policies reviewed and accepted by staff
+  - Security awareness training covering phishing and password management
+  - Industry-standard confidentiality agreements signed before first day
+  - Background checks on all new team members
+  cloud:
+  - Hosted on a combination of Amazon Web Services and Google Cloud Platform
+  - All data hosted in databases located in the United States
+  - Encryption at rest for all databases
+  - Encryption in transit — TLS/SSL only
+  - Vulnerability scanning and active threat monitoring
+  - Logging and monitoring of cloud services
+  - Backup via the hosting provider; monitoring alerts on failures
+  - Documented incident response with escalation, rapid mitigation and communication
+  access:
+  - Access to cloud infrastructure limited to authorized employees by role
+  - Principle of least privilege for identity and access management
+  - Quarterly access reviews for all staff with access to sensitive systems
+  - Minimum password complexity requirements
+  - Company-issued laptops use a password manager
+  vendor_and_risk:
+  - Vendor risk determined and reviewed before authorizing a new vendor
+  - At least annual risk assessments, including fraud considerations
+
+contact:
+  security: info@aristamd.com
+  verbatim: >-
+    "If you have any questions, comments or concerns or if you wish to report a
+    potential security issue, please contact info@aristamd.com"
+  legal_address: AristaMD, Inc., Attn Legal, 4660 La Jolla Village Dr., Suite 100
+    #1535, San Diego
+
+not_published:
+# Recorded because a healthcare buyer's security review will ask for each of these.
+- SOC 2 Type II report or bridge letter (not linked, not gated behind a form)
+- Name of the auditor or assessment firm
+- Date or period of the most recent assessment
+- HIPAA statement or BAA availability — notable, since the platform handles US PHI
+- ISO 27001, HITRUST, PCI DSS or FedRAMP
+- Subprocessor list
+- Automated trust portal (Vanta/Drata/SafeBase style)
+- security.txt (RFC 9116) at any host
+- Bug bounty or coordinated disclosure program
+
+evidence:
+- source: https://www.aristamd.com/security/
+  status: 200
+  keywords: [information security program, soc 2, third-party audits, penetration
+    testing, encryption at rest, encryption in transit, incident response, least
+    privilege, risk assessments, vendor risk]
+- source: https://trust.aristamd.com/
+  status: not-resolved
+- source: https://www.aristamd.com/trust/
+  status: 404
+- source: https://www.aristamd.com/compliance/
+  status: 404
+- source: https://www.aristamd.com/hipaa/
+  status: 404
+
+x-evidence:
+  fetched: '2026-08-06'

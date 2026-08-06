@@ -1,18 +1,68 @@
 aid: aristamd
 name: AristaMD
-description: 'AristaMD is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'AristaMD is a San Diego based specialty care company whose eConsult
+  platform connects primary care providers to a panel of board-certified specialists
+  across more than 70 specialties and subspecialties, delivering asynchronous, documented
+  specialist recommendations that reduce unnecessary face-to-face referrals, emergency
+  department visits and hospitalizations. The platform is sold to health plans, Medicaid
+  programs, federally qualified health centers and provider groups, and is delivered
+  through EHR-embedded referral workflows, HL7 messaging and a REST API. AristaMD
+  publishes a live Swagger 2.0 definition for its core business-logic API at
+  api.aristamd.com/api-docs covering eConsults, patients, panelists, specialties,
+  reviews and workup checklists, and operates an OAuth 2.0 authorization server plus
+  a SAML 2.0 service-provider endpoint for federated single sign-on.'
+image: https://www.aristamd.com/wp-content/uploads/AristaMD-SM.jpg
 url: https://raw.githubusercontent.com/api-evangelist/aristamd/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-06'
 modified: '2026-08-06'
 tags:
 - Company
-apis: []
+- Healthcare
+- Digital Health
+- Telehealth
+- eConsult
+- Specialty Care
+- Referrals
+- Care Coordination
+- Health Plans
+- Medicaid
+- HL7
+- Electronic Health Records
+apis:
+- aid: aristamd:api
+  name: AristaMD API
+  description: 'The AristaMD API is the business logic core that serves all AristaMD
+    sites, tools and integrations. It exposes eConsult lifecycle operations (create,
+    retrieve, update, assign, search by status, event transitions and panelist
+    availability), patient records including creation from HL7 messages, patient
+    history and external identifiers, panelist discovery and next-available routing,
+    specialties, reviews, comments, diagnostics and workup checklists. Access is
+    authenticated; every documented path returns 401 without credentials.'
+  humanURL: https://www.aristamd.com/specialty-care/care-delivery/econsults/
+  baseURL: https://api.aristamd.com
+  tags:
+  - eConsults
+  - Patients
+  - Panelists
+  - Specialties
+  - Reviews
+  - Workup Checklists
+  properties:
+  - type: Swagger
+    url: https://api.aristamd.com/api-docs
+  - type: OpenAPI
+    url: openapi/aristamd-openapi-original.json
+  - type: Authentication
+    url: authentication/aristamd-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aristamd-problem-types.yml
+  - type: DataModel
+    url: data-model/aristamd-data-model.yml
+  - type: Overlay
+    url: overlays/aristamd-api-overlay.yaml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +70,70 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://www.nasdaqprivatemarket.com/
+  url: https://www.aristamd.com/
+- type: SignUp
+  url: https://www.aristamd.com/request-demo/
+- type: Login
+  url: https://app.aristamd.com/login
+- type: TermsOfService
+  url: https://www.aristamd.com/terms-of-use/
+- type: PrivacyPolicy
+  url: https://www.aristamd.com/privacy-policy/
+- type: Security
+  url: https://www.aristamd.com/security/
+- type: Compliance
+  url: https://www.aristamd.com/security/
+- type: TrustCenter
+  url: security/aristamd-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/aristamd-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/aristamd-domain-security.yml
+- type: GitHubOrganization
+  url: https://github.com/aristamd
+- type: Support
+  url: https://www.aristamd.com/contact/
+- type: Blog
+  url: https://www.aristamd.com/thought-leadership/
+- type: Authentication
+  url: authentication/aristamd-authentication.yml
+- type: Conformance
+  url: conformance/aristamd-conformance.yml
+- type: Conventions
+  url: conventions/aristamd-conventions.yml
+- type: Lifecycle
+  url: lifecycle/aristamd-lifecycle.yml
+- type: ErrorCatalog
+  url: errors/aristamd-problem-types.yml
+- type: DataModel
+  url: data-model/aristamd-data-model.yml
+- type: Packages
+  url: packages/aristamd-packages.yml
+- type: LLMsTxt
+  url: llms/aristamd-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/aristamd-agentic-access.yml
+x-enrichment:
+  date: '2026-08-06'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v1
+x-coverage:
+  state: covered
+  reason: null
+  detail: >-
+    A live Swagger 2.0 contract (32 paths / 42 operations / 26 definitions) was
+    harvested from the API host root at https://api.aristamd.com/api-docs, along
+    with a live OAuth 2.0 token endpoint and SAML 2.0 SP metadata. AristaMD has
+    no developer portal — the contract sits on the API host with nothing
+    documenting it.
+  evidence:
+  - url: https://api.aristamd.com/api-docs
+    status: 200
+  - url: https://api.aristamd.com/saml2/metadata
+    status: 200
+  - url: https://api.aristamd.com/econsults
+    status: 401
+  checked: '2026-08-06'

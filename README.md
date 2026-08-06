@@ -42,5 +42,7 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-AristaMD is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+AristaMD is a San Diego based specialty care company whose eConsult platform connects primary care providers to a panel of board-certified specialists across more than 70 specialties and subspecialties, delivering asynchronous, documented specialist recommendations that reduce unnecessary face-to-face referrals, emergency department visits and hospitalizations. The platform is sold to health plans, Medicaid programs, federally qualified health centers and provider groups, and is delivered through EHR-embedded referral workflows, HL7 messaging and a REST API.
+
+- https://www.aristamd.com/
+- API: https://api.aristamd.com — live Swagger 2.0 definition at https://api.aristamd.com/api-docs

@@ -1,0 +1,224 @@
+generated: '2026-08-06'
+method: derived
+source: openapi/aristamd-openapi-original.json
+description: >-
+  Entity-relationship graph derived mechanically from the 26 `definitions` in
+  AristaMD's published Swagger 2.0 document — from inline `$ref` links and from
+  `*_id` foreign-key fields. Nothing here is invented; every relationship below
+  is a field that exists in the published schema. Field names are AristaMD's own
+  (snake_case, Laravel/Eloquent conventions).
+
+summary:
+  entities: 26
+  relationships: 57
+  id_style: integer surrogate keys named `id`, foreign keys `<entity>_id`
+  timestamps: created_at / updated_at on most entities; deleted_at where soft-deleted
+  core_aggregate: EConsult
+  note: >-
+    The model is a specialty-referral domain: an Organization's Patient, covered
+    by a Coverage (insurance plan), is the subject of an EConsult routed to a
+    panelist (specialist) within a Specialty, guided by a WorkupChecklist keyed
+    on a ChiefComplaint. Roles and Permissions gate access, and a set of routing
+    metric entities records how the assignment engine chose the panelist.
+
+domains:
+- name: Consult
+  entities: [EConsult, EConsultHandoff, Comment, Review, Asset, StateTransition]
+- name: Patient
+  entities: [Patient, Coverage]
+- name: Provider network
+  entities: [PanelistDetail, PanelistAvailability, Specialty, FacilityCode]
+- name: Clinical guidance
+  entities: [WorkupChecklist, WorkupChecklistSet, ChiefComplaint, ThirdPartyWorkupChecklist]
+- name: Tenancy and identity
+  entities: [Organization, User, Role, RoleType, Permission, Location]
+- name: Routing analytics
+  entities: [EConsultRoutingMetric, EConsultRoutingSpecialistMetric, EconsultAssignmentMetric,
+    EconsultAssignmentProfile]
+
+entities:
+- name: EConsult
+  role: core aggregate
+  operations: [GET /econsults, POST /econsults, 'GET /econsults/{econsultId}',
+    'PUT /econsults/{econsultId}', 'DELETE /econsults/{econsultId}',
+    'PATCH /econsults/{econsultId}', 'PATCH /econsults/{econsultId}/assign-to-me',
+    GET /econsults/search, POST /econsults/logAvailability,
+    'POST /econsults/{eConsultId}/events', 'POST /econsults/{eConsultId}/heartbeat']
+  status_field: status
+  relationships:
+  - {type: belongs_to, target: Organization, via: organization_id}
+  - {type: belongs_to, target: User, via: requester_id}
+  - {type: belongs_to, target: User, via: requesting_physician_id}
+  - {type: belongs_to, target: PanelistDetail, via: panelist_id}
+  - {type: belongs_to, target: Patient, via: patient_id}
+  - {type: belongs_to, target: Coverage, via: coverage_id}
+  - {type: belongs_to, target: Specialty, via: specialty_id}
+  - {type: has_many, target: Comment, via: comments}
+  - {type: has_many, target: Asset, via: attachments}
+  - {type: has_many, target: EConsultHandoff, via: econsult_handoffs}
+- name: Patient
+  operations: [GET /patients, POST /patients, 'GET /patients/{patientId}',
+    'PUT /patients/{patientId}', 'PATCH /patients/{patientId}', GET /patients/search,
+    'GET /patients/top-patients/{length}', 'GET /patients/{patientId}/history',
+    'GET /patients/{patientId}/identifiers', POST /HL7/messages]
+  relationships:
+  - {type: belongs_to, target: Organization, via: organization_id}
+  - {type: belongs_to, target: Coverage, via: coverage_id}
+  fields_of_note: [system_of_record, reference_id, version, AB109, chronic_conditions]
+  note: >-
+    `system_of_record` + `reference_id` are the external-EHR linkage. AB109 is a
+    California correctional-realignment population flag — a domain-specific field
+    worth knowing about before mapping this model to another system.
+- name: Coverage
+  relationships:
+  - {type: belongs_to, target: Patient, via: patient_id}
+  - {type: belongs_to, target: Organization, via: payor_organization_id}
+  fields_of_note: [insurance_plan_name, insurance_provider_name, member_id, status]
+- name: Organization
+  role: tenancy root
+  relationships:
+  - {type: belongs_to, target: Organization, via: parent_organization_id}
+  - {type: belongs_to, target: WorkupChecklistSet, via: workup_checklist_set_id}
+  - {type: has_many, target: Location, via: locations}
+  fields_of_note: [code, namespace, domain, site_name, settings, service_types]
+- name: User
+  operations: [GET /users, 'GET /users/{user_id}', POST /users/search, PATCH /users/update]
+  relationships:
+  - {type: belongs_to, target: Location, via: primary_site_id}
+  - {type: has_many, target: Organization, via: organizations}
+  - {type: has_many, target: Role, via: roles}
+  fields_of_note: [username, email, authentication_provider, status, last_login, base_dn]
+  note: '`authentication_provider` and `base_dn` corroborate the SAML/LDAP federation
+    surface recorded in authentication/aristamd-authentication.yml.'
+- name: PanelistDetail
+  operations: [GET /panelists, 'GET /panelists/getNextAvailable/{code}/{patient_id}']
+  relationships:
+  - {type: belongs_to, target: User, via: user_id}
+  - {type: has_many, target: PanelistAvailability, via: availability}
+  fields_of_note: [certifications, education, main_practice_location, source_id]
+- name: PanelistAvailability
+  relationships:
+  - {type: belongs_to, target: User, via: panelist_id}
+  - {type: belongs_to, target: Specialty, via: specialty_id}
+- name: Specialty
+  operations: ['GET /specialties/{specialtyId}', 'PUT /specialties/{specialtyId}',
+    POST /specialties, 'GET /specialties/withAvailablePanelists/{filter}']
+  relationships:
+  - {type: belongs_to, target: Specialty, via: parent_specialty_id}
+  fields_of_note: [code, keywords, pediatrics_only, specialist_form_version]
+  note: Self-referencing — this is how subspecialties hang off specialties.
+- name: ChiefComplaint
+  relationships:
+  - {type: has_many, target: Specialty, via: specialties}
+  fields_of_note: [code, display_name]
+- name: WorkupChecklist
+  operations: [GET /workup-checklists/specialties,
+    'GET /workup-checklists/specialties/{specialtyCode}/chief-complaints',
+    'GET /workup-checklists/specialties/{specialtyCode}/chief-complaints/{chiefComplaintCode}']
+  relationships:
+  - {type: belongs_to, target: WorkupChecklist, via: base_workup_checklist_id}
+  - {type: belongs_to, target: ChiefComplaint, via: chief_complaint_id}
+  - {type: belongs_to, target: Organization, via: organization_id}
+  - {type: belongs_to, target: Specialty, via: specialty_id}
+  - {type: has_many, target: WorkupChecklistSet, via: workup_checklist_sets}
+  fields_of_note: [version, base_workup_checklist_version, version_tag, status, update_status]
+  note: >-
+    Versioned and forkable per organization — a base checklist is versioned, then
+    an organization derives its own via base_workup_checklist_id.
+- name: WorkupChecklistSet
+  relationships: []
+  fields_of_note: [code, display_name, version]
+- name: ThirdPartyWorkupChecklist
+  relationships: []
+  fields_of_note: [specialty, chief_complaint, created_by, assessments, diagnostics,
+    special_note]
+  note: Flat, string-keyed variant for external submitters — does not use the
+    integer foreign keys the internal model uses.
+- name: Comment
+  operations: [POST /comments]
+  relationships:
+  - {type: belongs_to, target: User, via: user_id}
+  polymorphic: {via: [association_type, association_id], note: 'Laravel morph
+      relation — attaches to any request-like parent, which is why the spec has a
+      generic /{request}/{requestId}/... path template.'}
+- name: Review
+  operations: [GET /reviews, POST /reviews, 'GET /reviews/{id}', 'PUT /reviews/{id}']
+  relationships: []
+  polymorphic: {via: [association_type, association_id]}
+  fields_of_note: [question_type, answer]
+- name: Asset
+  relationships: []
+  fields_of_note: [security_profile, mime_type, hash, size, url]
+  note: Attachment model for consult documents; `security_profile` gates access.
+- name: EConsultHandoff
+  relationships:
+  - {type: belongs_to, target: EConsult, via: econsult_id}
+  - {type: belongs_to, target: User, via: from_user_id}
+  - {type: belongs_to, target: User, via: to_user_id}
+- name: StateTransition
+  relationships: []
+  polymorphic: {via: [object_type, object_id]}
+  fields_of_note: [transition, from_status, to_status]
+  note: >-
+    Audit trail for the state machine the /events endpoints drive. Explains why
+    those endpoints take a bare `action` string.
+- name: Role
+  relationships:
+  - {type: has_many, target: Permission, via: permissions}
+  - {type: has_many, target: Permission, via: perms}
+  note: '`permissions` and `perms` are both present and both point at Permission —
+    a duplicated projection in the published schema.'
+- name: RoleType
+  relationships: []
+- name: Permission
+  relationships:
+  - {type: belongs_to, target: Permission, via: permission_types_id}
+  note: permission_types_id appears to reference a permission-type table that is
+    not itself published as a definition.
+- name: Location
+  relationships: []
+  fields_of_note: [street_address_1, city, county, postal_code, state, country,
+    time_zone, latitude, longitude, phone_number]
+- name: FacilityCode
+  relationships:
+  - {type: belongs_to, target: Specialty, via: specialty_id}
+  - {type: belongs_to, target: Organization, via: organization_id}
+- name: EConsultRoutingMetric
+  relationships:
+  - {type: belongs_to, target: EConsult, via: econsult_id}
+  - {type: belongs_to, target: Specialty, via: specialty_id}
+  - {type: belongs_to, target: EconsultAssignmentProfile, via: econsult_assignment_profile_id}
+  fields_of_note: [medicaid_specialists_over_capacity, assigned_to_next_available,
+    assigned_to_usual, available_specialists, exit_rule]
+  note: >-
+    Records why the routing engine assigned a given panelist, including a
+    Medicaid capacity constraint and a named exit_rule.
+- name: EConsultRoutingSpecialistMetric
+  relationships:
+  - {type: belongs_to, target: PanelistDetail, via: panelist_detail_id}
+  - {type: belongs_to, target: EConsultRoutingMetric, via: econsult_routing_metric_id}
+  fields_of_note: [medicaid_certified, daily_capacity, assignment_count,
+    assignment_average_7_days, assignment_average_30_days]
+- name: EconsultAssignmentMetric
+  relationships:
+  - {type: belongs_to, target: User, via: panelist_id}
+  fields_of_note: [assignment_date, assignment_count, assignment_average_7_days,
+    assignment_average_30_days]
+- name: EconsultAssignmentProfile
+  relationships: []
+
+observations:
+- >-
+  EConsult carries both the foreign keys (panelist_id, patient_id, …) and the
+  expanded objects (panelist, patient, …) in one schema, with no documented way
+  to control expansion — an agent cannot tell from the contract whether a given
+  response will be shallow or deep.
+- >-
+  `panelist_id` is typed against PanelistDetail in the expanded form but against
+  User in EconsultAssignmentMetric and PanelistAvailability. The referent of that
+  field is ambiguous in the published schema.
+- >-
+  No FHIR resources appear anywhere in the model. AristaMD's public material and
+  third-party writeups describe FHIR alignment, but the published contract is a
+  proprietary relational model with an HL7 v2 message intake at POST /HL7/messages.
+  Recorded as a discrepancy, not resolved.

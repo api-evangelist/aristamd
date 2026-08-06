@@ -1,0 +1,108 @@
+generated: '2026-08-06'
+method: probed
+source: >-
+  openapi/aristamd-openapi-original.json plus live probes on 2026-08-06.
+  AristaMD publishes no developer portal, changelog, SLA or deprecation policy,
+  so most of this artifact records verified absence.
+
+versioning:
+  scheme: none
+  current: 1.0.0
+  source: info.version in the published Swagger document
+  in_path: false
+  in_header: false
+  in_media_type: false
+  evidence: >-
+    All 32 paths sit at the host root with no version segment. Probes of
+    /v1/openapi.json and /api/v1/openapi.json returned 404. No Accept-Version or
+    API-Version header is documented or observed.
+  note: >-
+    With no versioning mechanism there is no non-breaking path for change. Any
+    schema or path change ships directly to every existing caller.
+
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  deprecated_operations: []
+  evidence: >-
+    Zero operations carry `deprecated: true` in the Swagger document; the string
+    "deprecated" does not appear in it at all. No Sunset or Deprecation response
+    header was observed. No deprecation or API-change policy page exists —
+    /developers, /api and /support all return 404 on www.aristamd.com.
+  # No `type: Deprecation` pointer is wired — there is no policy to point at.
+
+sla:
+  url: null
+  uptime_target: null
+  published: false
+  note: No public SLA or uptime commitment was found.
+
+status_page:
+  url: null
+  published: false
+  probe:
+    host: status.aristamd.com
+    status: 200
+    resolves_to: https://aristamd.statuspage.io/inactive
+  evidence: >-
+    status.aristamd.com is configured and resolves, but Atlassian Statuspage
+    redirects it to /inactive — the page exists as a DNS entry and a deactivated
+    Statuspage account, not as a working status page. No incident history,
+    component list or subscribe surface is served.
+  # Deliberately NO `type: StatusPage` pointer in apis.yml. A pointer here would
+  # credit AristaMD with operational transparency it does not currently provide;
+  # the subdomain is a leftover, not a status page. Reactivating that Statuspage
+  # is a low-cost, high-value fix for the provider.
+
+changelog:
+  url: null
+  published: false
+  evidence: >-
+    No changelog, release notes or API updates page was found. The sitemap
+    (42 pages) contains no developer or release-notes page. The API spec's
+    info block carries no date and the document is unversioned beyond "1.0.0".
+
+support:
+  channels:
+  - {type: contact form, url: 'https://www.aristamd.com/contact/', status: 200}
+  - {type: email, value: support@aristamd.com, source: 'SAML SP metadata
+      technical + support contactPerson at https://api.aristamd.com/saml2/metadata'}
+  - {type: email, value: info@aristamd.com, source: 'https://www.aristamd.com/security/'}
+  - {type: in-app, value: Help Scout Beacon, source: 'embedded in the
+      app.aristamd.com bundle; the Beacon is configured with docsEnabled bound to
+      an authenticated session, so its knowledge base is customer-only'}
+  help_center:
+    host: help.aristamd.com
+    status: 200
+    real: false
+    note: >-
+      help.aristamd.com returns the same 1820-byte Angular shell that
+      app.aristamd.com and developer.aristamd.com return for every path,
+      including control paths. It is a CNAME onto the application, not a public
+      help center.
+
+maturity:
+  spec_generated_by: Swaggervel (Swagger for Laravel) — the provider's GitHub org
+    publishes a fork at github.com/aristamd/Swaggervel, and the document's shape
+    (Laravel resource-controller operationIds, DataTables pagination) matches
+    annotation-generated output.
+  assessment: >-
+    The contract is real, live and reasonably broad, but it is an internal
+    service definition that happens to be publicly reachable rather than a
+    published developer product. There is no portal, no getting-started, no auth
+    documentation, no versioning, no changelog and no working status page around
+    it.
+
+x-evidence:
+  fetched: '2026-08-06'
+  probes:
+  - {url: 'https://status.aristamd.com/', status: 200, note: redirects to
+      aristamd.statuspage.io/inactive}
+  - {url: 'https://help.aristamd.com/', status: 200, note: SPA catch-all shell}
+  - {url: 'https://www.aristamd.com/developers/', status: 404}
+  - {url: 'https://www.aristamd.com/api/', status: 404}
+  - {url: 'https://www.aristamd.com/support/', status: 404}
+  - {url: 'https://www.aristamd.com/status/', status: 404}
+  - {url: 'https://www.aristamd.com/contact/', status: 200}

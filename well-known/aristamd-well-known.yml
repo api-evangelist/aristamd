@@ -1,0 +1,71 @@
+generated: '2026-08-06'
+method: probed
+source: live probes on 2026-08-06
+result: none
+summary: >-
+  AristaMD publishes no /.well-known/ discovery documents on any host. Every
+  probe below either 404'd honestly or was a soft-404 from a single-page-app
+  catch-all. No raw files were saved and no `WellKnown` or `SecurityTxt` pointer
+  is wired in apis.yml, because there is nothing to point at.
+
+hosts:
+- host: https://api.aristamd.com
+  behaviour: honest 404s
+  control_path: {path: /ZZZ-control-path-xyz, status: 404, bytes: 59}
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  note: >-
+    This host answers 404 with a distinct 59-byte JSON body and 200 for real
+    routes, so these 404s are trustworthy. Notably the OAuth server at
+    /oauth/token is live but publishes neither RFC 8414 authorization-server
+    metadata nor RFC 9728 protected-resource metadata — a client cannot
+    discover it, only guess it.
+
+- host: https://www.aristamd.com
+  behaviour: honest 404s (WordPress 404 template, ~390KB)
+  control_path: {path: /ZZZ-control-xyz, status: 404, bytes: 390141}
+  documents:
+  - {path: /llms.txt, status: 404}
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /robots.txt, status: 200, saved: false, note: 'standard WordPress
+      robots.txt; disallows /wp-admin/, lists three sitemaps'}
+  - {path: /sitemap.xml, status: 200, saved: false, note: 'sitemap index; the
+      page sitemap lists 42 pages, none developer-facing'}
+
+- hosts: [https://app.aristamd.com, https://developer.aristamd.com, https://help.aristamd.com]
+  behaviour: SOFT 404 — single-page-app catch-all
+  control_path: {path: /ZZZ-control-xyz, status: 200, bytes: 1820}
+  documents_apparent_status: 200
+  documents_real_status: not-found
+  paths_probed: [/llms.txt, /.well-known/security.txt, /security.txt,
+    /.well-known/agent-card.json, /.well-known/agent.json,
+    /.well-known/openid-configuration, /.well-known/oauth-authorization-server,
+    /.well-known/api-catalog, /.well-known/ai-plugin.json, /openapi.json,
+    /api-docs, /sitemap.xml]
+  warning: >-
+    These three hosts return HTTP 200 with an identical 1820-byte Angular shell
+    for EVERY path, including a nonsense control path. Every one of the twelve
+    paths above "succeeded" with the same bytes. None of them is a real
+    document. Any scan that treats a 200 as evidence would credit AristaMD with
+    an agent card, an llms.txt, a security.txt, an OpenAPI and an OIDC
+    configuration it does not have. The control-path diff is what disproves it.
+  # This is why no a2a/ artifact was written for AristaMD. See STEP 0b.
+
+x-evidence:
+  fetched: '2026-08-06'
+  method: 'curl -s -o /dev/null -w "%{http_code} %{size_download}" -L, each host
+    probed with a nonsense control path alongside the real ones'

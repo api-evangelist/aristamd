@@ -1,0 +1,137 @@
+generated: '2026-08-06'
+method: derived
+source: >-
+  openapi/aristamd-openapi-original.json, live probes of api.aristamd.com, and
+  https://www.aristamd.com/security/ (fetched 2026-08-06).
+
+standards:
+- id: swagger-2.0
+  conforms: true
+  evidence: '`swagger: "2.0"` document served at https://api.aristamd.com/api-docs
+    (200, application/json, 156353 bytes), 32 paths / 42 operations / 26 definitions.'
+- id: openapi-3
+  conforms: false
+  evidence: The published contract is Swagger 2.0; no OpenAPI 3.x document exists
+    at any probed location.
+- id: oauth2
+  conforms: true
+  evidence: >-
+    Live OAuth 2.0 authorization server at https://api.aristamd.com/oauth/token
+    and /oauth/authorize. Returns RFC 6749 section 5.2 error objects. Supports
+    authorization_code, client_credentials, password and refresh_token; rejects
+    implicit and jwt-bearer as unsupported_grant_type.
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: false
+  evidence: 'GET /.well-known/oauth-authorization-server -> 404'
+- id: rfc9728-oauth-protected-resource
+  conforms: false
+  evidence: 'GET /.well-known/oauth-protected-resource -> 404'
+- id: openid-connect
+  conforms: false
+  evidence: 'GET /.well-known/openid-configuration -> 404 on every probed host;
+    no id_token or OIDC scope surface found.'
+- id: saml-2.0
+  conforms: true
+  evidence: >-
+    Valid SAML 2.0 SPSSODescriptor served at
+    https://api.aristamd.com/saml2/metadata (200, text/xml). Declares HTTP-POST
+    ACS at /saml2/acs, HTTP-Redirect SLO at /saml2/sls, persistent NameID format.
+  caveat: AuthnRequestsSigned="false" and WantAssertionsSigned="false" — signing
+    is not required by this service provider.
+- id: hl7-v2
+  conforms: partial
+  evidence: >-
+    POST /HL7/messages — "Creates a Patient from an HL7 message". A single
+    message-intake endpoint exists, but the request body is typed as the
+    proprietary `Patient` definition rather than as an HL7 message, so the
+    contract does not describe which HL7 message types, segments or versions are
+    accepted. The provider's GitHub org publishes MLLP transport tooling
+    (aristamd/mllparty, aristamd/elixir-mllp), which corroborates real HL7 v2
+    usage outside the REST surface.
+- id: fhir
+  conforms: false
+  evidence: >-
+    No FHIR resource, no FHIR-shaped schema and no /fhir, /metadata or
+    CapabilityStatement endpoint appears in the published contract or on the
+    probed host. Third-party writeups and vendor marketing describe the platform
+    as "based on the FHIR standard"; the public API does not evidence that. If a
+    FHIR facade exists it is not publicly discoverable.
+  x-discrepancy: true
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors are '{"message": "..."}' with content-type application/json; no
+    application/problem+json and no type/title/status/detail members.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: 'GET /.well-known/security.txt -> 404 on api.aristamd.com and
+    www.aristamd.com.'
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation header observed; no deprecation policy published.
+- id: json-api
+  conforms: false
+  evidence: Responses are bare resource objects, not JSON:API documents.
+- id: odata
+  conforms: false
+- id: scim-2.0
+  conforms: false
+  evidence: User and Role management is proprietary (/users, /users/search); no
+    /scim/v2 surface.
+- id: idempotency-key
+  conforms: false
+  evidence: No idempotency key parameter or header anywhere in the contract; 21
+    of 42 operations are unsafe writes.
+- id: tls-1.2-or-better
+  conforms: true
+  evidence: 'TLSv1.3 on api.aristamd.com and www.aristamd.com (probed 2026-08-06).'
+- id: hsts
+  conforms: partial
+  evidence: >-
+    api.aristamd.com sends Strict-Transport-Security max-age=63072000;
+    includeSubDomains; preload. www.aristamd.com sends no HSTS header.
+
+compliance_program:
+  published: true
+  url: https://www.aristamd.com/security/
+  method: searched
+  claims:
+  # Quoted/paraphrased from the provider's own security page. Recorded as the
+  # provider states them — AristaMD describes SOC 2 as the framework its program
+  # follows and cites independent third-party assessments; it does not publish an
+  # attestation report, a certificate, or a named auditor on the public page.
+  - claim: Information Security Program follows the criteria set forth by the SOC 2 Framework
+    named_standard: SOC 2
+    attestation_published: false
+  - claim: Independent third-party assessments of security and compliance controls
+    attestation_published: false
+  - claim: Independent third-party penetration testing performed at least annually
+  - claim: Annual risk assessments including fraud considerations
+  - claim: Quarterly access reviews; least-privilege access control
+  - claim: Encryption at rest for all databases; TLS/SSL in transit only
+  - claim: Data hosted on AWS and GCP, located in the United States
+  - claim: Documented incident response with escalation and communication procedures
+  - claim: Vendor risk review prior to authorizing a new vendor
+  - claim: Security awareness training and signed confidentiality agreements for all staff
+  regulatory_context:
+    hipaa:
+      status: not-asserted-on-security-page
+      note: >-
+        AristaMD handles US protected health information (patients, coverage,
+        chronic conditions, clinical attachments) and is described in third-party
+        material as HIPAA compliant, but the public /security/ page does not name
+        HIPAA, and no BAA or HIPAA statement was found at a public URL. Recorded
+        as unverified rather than assumed.
+  not_found: [SOC 2 Type II report, ISO 27001, HITRUST, PCI DSS, FedRAMP,
+    CSA STAR, public trust portal, public subprocessor list]
+
+x-evidence:
+  fetched: '2026-08-06'
+  probes:
+  - {url: 'https://api.aristamd.com/api-docs', status: 200}
+  - {url: 'https://api.aristamd.com/oauth/token', status: 400}
+  - {url: 'https://api.aristamd.com/saml2/metadata', status: 200}
+  - {url: 'https://api.aristamd.com/.well-known/oauth-authorization-server', status: 404}
+  - {url: 'https://api.aristamd.com/.well-known/openid-configuration', status: 404}
+  - {url: 'https://api.aristamd.com/.well-known/security.txt', status: 404}
+  - {url: 'https://www.aristamd.com/security/', status: 200}

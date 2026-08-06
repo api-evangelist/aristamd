@@ -1,0 +1,106 @@
+generated: '2026-08-06'
+method: derived
+source: openapi/aristamd-openapi-original.json
+format: proprietary
+envelope:
+  shape: '{"message": "<human readable string>"}'
+  content_type: application/json
+  rfc9457: false
+  fields: [message]
+  note: >-
+    Observed live on api.aristamd.com. There is no `type`, `title`, `status`,
+    `detail` or `instance` member and no application/problem+json media type, so
+    this is not RFC 9457 Problem Details. There is also no machine-readable error
+    code — the only discriminator an agent gets is the HTTP status plus an
+    English string, which means error handling cannot be written against a stable
+    identifier.
+  oauth_envelope:
+    shape: '{"error": "...", "error_description": "...", "hint": "...", "message": "..."}'
+    applies_to: /oauth/token
+    standard: RFC 6749 section 5.2 (plus league/oauth2-server hint/message extensions)
+    note: >-
+      The OAuth endpoint uses a different, standards-conformant error envelope
+      than the rest of the API. Two error shapes coexist on one host.
+
+observed:
+# Verbatim bodies recorded from anonymous requests on 2026-08-06.
+- status: 401
+  body: '{"message":"Unauthorized"}'
+  trigger: any documented path without credentials
+  note: >-
+    401 is what the API actually returns for missing credentials. The Swagger
+    document never declares a 401 on any operation — it declares 400 "Invalid
+    Credentials" and 403 "Unauthorized" instead. The spec and the service
+    disagree about the authentication failure code.
+- status: 404
+  body: '{"message":"The resource you requested could not be found"}'
+  trigger: unrouted path
+- status: 500
+  body: '{"message":"An error has occurred while processing your request"}'
+  trigger: GET /patients without credentials
+- status: 400
+  body: '{"error":"unsupported_grant_type","error_description":"The authorization
+    grant type is not supported by the authorization server.","hint":"Check that
+    all required parameters have been provided"}'
+  trigger: POST /oauth/token with an unimplemented grant_type
+
+problems:
+- status: 400
+  title: Invalid Credentials
+  operations: 35
+  example_operation: POST /comments
+  description: >-
+    Declared on 35 of 42 operations, in three different spellings ("Invalid
+    Credentials" x22, "Invalid credentials" x12, "Invalid Credentials or invalid
+    request" x1). Using 400 for an authentication failure is unusual — the live
+    service returns 401 for this condition.
+  remediation: Obtain a token from POST /oauth/token and retry.
+- status: 402
+  title: Unprocessable entity
+  operations: 2
+  example_operation: PUT /specialties/{specialtyId}
+  description: >-
+    402 is Payment Required. The description says "Unprocessable entity", which
+    is 422. Almost certainly a typo in the specification; flagged for the
+    provider rather than reproduced as intent.
+  remediation: Correct the request body to satisfy the specialty schema.
+  x-suspected-spec-defect: true
+- status: 403
+  title: Unauthorized
+  operations: 23
+  example_operation: POST /comments
+  description: >-
+    403 Forbidden carrying the reason phrase "Unauthorized". Represents an
+    authenticated caller lacking permission for the resource; AristaMD models
+    permissions and roles explicitly (see the Permission, Role and RoleType
+    definitions in the data model).
+  remediation: Confirm the authenticated user holds the required role/permission.
+- status: 404
+  title: Resource not found
+  operations: 21
+  variants: [EConsult not found, Patient not found, Review not found, User not found,
+    Specialty or Chief complaint not found, 'Specilaty not found', Not Found, Not found]
+  example_operation: GET /econsults/{econsultId}
+  description: >-
+    Per-resource 404 descriptions. "Specilaty not found" on GET
+    /specialties/{specialtyId} is a misspelling in the published spec.
+  remediation: Verify the resource id exists and is visible to the caller's organization.
+  x-suspected-spec-defect: true
+- status: 500
+  title: Internal error
+  operations: 17
+  variants: [Internal Error, Internal Server error, Unexpected failure]
+  example_operation: POST /econsults/{eConsultId}/events
+  description: Server-side failure. No error identifier is returned.
+  remediation: Retry; the API publishes no idempotency key, so retrying a write
+    is not safe to do blindly.
+
+gaps:
+# Recorded so a follow-up with the provider has something concrete to point at.
+- No RFC 9457 Problem Details; no application/problem+json anywhere.
+- No machine-readable error code or error type URI — only an English string.
+- 401 is returned by the service but declared on zero operations in the spec.
+- 400 is used for authentication failures throughout the spec.
+- 402 (Payment Required) is used where 422 is described.
+- Error descriptions are inconsistently cased and contain typos ("Specilaty").
+- No error reference page is published anywhere on the public site.

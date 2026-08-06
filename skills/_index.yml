@@ -1,0 +1,73 @@
+generated: '2026-08-06'
+method: generated
+source: openapi/aristamd-openapi-original.json
+searched:
+  provider_published_skills: none
+  evidence: >-
+    No AGENTS.md, skills/ directory, llms.txt or agent guidance is published by
+    AristaMD on any host. These skills are authored by API Evangelist from
+    AristaMD's live Swagger 2.0 contract and from anonymous probes of
+    api.aristamd.com; they are not AristaMD documents.
+note: >-
+  Every operation referenced in these skills was verified present in the
+  published specification. Operations are addressed by METHOD + PATH rather than
+  by operationId, because the source document reuses operationIds across
+  resources (14 distinct ids across 42 operations) and ids are therefore not a
+  safe handle.
+warning: >-
+  All three flows carry US protected health information. Each skill opens with a
+  PHI warning and a no-blind-retry rule, because the API publishes no idempotency
+  key and 21 of its 42 operations are unsafe writes.
+
+skills:
+- file: aristamd-submit-econsult.md
+  name: Submit an eConsult to a specialist
+  description: 'Create a patient if needed, find an available specialist, submit
+    the eConsult and attach clinical context — the core AristaMD flow.'
+  api: openapi/aristamd-openapi-original.json
+  operations:
+  - GET /workup-checklists/specialties
+  - GET /workup-checklists/specialties/{specialtyCode}/chief-complaints
+  - GET /workup-checklists/specialties/{specialtyCode}/chief-complaints/{chiefComplaintCode}
+  - GET /patients/search
+  - POST /patients
+  - GET /specialties/withAvailablePanelists/{filter}
+  - GET /panelists/getNextAvailable/{code}/{patient_id}
+  - POST /econsults
+  - POST /comments
+  - GET /econsults/{econsultId}
+
+- file: aristamd-triage-econsult-queue.md
+  name: Triage and work the eConsult queue as a specialist
+  description: 'Find eConsults awaiting review, claim one, record progress, drive
+    its state transitions, and close it out with a review.'
+  api: openapi/aristamd-openapi-original.json
+  operations:
+  - GET /econsults/search
+  - GET /econsults
+  - GET /econsults/{econsultId}
+  - PATCH /econsults/{econsultId}/assign-to-me
+  - POST /econsults/{eConsultId}/heartbeat
+  - POST /econsults/{eConsultId}/events
+  - POST /comments
+  - POST /reviews
+  - GET /reviews
+  - POST /econsults/logAvailability
+
+- file: aristamd-sync-patients-from-ehr.md
+  name: Sync patients into AristaMD from an EHR
+  description: 'Bring patient records in from an HL7 v2 feed or the Greenway
+    Intergy API, reconcile against existing records, and keep external
+    identifiers straight.'
+  api: openapi/aristamd-openapi-original.json
+  operations:
+  - POST /HL7/messages
+  - GET /intergy/patients/{id}
+  - GET /patients/search
+  - GET /patients
+  - POST /patients
+  - PUT /patients/{patientId}
+  - PATCH /patients/{patientId}
+  - GET /patients/{patientId}
+  - GET /patients/{patientId}/identifiers
+  - GET /patients/{patientId}/history

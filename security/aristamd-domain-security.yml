@@ -1,0 +1,33 @@
+generated: '2026-08-06'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.aristamd.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 20 01:23:31 2026 GMT
+  hsts: false
+- host: api.aristamd.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 19 11:05:20 2026 GMT
+  hsts: true
+  hsts_max_age: 63072000
+  hsts_include_subdomains: true
+  hsts_preload: true
+  note: >-
+    Corrected by hand after the automated probe recorded null. The API host root
+    answers 404 (JSON), which the probe skipped; a direct HEAD of both
+    https://api.aristamd.com/ and https://api.aristamd.com/econsults returns
+    "Strict-Transport-Security: max-age=63072000; includeSubDomains; preload".
+    The marketing host www.aristamd.com sends no HSTS header at all.
+  other_headers:
+    referrer_policy: strict-origin-when-cross-origin
+    access_control_allow_origin: '*'
+domains:
+- domain: aristamd.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
