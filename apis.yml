@@ -32,43 +32,232 @@ tags:
 - HL7
 - Electronic Health Records
 apis:
-- aid: aristamd:api
-  name: AristaMD API
-  description: 'The AristaMD API is the business logic core that serves all AristaMD
-    sites, tools and integrations. It exposes eConsult lifecycle operations (create,
-    retrieve, update, assign, search by status, event transitions and panelist
-    availability), patient records including creation from HL7 messages, patient
-    history and external identifiers, panelist discovery and next-available routing,
-    specialties, reviews, comments, diagnostics and workup checklists. Access is
-    authenticated; every documented path returns 401 without credentials.'
+- aid: aristamd:aristamd-comments-api
+  name: AristaMD Comments API
+  description: The Comments API from AristaMD — 1 operation(s) for comments.
   humanURL: https://www.aristamd.com/specialty-care/care-delivery/econsults/
   baseURL: https://api.aristamd.com
   tags:
-  - eConsults
-  - Patients
-  - Panelists
-  - Specialties
-  - Reviews
-  - Workup Checklists
+  - Comments
   properties:
+  - type: OpenAPI
+    url: openapi/aristamd-comments-api-openapi.yml
   - type: Swagger
     url: https://api.aristamd.com/api-docs
-  - type: OpenAPI
-    url: openapi/aristamd-openapi-original.json
   - type: Authentication
     url: authentication/aristamd-authentication.yml
   - type: ErrorCatalog
     url: errors/aristamd-problem-types.yml
   - type: DataModel
     url: data-model/aristamd-data-model.yml
-  - type: Overlay
-    url: overlays/aristamd-api-overlay.yaml
+- aid: aristamd:aristamd-diagnostic-api
+  name: AristaMD Diagnostic API
+  description: The Diagnostic API from AristaMD — 1 operation(s) for diagnostic.
+  humanURL: https://www.aristamd.com/specialty-care/care-delivery/econsults/
+  baseURL: https://api.aristamd.com
+  tags:
+  - Diagnostic
+  properties:
+  - type: OpenAPI
+    url: openapi/aristamd-diagnostic-api-openapi.yml
+  - type: Swagger
+    url: https://api.aristamd.com/api-docs
+  - type: Authentication
+    url: authentication/aristamd-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aristamd-problem-types.yml
+  - type: DataModel
+    url: data-model/aristamd-data-model.yml
+- aid: aristamd:aristamd-econsults-api
+  name: AristaMD E Consults API
+  description: The EConsults API from AristaMD — 7 operation(s) for econsults.
+  humanURL: https://www.aristamd.com/specialty-care/care-delivery/econsults/
+  baseURL: https://api.aristamd.com
+  tags:
+  - EConsults
+  properties:
+  - type: OpenAPI
+    url: openapi/aristamd-econsults-api-openapi.yml
+  - type: Swagger
+    url: https://api.aristamd.com/api-docs
+  - type: Authentication
+    url: authentication/aristamd-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aristamd-problem-types.yml
+  - type: DataModel
+    url: data-model/aristamd-data-model.yml
+- aid: aristamd:aristamd-intergy-patients-api
+  name: AristaMD Intergy/Patients API
+  description: The Intergy/Patients API from AristaMD — 1 operation(s) for intergy/patients.
+  humanURL: https://www.aristamd.com/specialty-care/care-delivery/econsults/
+  baseURL: https://api.aristamd.com
+  tags:
+  - Intergy/Patients
+  properties:
+  - type: OpenAPI
+    url: openapi/aristamd-intergy-patients-api-openapi.yml
+  - type: Swagger
+    url: https://api.aristamd.com/api-docs
+  - type: Authentication
+    url: authentication/aristamd-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aristamd-problem-types.yml
+  - type: DataModel
+    url: data-model/aristamd-data-model.yml
+- aid: aristamd:aristamd-panelists-api
+  name: AristaMD Panelists API
+  description: The Panelists API from AristaMD — 2 operation(s) for panelists.
+  humanURL: https://www.aristamd.com/specialty-care/care-delivery/econsults/
+  baseURL: https://api.aristamd.com
+  tags:
+  - Panelists
+  properties:
+  - type: OpenAPI
+    url: openapi/aristamd-panelists-api-openapi.yml
+  - type: Swagger
+    url: https://api.aristamd.com/api-docs
+  - type: Authentication
+    url: authentication/aristamd-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aristamd-problem-types.yml
+  - type: DataModel
+    url: data-model/aristamd-data-model.yml
+- aid: aristamd:aristamd-patients-api
+  name: AristaMD Patients API
+  description: The Patients API from AristaMD — 7 operation(s) for patients.
+  humanURL: https://www.aristamd.com/specialty-care/care-delivery/econsults/
+  baseURL: https://api.aristamd.com
+  tags:
+  - Patients
+  properties:
+  - type: OpenAPI
+    url: openapi/aristamd-patients-api-openapi.yml
+  - type: Swagger
+    url: https://api.aristamd.com/api-docs
+  - type: Authentication
+    url: authentication/aristamd-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aristamd-problem-types.yml
+  - type: DataModel
+    url: data-model/aristamd-data-model.yml
+- aid: aristamd:aristamd-requests-api
+  name: AristaMD Requests API
+  description: The Requests API from AristaMD — 1 operation(s) for requests.
+  humanURL: https://www.aristamd.com/specialty-care/care-delivery/econsults/
+  baseURL: https://api.aristamd.com
+  tags:
+  - Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/aristamd-requests-api-openapi.yml
+  - type: Swagger
+    url: https://api.aristamd.com/api-docs
+  - type: Authentication
+    url: authentication/aristamd-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aristamd-problem-types.yml
+  - type: DataModel
+    url: data-model/aristamd-data-model.yml
+- aid: aristamd:aristamd-reviews-api
+  name: AristaMD Reviews API
+  description: The Reviews API from AristaMD — 2 operation(s) for reviews.
+  humanURL: https://www.aristamd.com/specialty-care/care-delivery/econsults/
+  baseURL: https://api.aristamd.com
+  tags:
+  - Reviews
+  properties:
+  - type: OpenAPI
+    url: openapi/aristamd-reviews-api-openapi.yml
+  - type: Swagger
+    url: https://api.aristamd.com/api-docs
+  - type: Authentication
+    url: authentication/aristamd-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aristamd-problem-types.yml
+  - type: DataModel
+    url: data-model/aristamd-data-model.yml
+- aid: aristamd:aristamd-specialties-api
+  name: AristaMD Specialties API
+  description: The Specialties API from AristaMD — 3 operation(s) for specialties.
+  humanURL: https://www.aristamd.com/specialty-care/care-delivery/econsults/
+  baseURL: https://api.aristamd.com
+  tags:
+  - Specialties
+  properties:
+  - type: OpenAPI
+    url: openapi/aristamd-specialties-api-openapi.yml
+  - type: Swagger
+    url: https://api.aristamd.com/api-docs
+  - type: Authentication
+    url: authentication/aristamd-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aristamd-problem-types.yml
+  - type: DataModel
+    url: data-model/aristamd-data-model.yml
+- aid: aristamd:aristamd-specialty-api
+  name: AristaMD Specialty API
+  description: The Specialty API from AristaMD — 1 operation(s) for specialty.
+  humanURL: https://www.aristamd.com/specialty-care/care-delivery/econsults/
+  baseURL: https://api.aristamd.com
+  tags:
+  - Specialty
+  properties:
+  - type: OpenAPI
+    url: openapi/aristamd-specialty-api-openapi.yml
+  - type: Swagger
+    url: https://api.aristamd.com/api-docs
+  - type: Authentication
+    url: authentication/aristamd-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aristamd-problem-types.yml
+  - type: DataModel
+    url: data-model/aristamd-data-model.yml
+- aid: aristamd:aristamd-users-api
+  name: AristaMD Users API
+  description: The Users API from AristaMD — 4 operation(s) for users.
+  humanURL: https://www.aristamd.com/specialty-care/care-delivery/econsults/
+  baseURL: https://api.aristamd.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/aristamd-users-api-openapi.yml
+  - type: Swagger
+    url: https://api.aristamd.com/api-docs
+  - type: Authentication
+    url: authentication/aristamd-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aristamd-problem-types.yml
+  - type: DataModel
+    url: data-model/aristamd-data-model.yml
+- aid: aristamd:aristamd-workup-checklists-api
+  name: AristaMD Workup Checklists API
+  description: The Workup Checklists API from AristaMD — 3 operation(s) for workup checklists.
+  humanURL: https://www.aristamd.com/specialty-care/care-delivery/econsults/
+  baseURL: https://api.aristamd.com
+  tags:
+  - Workup Checklists
+  properties:
+  - type: OpenAPI
+    url: openapi/aristamd-workup-checklists-api-openapi.yml
+  - type: Swagger
+    url: https://api.aristamd.com/api-docs
+  - type: Authentication
+    url: authentication/aristamd-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aristamd-problem-types.yml
+  - type: DataModel
+    url: data-model/aristamd-data-model.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: MCPServer
+  url: mcp/aristamd-mcp.yml
+- type: Overlay
+  url: overlays/aristamd-api-overlay.yaml
 - type: Website
   url: https://www.aristamd.com/
 - type: SignUp
