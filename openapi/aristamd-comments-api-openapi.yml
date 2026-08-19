@@ -1,0 +1,88 @@
+openapi: 3.2.0
+info:
+  title: Arista MD Comments API
+  description: This is the business logic core that serves all Arista MD sites, tools, and integrations
+  version: 1.0.0
+tags:
+- name: Comments
+paths:
+  /comments:
+    post:
+      tags:
+      - Comments
+      summary: Adds a comment to a Request
+      description: Adds a comment for a request.
+      operationId: post
+      responses:
+        '200':
+          description: Saved Comment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '400':
+          description: Invalid Credentials
+        '403':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+        description: Comment body
+        required: true
+components:
+  schemas:
+    Comment:
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
+        association_type:
+          type: string
+        association_id:
+          type: integer
+        text:
+          type: string
+        created_at:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        updated_at:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        request_date:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        deleted_at:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        type:
+          type: string
+      type: object
+      xml:
+        name: Comment

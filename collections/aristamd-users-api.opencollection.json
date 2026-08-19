@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arista MD Users API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Offset of records"
+              },
+              {
+                "name": "length",
+                "value": "",
+                "type": "query",
+                "description": "How many items should bring"
+              },
+              {
+                "name": "orderColumn",
+                "value": "",
+                "type": "query",
+                "description": "Column used to do the sort"
+              },
+              {
+                "name": "orderDir",
+                "value": "",
+                "type": "query",
+                "description": "Direction of sort"
+              },
+              {
+                "name": "searchValue",
+                "value": "",
+                "type": "query",
+                "description": "Search term"
+              },
+              {
+                "name": "searchStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filter user's list by status"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of users based on its offset. Allows to order the records and perform a search"
+        },
+        {
+          "info": {
+            "name": "Return a user object specified. If the id is set to self the function will return an instance of the currently logged in user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of user we want to get info."
+              }
+            ]
+          },
+          "docs": "Finds EConsult by ID"
+        },
+        {
+          "info": {
+            "name": "Retrieves a user object specified. If the id is set to self the function will return an instance of the currently logged in user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users/search",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "Username of the user required"
+              },
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query",
+                "description": "First Name or Last Name or the required user"
+              },
+              {
+                "name": "role",
+                "value": "",
+                "type": "query",
+                "description": "Role's name assigned to the users we want to get"
+              },
+              {
+                "name": "permission",
+                "value": "",
+                "type": "query",
+                "description": "Permission's name assigned to the users we want to get"
+              },
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "query",
+                "description": "Id of the organization we are filtering for"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status name we are filtering for"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of users based on its offset. Allows to order the records and perform a search"
+        },
+        {
+          "info": {
+            "name": "Updates a specific field on a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/users/update",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Id if the user to be updated"
+              }
+            ]
+          },
+          "docs": "Updates a specific field on a user"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

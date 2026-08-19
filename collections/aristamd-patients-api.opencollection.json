@@ -1,0 +1,268 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arista MD Patients API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Patients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a Patient from an HL7 message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/HL7/messages",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Save a patient object with the input specified."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of patients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/patients",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Offset of records"
+              },
+              {
+                "name": "length",
+                "value": "",
+                "type": "query",
+                "description": "How many items should bring"
+              },
+              {
+                "name": "orderColumn",
+                "value": "",
+                "type": "query",
+                "description": "Column used to do the sort"
+              },
+              {
+                "name": "orderDir",
+                "value": "",
+                "type": "query",
+                "description": "Direction of sort"
+              },
+              {
+                "name": "searchValue",
+                "value": "",
+                "type": "query",
+                "description": "Search term"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of patient based on its offset. Allows to order the records and perform a search"
+        },
+        {
+          "info": {
+            "name": "Creates a Patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/patients",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Save a patient object with the input specified."
+        },
+        {
+          "info": {
+            "name": "Retrieves a Patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/patients/:patientId",
+            "params": [
+              {
+                "name": "patientId",
+                "value": "",
+                "type": "path",
+                "description": "ID of patient to return"
+              }
+            ]
+          },
+          "docs": "Find a Patient by ID"
+        },
+        {
+          "info": {
+            "name": "Updates a patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/patients/:patientId",
+            "params": [
+              {
+                "name": "patientId",
+                "value": "",
+                "type": "path",
+                "description": "ID of patient"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a patient using its id"
+        },
+        {
+          "info": {
+            "name": "Patches a patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/patients/:patientId",
+            "params": [
+              {
+                "name": "patientId",
+                "value": "",
+                "type": "path",
+                "description": "ID of patient"
+              },
+              {
+                "name": "operation",
+                "value": "",
+                "type": "query",
+                "description": "Patch operation"
+              },
+              {
+                "name": "assets",
+                "value": "",
+                "type": "query",
+                "description": "assets array"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Patches a patient using its id"
+        },
+        {
+          "info": {
+            "name": "Return a user object specified. If the id is set to self the function will return an instance of the currently logged in user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/patients/search",
+            "params": [
+              {
+                "name": "data[last_name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last name"
+              },
+              {
+                "name": "data[q]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by elements matching the provided text."
+              },
+              {
+                "name": "rest",
+                "value": "",
+                "type": "query",
+                "description": "ID of user we want to get info."
+              }
+            ]
+          },
+          "docs": "Finds patients by last name or elements that match with a provided text."
+        },
+        {
+          "info": {
+            "name": "TopReferral",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/patients/top-patients/:length",
+            "params": [
+              {
+                "name": "length",
+                "value": "",
+                "type": "path",
+                "description": "length of the top patients"
+              }
+            ]
+          },
+          "docs": "it returns a list with the length received of the top patients"
+        },
+        {
+          "info": {
+            "name": "Patient's History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/patients/:patientId/history",
+            "params": [
+              {
+                "name": "patientId",
+                "value": "",
+                "type": "path",
+                "description": "ID of patient to return"
+              }
+            ]
+          },
+          "docs": "Get the patient's history of referrals and econsults"
+        },
+        {
+          "info": {
+            "name": "Patient's External Identifiers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/patients/:patientId/identifiers",
+            "params": [
+              {
+                "name": "patientId",
+                "value": "",
+                "type": "path",
+                "description": "ID of patient to return"
+              },
+              {
+                "name": "identifier_name",
+                "value": "",
+                "type": "query",
+                "description": "Identifier name"
+              },
+              {
+                "name": "auth_provider_id",
+                "value": "",
+                "type": "query",
+                "description": "Auth Provider ID"
+              }
+            ]
+          },
+          "docs": "Get the patient's external identifiers"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1099 @@
+openapi: 3.2.0
+info:
+  title: Arista MD E Consults API
+  description: This is the business logic core that serves all Arista MD sites, tools, and integrations
+  version: 1.0.0
+tags:
+- name: EConsults
+paths:
+  /econsults:
+    get:
+      tags:
+      - EConsults
+      summary: Retrieves a list of econsults
+      description: "Retrieves a list of econsults based on its offset. Allows to order the records and\
+        \ perform a\n     *     search"
+      operationId: index
+      parameters:
+      - name: status
+        in: query
+        description: Filter by status(es)
+        required: false
+        schema:
+          type: string
+          enum:
+          - new
+          - saved_by_requester
+          - econsult_recalled
+          - submitted
+          - opened
+          - saved_by_specialist
+          - dispositioned
+          - ok_to_treat
+          - face_to_face
+          - wrong_specialty
+          - pending_requester_feedback
+          - pending_specialist_feedback
+          - acknowledged_and_completed
+          - rerouted
+          - requester_feedback_sent
+          - specialist_feedback_sent
+          - econsult_reassigned
+          - delegated
+      - name: site
+        in: query
+        description: Filter econsults by site using the site ID
+        required: false
+        schema:
+          type: integer
+      - name: request_date[from]
+        in: query
+        description: Filter econsults by its request date starting from the received date. (yyyy-mm-dd)
+        required: false
+        schema:
+          type: string
+      - name: request_date[to]
+        in: query
+        description: Filter econsults by its request date to the received date. (yyyy-mm-dd)
+        required: false
+        schema:
+          type: string
+      - name: panelistId
+        in: query
+        description: Filter econsults by panelist using the panelist ID
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EConsult'
+        '400':
+          description: Invalid Credentials
+          content:
+            application/json:
+              schema: {}
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: {}
+    post:
+      tags:
+      - EConsults
+      summary: Creates an EConsult
+      description: "Save an econsult object with the input specified. The STORE method should ONLY deal\
+        \ with the\n     *                 eConsult object. It should not touch the User/Patient/ etc.\
+        \ Those items that need to be helped\n     *                 onto the model should be a seperate\
+        \ class that is responsible for helping 'build' the perfect\n     *                 econsult model\
+        \ Default state is saved by requester."
+      operationId: store
+      responses:
+        '201':
+          description: Created EConsult
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EConsult'
+        '400':
+          description: Invalid credentials
+        '500':
+          description: Internal Error
+        '404':
+          description: Not Found
+        '403':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EConsult'
+        description: EConsult body
+        required: true
+  /econsults/{econsultId}:
+    get:
+      tags:
+      - EConsults
+      summary: Retrieves an EConsult
+      description: Finds EConsult by ID
+      operationId: show
+      parameters:
+      - name: econsultId
+        in: path
+        description: ID of econsult to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Econsult Record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EConsult'
+        '400':
+          description: Invalid Credentials
+        '404':
+          description: EConsult not found
+        '403':
+          description: Unauthorized
+    put:
+      tags:
+      - EConsults
+      summary: Updates an econsult
+      description: Updates an econsult using its id
+      operationId: update
+      parameters:
+      - name: econsultId
+        in: path
+        description: ID of econsult to update
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Updated Econsult
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EConsult'
+        '400':
+          description: Invalid credentials
+        '500':
+          description: Internal Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EConsult'
+        description: EConsult body
+        required: true
+    delete:
+      tags:
+      - EConsults
+      summary: Deletes an econsult
+      description: Destroys an EConsult using its id
+      operationId: destroy
+      parameters:
+      - name: econsultId
+        in: path
+        description: ID of econsult to be deleted
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Deleted EConsult
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EConsult'
+        '400':
+          description: Invalid credentials
+        '404':
+          description: Not found
+    patch:
+      tags:
+      - EConsults
+      summary: Updates an econsult
+      description: Updates one or more fields of a econsult resource
+      operationId: patch
+      parameters:
+      - name: econsultId
+        in: path
+        description: ID of econsult to update
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Updated Econsult
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EConsult'
+        '400':
+          description: Invalid credentials
+        '500':
+          description: Internal Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EConsult'
+        description: EConsult body
+        required: true
+  /econsults/{econsultId}/assign-to-me:
+    patch:
+      tags:
+      - EConsults
+      summary: Assign econsult to current user
+      description: Updates econsult panelist id to current user id
+      operationId: patch
+      parameters:
+      - name: econsultId
+        in: path
+        description: ID of econsult to update
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Updated Econsult
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EConsult'
+        '400':
+          description: Invalid credentials
+        '500':
+          description: Internal Error
+  /econsults/search:
+    get:
+      tags:
+      - EConsults
+      summary: Find EConsult ids by status
+      description: Returns a list of eConsult Ids for the specified requesterId
+      operationId: searchByStatus
+      parameters:
+      - name: status
+        in: query
+        description: Filter status
+        required: false
+        schema:
+          type: string
+          enum:
+          - ok_to_treat
+          - wrong_specialty
+          - face_to_face
+          - pending_requester_feedback
+      responses:
+        '200':
+          description: Econsult Record
+          content:
+            application/json:
+              schema:
+                properties:
+                  total_hits:
+                    type: integer
+                  hits:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                        rounds:
+                          type: integer
+                        masked_id:
+                          type: string
+                        diagnosis:
+                          type: string
+                        main_question:
+                          type: string
+                        service_type:
+                          type: string
+                        supporting_details:
+                          type: string
+                        first_request_date:
+                          properties:
+                            date:
+                              type: string
+                            timezone_type:
+                              type: integer
+                            timezone:
+                              type: string
+                          type: object
+                        last_edit_by_id:
+                          type: integer
+                        last_status_before_reassign:
+                          type: string
+                        last_panelist_user_id_before_reassign:
+                          type: integer
+                        created_by_des_agent:
+                          type: boolean
+                        info_required:
+                          type: string
+                        appropriateness:
+                          type: string
+                        disposition_date:
+                          properties:
+                            date:
+                              type: string
+                            timezone_type:
+                              type: integer
+                            timezone:
+                              type: string
+                          type: object
+                        answer_specialty:
+                          type: string
+                        initials:
+                          type: string
+                        recommendation_support:
+                          type: string
+                        recommended_specialty:
+                          type: string
+                        face_recommendation_support:
+                          type: string
+                        saved:
+                          type: boolean
+                        additional_diagnostics:
+                          type: string
+                        actions_pcp:
+                          type: string
+                        actions_patient:
+                          type: string
+                        follow_up:
+                          type: string
+                      type: object
+                type: object
+        '400':
+          description: Invalid Credentials
+        '404':
+          description: EConsult not found
+        '403':
+          description: Unauthorized
+  /econsults/logAvailability:
+    post:
+      tags:
+      - EConsults
+      summary: Log panelist availability
+      description: Create a log for panelist available times
+      operationId: LogPanelistAvailability
+      responses:
+        '201':
+          description: Event Transition was success
+          content:
+            application/json:
+              schema: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                econsultId:
+                  type: integer
+                panelistUserId:
+                  type: integer
+                availability:
+                  type: string
+                hours:
+                  type: integer
+                  format: float
+                specialty:
+                  type: string
+                submitted:
+                  type: boolean
+                date:
+                  type: string
+                  format: date-time
+              type: object
+        description: EConsult body
+        required: true
+  /econsults/{eConsultId}/events:
+    post:
+      tags:
+      - EConsults
+      summary: EConsult Event Handler
+      description: Handles the event for an EConsult
+      operationId: events
+      parameters:
+      - name: eConsultId
+        in: path
+        description: ID of EConsult that will be transitioned
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: Event Transition was success
+        '500':
+          description: Internal Error
+        '404':
+          description: Not Found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                action:
+                  type: string
+              type: object
+        description: EConsult body
+        required: true
+  /econsults/{eConsultId}/heartbeat:
+    post:
+      tags:
+      - EConsults
+      summary: EConsult Event Handler
+      description: Handles the event for an EConsult
+      operationId: events
+      parameters:
+      - name: eConsultId
+        in: path
+        description: ID of EConsult that will be updated
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: CTP Time has been successfully updated
+        '500':
+          description: Internal Error
+        '404':
+          description: Not Found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                specialistId:
+                  type: number
+              type: object
+        description: EConsult body
+        required: true
+components:
+  schemas:
+    Role:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        display_name:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        notifications:
+          type: array
+          items:
+            type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        perms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+      type: object
+      xml:
+        name: Role
+    PanelistAvailability:
+      properties:
+        id:
+          type: integer
+        available_date:
+          type: string
+        panelist_id:
+          type: integer
+        specialty_id:
+          type: integer
+      type: object
+      xml:
+        name: PanelistAvailability
+    Asset:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        security_profile:
+          type: string
+        mime_type:
+          type: string
+        hash:
+          type: string
+        size:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        url:
+          type: string
+      type: object
+      xml:
+        name: Asset
+    Organization:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        display_name:
+          type: string
+        parent_organization_id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        deleted_at:
+          type: string
+        domain:
+          type: string
+        formal_name:
+          type: string
+        namespace:
+          type: string
+        workup_checklist_set_id:
+          type: integer
+        site_name:
+          type: string
+        settings:
+          type: array
+          items:
+            type: object
+        service_types:
+          type: array
+          items:
+            type: string
+        urgency_ratings:
+          type: array
+          items:
+            type: string
+        expected_release_date_options:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        pivot:
+          properties:
+            user_id:
+              type: integer
+            organization_id:
+              type: integer
+          type: object
+        parent_organization:
+          type: object
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+      type: object
+      xml:
+        name: Organization
+    User:
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        email:
+          type: string
+        authentication_provider:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        status:
+          type: string
+        last_login:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        suffix:
+          type: string
+        base_dn:
+          type: string
+        primary_site_id:
+          type: integer
+        full_name:
+          type: string
+        organization:
+          type: object
+          $ref: '#/components/schemas/Organization'
+        phone:
+          type: string
+        mobile:
+          type: string
+        last_active_organization_id:
+          type: integer
+        notification_email:
+          type: string
+        notification_phone:
+          type: string
+        organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+      type: object
+      xml:
+        name: User
+    Permission:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        display_name:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        permission_types_id:
+          type: integer
+      type: object
+      xml:
+        name: Permission
+    Comment:
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
+        association_type:
+          type: string
+        association_id:
+          type: integer
+        text:
+          type: string
+        created_at:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        updated_at:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        request_date:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        deleted_at:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        type:
+          type: string
+      type: object
+      xml:
+        name: Comment
+    Coverage:
+      properties:
+        id:
+          type: integer
+        patient_id:
+          type: integer
+        insurance_plan_name:
+          type: string
+        insurance_provider_name:
+          type: string
+        member_id:
+          type: string
+        status:
+          type: string
+        created_at:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        updated_at:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        payor_organization_id:
+          type: integer
+      type: object
+      xml:
+        name: Coverage
+    Specialty:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        display_name:
+          type: string
+        parent_specialty_id:
+          type: integer
+        title:
+          type: string
+        keywords:
+          type: string
+        pediatrics_only:
+          type: boolean
+        nameKeywords:
+          type: string
+        specialist_form_version:
+          type: integer
+      type: object
+      xml:
+        name: Specialty
+    EConsult:
+      properties:
+        id:
+          type: integer
+        organization_id:
+          type: integer
+        requester_id:
+          type: integer
+        requesting_physician_id:
+          type: integer
+        panelist_id:
+          type: integer
+        patient_id:
+          type: integer
+        coverage_id:
+          type: integer
+        specialty_id:
+          type: integer
+        status:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        response_date:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        request_date:
+          type: string
+        panelist_status:
+          type: string
+        referral_id:
+          type: integer
+        patient_version:
+          type: string
+        requester_is_DES_agent:
+          type: boolean
+        rounds:
+          type: integer
+        masked_id:
+          type: string
+        diagnosis:
+          properties:
+            code:
+              type: string
+            display_name:
+              type: string
+            type:
+              type: string
+            parent_id:
+              type: string
+          type: object
+        main_question:
+          type: string
+        service_type:
+          type: string
+        supporting_details:
+          type: string
+        first_request_date:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        last_edit_by_id:
+          type: integer
+        last_status_before_reassign:
+          type: string
+        last_panelist_user_id_before_reassign:
+          type: integer
+        created_by_des_agent:
+          type: string
+        info_required:
+          type: string
+        appropriateness:
+          type: string
+        disposition_date:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        answer_specialty:
+          type: string
+        initials:
+          type: string
+        recommendation_support:
+          type: string
+        recommended_specialty:
+          type: string
+        face_recommendation_support:
+          type: string
+        saved:
+          type: string
+        additional_diagnostics:
+          type: string
+        actions_pcp:
+          type: string
+        actions_patient:
+          type: string
+        follow_up:
+          type: string
+        organization:
+          type: object
+          $ref: '#/components/schemas/Organization'
+        requesting_physician:
+          type: object
+          $ref: '#/components/schemas/User'
+        requester:
+          type: object
+          $ref: '#/components/schemas/User'
+        patient:
+          type: object
+          $ref: '#/components/schemas/Patient'
+        coverage:
+          type: object
+          $ref: '#/components/schemas/Coverage'
+        specialty:
+          type: object
+          $ref: '#/components/schemas/Specialty'
+        panelist:
+          type: object
+          $ref: '#/components/schemas/PanelistDetail'
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Asset'
+        econsult_handoffs:
+          type: array
+          items:
+            $ref: '#/components/schemas/EConsultHandoff'
+      type: object
+      xml:
+        name: EConsult
+    Location:
+      properties:
+        id:
+          type: integer
+        display_name:
+          type: string
+        street_address_1:
+          type: string
+        street_address_2:
+          type: string
+        city:
+          type: string
+        county:
+          type: string
+        postal_code:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        time_zone:
+          type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        phone_number:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        type:
+          type: string
+        fax:
+          type: string
+      type: object
+      xml:
+        name: Location
+    EConsultHandoff:
+      properties:
+        id:
+          type: integer
+        econsult_id:
+          type: integer
+        from_user_id:
+          type: integer
+        to_user_id:
+          type: integer
+        status:
+          type: string
+        created_at:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+      type: object
+      xml:
+        name: EConsultHandoff
+    Patient:
+      properties:
+        id:
+          type: integer
+        organization_id:
+          type: integer
+        coverage_id:
+          type: integer
+        system_of_record:
+          type: string
+        reference_id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        date_of_birth:
+          type: string
+        gender:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        version:
+          type: string
+        AB109:
+          type: boolean
+        chronic_conditions:
+          type: array
+          items:
+            type: string
+        estimated_release_date:
+          type: string
+        ccd_file:
+          properties:
+            id:
+              type: string
+          type: object
+        booking_history:
+          type: string
+        booking_date:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+      type: object
+      xml:
+        name: Patient
+    PanelistDetail:
+      properties:
+        id:
+          type: integer
+        suffix:
+          type: string
+        website:
+          type: string
+        mobile_number:
+          type: string
+        fax_number:
+          type: string
+        notes:
+          type: string
+        user_id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        profile_photo:
+          type: string
+        main_practice_location:
+          type: string
+        source_id:
+          type: integer
+        certifications:
+          type: array
+          items:
+            properties:
+              name:
+                type: string
+              date:
+                type: string
+            type: object
+        education:
+          type: string
+        fellowships:
+          type: array
+          items:
+            properties:
+              name:
+                type: string
+              date:
+                type: string
+            type: object
+        user:
+          type: object
+          $ref: '#/components/schemas/User'
+        availability:
+          type: array
+          items:
+            $ref: '#/components/schemas/PanelistAvailability'
+      type: object
+      xml:
+        name: PanelistDetail

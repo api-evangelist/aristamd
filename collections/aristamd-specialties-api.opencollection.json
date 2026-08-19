@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arista MD Specialties API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Specialties",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Updates a specialty instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/specialties/:specialtyId",
+            "params": [
+              {
+                "name": "Specialty Id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the specialty to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a main specialty or sub specialty based on the provided input"
+        },
+        {
+          "info": {
+            "name": "Creates a new specialty instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/specialties",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a main specialty or sub specialty based on the provided input"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of specialties with available panelists.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/specialties/withAvailablePanelists/:filter",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "path",
+                "description": "Filter that we should apply to the specialties list. You can include into the path the filter options: pediatrics or non-pediatrics."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of specialties with available panelists"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

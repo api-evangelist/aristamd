@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arista MD Diagnostic API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Diagnostic",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deletes a diagnostic",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/diagnostics/:diagnosticId",
+            "params": [
+              {
+                "name": "diagnosticId",
+                "value": "",
+                "type": "path",
+                "description": "ID of diagnostic to be deleted"
+              }
+            ]
+          },
+          "docs": "Destroys a Diagnostic using its id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

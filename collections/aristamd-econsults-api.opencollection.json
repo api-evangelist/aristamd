@@ -1,0 +1,259 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arista MD E Consults API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EConsults",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of econsults",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/econsults",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status(es)"
+              },
+              {
+                "name": "site",
+                "value": "",
+                "type": "query",
+                "description": "Filter econsults by site using the site ID"
+              },
+              {
+                "name": "request_date[from]",
+                "value": "",
+                "type": "query",
+                "description": "Filter econsults by its request date starting from the received date. (yyyy-mm-dd)"
+              },
+              {
+                "name": "request_date[to]",
+                "value": "",
+                "type": "query",
+                "description": "Filter econsults by its request date to the received date. (yyyy-mm-dd)"
+              },
+              {
+                "name": "panelistId",
+                "value": "",
+                "type": "query",
+                "description": "Filter econsults by panelist using the panelist ID"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of econsults based on its offset. Allows to order the records and perform a\n     *     search"
+        },
+        {
+          "info": {
+            "name": "Creates an EConsult",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/econsults",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Save an econsult object with the input specified. The STORE method should ONLY deal with the\n     *                 eConsult object. It should not touch the User/Patient/ etc. Those items that need to be helped\n     *                 onto the model should be a seperate class that is responsible for helping 'build' the perfect\n     *                 econsult model Default state is saved by requester."
+        },
+        {
+          "info": {
+            "name": "Retrieves an EConsult",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/econsults/:econsultId",
+            "params": [
+              {
+                "name": "econsultId",
+                "value": "",
+                "type": "path",
+                "description": "ID of econsult to return"
+              }
+            ]
+          },
+          "docs": "Finds EConsult by ID"
+        },
+        {
+          "info": {
+            "name": "Updates an econsult",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/econsults/:econsultId",
+            "params": [
+              {
+                "name": "econsultId",
+                "value": "",
+                "type": "path",
+                "description": "ID of econsult to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an econsult using its id"
+        },
+        {
+          "info": {
+            "name": "Updates an econsult",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/econsults/:econsultId",
+            "params": [
+              {
+                "name": "econsultId",
+                "value": "",
+                "type": "path",
+                "description": "ID of econsult to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates one or more fields of a econsult resource"
+        },
+        {
+          "info": {
+            "name": "Deletes an econsult",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/econsults/:econsultId",
+            "params": [
+              {
+                "name": "econsultId",
+                "value": "",
+                "type": "path",
+                "description": "ID of econsult to be deleted"
+              }
+            ]
+          },
+          "docs": "Destroys an EConsult using its id"
+        },
+        {
+          "info": {
+            "name": "Assign econsult to current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/econsults/:econsultId/assign-to-me",
+            "params": [
+              {
+                "name": "econsultId",
+                "value": "",
+                "type": "path",
+                "description": "ID of econsult to update"
+              }
+            ]
+          },
+          "docs": "Updates econsult panelist id to current user id"
+        },
+        {
+          "info": {
+            "name": "Find EConsult ids by status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/econsults/search",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter status"
+              }
+            ]
+          },
+          "docs": "Returns a list of eConsult Ids for the specified requesterId"
+        },
+        {
+          "info": {
+            "name": "Log panelist availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/econsults/logAvailability",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a log for panelist available times"
+        },
+        {
+          "info": {
+            "name": "EConsult Event Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/econsults/:eConsultId/events",
+            "params": [
+              {
+                "name": "eConsultId",
+                "value": "",
+                "type": "path",
+                "description": "ID of EConsult that will be transitioned"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Handles the event for an EConsult"
+        },
+        {
+          "info": {
+            "name": "EConsult Event Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/econsults/:eConsultId/heartbeat",
+            "params": [
+              {
+                "name": "eConsultId",
+                "value": "",
+                "type": "path",
+                "description": "ID of EConsult that will be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Handles the event for an EConsult"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

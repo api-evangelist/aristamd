@@ -1,0 +1,50 @@
+{
+  "provider": "aristamd",
+  "sources": [
+    "aristamd-comments-api-openapi.yml",
+    "aristamd-diagnostic-api-openapi.yml",
+    "aristamd-econsults-api-openapi.yml",
+    "aristamd-intergy-patients-api-openapi.yml",
+    "aristamd-panelists-api-openapi.yml",
+    "aristamd-patients-api-openapi.yml",
+    "aristamd-requests-api-openapi.yml",
+    "aristamd-reviews-api-openapi.yml",
+    "aristamd-specialties-api-openapi.yml",
+    "aristamd-specialty-api-openapi.yml",
+    "aristamd-users-api-openapi.yml",
+    "aristamd-workup-checklists-api-openapi.yml"
+  ],
+  "outputs": [
+    "aristamd-comments-api-openapi.yml",
+    "aristamd-diagnostic-api-openapi.yml",
+    "aristamd-econsults-api-openapi.yml",
+    "aristamd-intergy-patients-api-openapi.yml",
+    "aristamd-panelists-api-openapi.yml",
+    "aristamd-patients-api-openapi.yml",
+    "aristamd-requests-api-openapi.yml",
+    "aristamd-reviews-api-openapi.yml",
+    "aristamd-specialties-api-openapi.yml",
+    "aristamd-specialty-api-openapi.yml",
+    "aristamd-users-api-openapi.yml",
+    "aristamd-workup-checklists-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "aristamd-comments-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "aristamd-diagnostic-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "aristamd-econsults-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "aristamd-intergy-patients-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "aristamd-panelists-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "aristamd-patients-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "aristamd-requests-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "aristamd-reviews-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "aristamd-specialties-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "aristamd-specialty-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "aristamd-users-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "aristamd-workup-checklists-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}

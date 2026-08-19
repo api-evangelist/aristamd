@@ -1,0 +1,4165 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Arista MD API",
+        "description": "This is the business logic core that serves all Arista MD sites, tools, and integrations",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/comments": {
+            "post": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Adds a comment to a Request",
+                "description": "Adds a comment for a request.",
+                "operationId": "post",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Comment body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Saved Comment",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/diagnostics/{diagnosticId}": {
+            "delete": {
+                "tags": [
+                    "Diagnostic"
+                ],
+                "summary": "Deletes a diagnostic",
+                "description": "Destroys a Diagnostic using its id",
+                "operationId": "destroy",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "diagnosticId",
+                        "in": "path",
+                        "description": "ID of diagnostic to be deleted",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted diagnostic"
+                    },
+                    "400": {
+                        "description": "Invalid credentials"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/{request}/{requestId}/diagnostics/{diagnosticId}/events": {
+            "post": {
+                "tags": [
+                    "Requests"
+                ],
+                "summary": "Request diagnostics event handler",
+                "description": "Handles the event for a Request diagnostics",
+                "operationId": "events",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Message body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "action": {
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "type": "string"
+                                },
+                                "note": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "request",
+                        "in": "path",
+                        "description": "Request type that will be transitioned",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "requestId",
+                        "in": "path",
+                        "description": "ID of Request that will be transitioned",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "diagnosticId",
+                        "in": "path",
+                        "description": "ID of Diagnostic that will be transitioned",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Event Transition was success"
+                    },
+                    "500": {
+                        "description": "Internal Error"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/econsults": {
+            "get": {
+                "tags": [
+                    "EConsults"
+                ],
+                "summary": "Retrieves a list of econsults",
+                "description": "Retrieves a list of econsults based on its offset. Allows to order the records and perform a\n     *     search",
+                "operationId": "index",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filter by status(es)",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "new",
+                            "saved_by_requester",
+                            "econsult_recalled",
+                            "submitted",
+                            "opened",
+                            "saved_by_specialist",
+                            "dispositioned",
+                            "ok_to_treat",
+                            "face_to_face",
+                            "wrong_specialty",
+                            "pending_requester_feedback",
+                            "pending_specialist_feedback",
+                            "acknowledged_and_completed",
+                            "rerouted",
+                            "requester_feedback_sent",
+                            "specialist_feedback_sent",
+                            "econsult_reassigned",
+                            "delegated"
+                        ]
+                    },
+                    {
+                        "name": "site",
+                        "in": "query",
+                        "description": "Filter econsults by site using the site ID",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "request_date[from]",
+                        "in": "query",
+                        "description": "Filter econsults by its request date starting from the received date. (yyyy-mm-dd)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "request_date[to]",
+                        "in": "query",
+                        "description": "Filter econsults by its request date to the received date. (yyyy-mm-dd)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "panelistId",
+                        "in": "query",
+                        "description": "Filter econsults by panelist using the panelist ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/EConsult"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials",
+                        "schema": {}
+                    },
+                    "403": {
+                        "description": "Unauthorized",
+                        "schema": {}
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "EConsults"
+                ],
+                "summary": "Creates an EConsult",
+                "description": "Save an econsult object with the input specified. The STORE method should ONLY deal with the\n     *                 eConsult object. It should not touch the User/Patient/ etc. Those items that need to be helped\n     *                 onto the model should be a seperate class that is responsible for helping 'build' the perfect\n     *                 econsult model Default state is saved by requester.",
+                "operationId": "store",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "EConsult body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/EConsult"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created EConsult",
+                        "schema": {
+                            "$ref": "#/definitions/EConsult"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid credentials"
+                    },
+                    "500": {
+                        "description": "Internal Error"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/econsults/{econsultId}": {
+            "get": {
+                "tags": [
+                    "EConsults"
+                ],
+                "summary": "Retrieves an EConsult",
+                "description": "Finds EConsult by ID",
+                "operationId": "show",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "econsultId",
+                        "in": "path",
+                        "description": "ID of econsult to return",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Econsult Record",
+                        "schema": {
+                            "$ref": "#/definitions/EConsult"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials"
+                    },
+                    "404": {
+                        "description": "EConsult not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "EConsults"
+                ],
+                "summary": "Updates an econsult",
+                "description": "Updates an econsult using its id",
+                "operationId": "update",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "EConsult body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/EConsult"
+                        }
+                    },
+                    {
+                        "name": "econsultId",
+                        "in": "path",
+                        "description": "ID of econsult to update",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated Econsult",
+                        "schema": {
+                            "$ref": "#/definitions/EConsult"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid credentials"
+                    },
+                    "500": {
+                        "description": "Internal Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "EConsults"
+                ],
+                "summary": "Deletes an econsult",
+                "description": "Destroys an EConsult using its id",
+                "operationId": "destroy",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "econsultId",
+                        "in": "path",
+                        "description": "ID of econsult to be deleted",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted EConsult",
+                        "schema": {
+                            "$ref": "#/definitions/EConsult"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid credentials"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "EConsults"
+                ],
+                "summary": "Updates an econsult",
+                "description": "Updates one or more fields of a econsult resource",
+                "operationId": "patch",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "EConsult body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/EConsult"
+                        }
+                    },
+                    {
+                        "name": "econsultId",
+                        "in": "path",
+                        "description": "ID of econsult to update",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated Econsult",
+                        "schema": {
+                            "$ref": "#/definitions/EConsult"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid credentials"
+                    },
+                    "500": {
+                        "description": "Internal Error"
+                    }
+                }
+            }
+        },
+        "/econsults/{econsultId}/assign-to-me": {
+            "patch": {
+                "tags": [
+                    "EConsults"
+                ],
+                "summary": "Assign econsult to current user",
+                "description": "Updates econsult panelist id to current user id",
+                "operationId": "patch",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "econsultId",
+                        "in": "path",
+                        "description": "ID of econsult to update",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated Econsult",
+                        "schema": {
+                            "$ref": "#/definitions/EConsult"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid credentials"
+                    },
+                    "500": {
+                        "description": "Internal Error"
+                    }
+                }
+            }
+        },
+        "/econsults/search": {
+            "get": {
+                "tags": [
+                    "EConsults"
+                ],
+                "summary": "Find EConsult ids by status",
+                "description": "Returns a list of eConsult Ids for the specified requesterId",
+                "operationId": "searchByStatus",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filter status",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "ok_to_treat",
+                            "wrong_specialty",
+                            "face_to_face",
+                            "pending_requester_feedback"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Econsult Record",
+                        "schema": {
+                            "properties": {
+                                "total_hits": {
+                                    "type": "integer"
+                                },
+                                "hits": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "rounds": {
+                                                "type": "integer"
+                                            },
+                                            "masked_id": {
+                                                "type": "string"
+                                            },
+                                            "diagnosis": {
+                                                "type": "string"
+                                            },
+                                            "main_question": {
+                                                "type": "string"
+                                            },
+                                            "service_type": {
+                                                "type": "string"
+                                            },
+                                            "supporting_details": {
+                                                "type": "string"
+                                            },
+                                            "first_request_date": {
+                                                "properties": {
+                                                    "date": {
+                                                        "type": "string"
+                                                    },
+                                                    "timezone_type": {
+                                                        "type": "integer"
+                                                    },
+                                                    "timezone": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "last_edit_by_id": {
+                                                "type": "integer"
+                                            },
+                                            "last_status_before_reassign": {
+                                                "type": "string"
+                                            },
+                                            "last_panelist_user_id_before_reassign": {
+                                                "type": "integer"
+                                            },
+                                            "created_by_des_agent": {
+                                                "type": "boolean"
+                                            },
+                                            "info_required": {
+                                                "type": "string"
+                                            },
+                                            "appropriateness": {
+                                                "type": "string"
+                                            },
+                                            "disposition_date": {
+                                                "properties": {
+                                                    "date": {
+                                                        "type": "string"
+                                                    },
+                                                    "timezone_type": {
+                                                        "type": "integer"
+                                                    },
+                                                    "timezone": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "answer_specialty": {
+                                                "type": "string"
+                                            },
+                                            "initials": {
+                                                "type": "string"
+                                            },
+                                            "recommendation_support": {
+                                                "type": "string"
+                                            },
+                                            "recommended_specialty": {
+                                                "type": "string"
+                                            },
+                                            "face_recommendation_support": {
+                                                "type": "string"
+                                            },
+                                            "saved": {
+                                                "type": "boolean"
+                                            },
+                                            "additional_diagnostics": {
+                                                "type": "string"
+                                            },
+                                            "actions_pcp": {
+                                                "type": "string"
+                                            },
+                                            "actions_patient": {
+                                                "type": "string"
+                                            },
+                                            "follow_up": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials"
+                    },
+                    "404": {
+                        "description": "EConsult not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/econsults/logAvailability": {
+            "post": {
+                "tags": [
+                    "EConsults"
+                ],
+                "summary": "Log panelist availability",
+                "description": "Create a log for panelist available times",
+                "operationId": "LogPanelistAvailability",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "EConsult body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "econsultId": {
+                                    "type": "integer"
+                                },
+                                "panelistUserId": {
+                                    "type": "integer"
+                                },
+                                "availability": {
+                                    "type": "string"
+                                },
+                                "hours": {
+                                    "type": "integer",
+                                    "format": "float"
+                                },
+                                "specialty": {
+                                    "type": "string"
+                                },
+                                "submitted": {
+                                    "type": "boolean"
+                                },
+                                "date": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Event Transition was success",
+                        "schema": {}
+                    }
+                }
+            }
+        },
+        "/econsults/{eConsultId}/events": {
+            "post": {
+                "tags": [
+                    "EConsults"
+                ],
+                "summary": "EConsult Event Handler",
+                "description": "Handles the event for an EConsult",
+                "operationId": "events",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "EConsult body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "action": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "eConsultId",
+                        "in": "path",
+                        "description": "ID of EConsult that will be transitioned",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Event Transition was success"
+                    },
+                    "500": {
+                        "description": "Internal Error"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/econsults/{eConsultId}/heartbeat": {
+            "post": {
+                "tags": [
+                    "EConsults"
+                ],
+                "summary": "EConsult Event Handler",
+                "description": "Handles the event for an EConsult",
+                "operationId": "events",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "EConsult body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "specialistId": {
+                                    "type": "number"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "eConsultId",
+                        "in": "path",
+                        "description": "ID of EConsult that will be updated",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "CTP Time has been successfully updated"
+                    },
+                    "500": {
+                        "description": "Internal Error"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/HL7/messages": {
+            "post": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Creates a Patient from an HL7 message",
+                "description": "Save a patient object with the input specified.",
+                "operationId": "store",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "HL7 message",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Patient"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created Patient",
+                        "schema": {
+                            "$ref": "#/definitions/Patient"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid credentials"
+                    },
+                    "500": {
+                        "description": "Internal Error"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/intergy/patients/{id}": {
+            "get": {
+                "tags": [
+                    "Intergy/Patients"
+                ],
+                "summary": "Retrieves Patient information from Intergy API",
+                "description": "Retrieves Patient Record, if the patient was already included then we are goin to update patient's information,if not then we are going to return a new patient record.",
+                "operationId": "index",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Patient's Id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "practice_id",
+                        "in": "query",
+                        "description": "Id of the practice we want to search",
+                        "required": false,
+                        "type": "integer",
+                        "default": null
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Patient Record",
+                        "schema": {
+                            "$ref": "#/definitions/Patient"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials",
+                        "schema": {}
+                    },
+                    "403": {
+                        "description": "Unauthorized",
+                        "schema": {}
+                    }
+                }
+            }
+        },
+        "/panelists": {
+            "get": {
+                "tags": [
+                    "Panelists"
+                ],
+                "summary": "Find panelists based on provided parameters",
+                "description": "Find panelists based on provided parameters",
+                "operationId": "index",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "specialty_code",
+                        "in": "query",
+                        "description": "Code of the specialty that we want to get panelists.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "statusGroup",
+                        "in": "query",
+                        "description": "Code of the specialty that we want to get panelists.",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "active",
+                            "inactive"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/PanelistDetail"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials",
+                        "schema": {}
+                    }
+                }
+            }
+        },
+        "/panelists/getNextAvailable/{code}/{patient_id}": {
+            "get": {
+                "tags": [
+                    "Panelists"
+                ],
+                "summary": "Find the next available panelist for a given specialty",
+                "description": "Find the next available panelist for a given specialty\n      If patient id is provided and this patient has seen a specialist in the past\n      1. Select last seen specialist if available on the next 24 hrs\n      2. If last seen specialist is not available on the next 24 hrs\n      but he is available in the next 30 days, send both the last seen and next\n      available panelist to frontend so requester can choose either\n      3. If last seen specialist is not available at all, send both the last seen\n      and next available panelist to frontend so requester can choose between\n      consulting the next available panelist or not consulting at all",
+                "operationId": "index",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "Code of the specialty that we want to get panelists.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "patient_id",
+                        "in": "path",
+                        "description": "Code of the specialty that we want to get panelists.",
+                        "required": false,
+                        "type": "string",
+                        "default": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "suffix": {
+                                    "type": "string"
+                                },
+                                "website": {
+                                    "type": "string"
+                                },
+                                "mobile_number": {
+                                    "type": "string"
+                                },
+                                "fax_number": {
+                                    "type": "string"
+                                },
+                                "notes": {
+                                    "type": "string"
+                                },
+                                "user_id": {
+                                    "type": "integer"
+                                },
+                                "created_at": {
+                                    "type": "string"
+                                },
+                                "updated_at": {
+                                    "type": "string"
+                                },
+                                "profile_photo": {
+                                    "type": "string"
+                                },
+                                "main_practice_location": {
+                                    "type": "string"
+                                },
+                                "source_id": {
+                                    "type": "integer"
+                                },
+                                "available_date": {
+                                    "type": "string"
+                                },
+                                "econsults_count": {
+                                    "type": "integer"
+                                },
+                                "user_first_name": {
+                                    "type": "string"
+                                },
+                                "user_last_name": {
+                                    "type": "string"
+                                },
+                                "certifications": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "date": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "education": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "date": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "fellowships": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "date": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "specialties": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Specialty"
+                                    }
+                                },
+                                "availability": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/PanelistAvailability"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials",
+                        "schema": {}
+                    }
+                }
+            }
+        },
+        "/patients": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Retrieves a list of patients",
+                "description": "Retrieves a list of patient based on its offset. Allows to order the records and perform a search",
+                "operationId": "index",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "start",
+                        "in": "query",
+                        "description": "Offset of records",
+                        "required": false,
+                        "type": "integer",
+                        "default": 0
+                    },
+                    {
+                        "name": "length",
+                        "in": "query",
+                        "description": "How many items should bring",
+                        "required": false,
+                        "type": "integer",
+                        "default": 20
+                    },
+                    {
+                        "name": "orderColumn",
+                        "in": "query",
+                        "description": "Column used to do the sort",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "id",
+                            "first_name",
+                            "last_name",
+                            "organization",
+                            "organization_name",
+                            "date_of_birth",
+                            "reference_id",
+                            "gender"
+                        ]
+                    },
+                    {
+                        "name": "orderDir",
+                        "in": "query",
+                        "description": "Direction of sort",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "desc",
+                            "asc"
+                        ]
+                    },
+                    {
+                        "name": "searchValue",
+                        "in": "query",
+                        "description": "Search term",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "draw": {
+                                    "type": "integer"
+                                },
+                                "recordsFiltered": {
+                                    "type": "integer"
+                                },
+                                "recordsTotal": {
+                                    "type": "integer"
+                                },
+                                "aaData": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "DT_RowId": {
+                                                "type": "integer"
+                                            },
+                                            "date_of_birth": {
+                                                "type": "string"
+                                            },
+                                            "empty": {
+                                                "type": "string"
+                                            },
+                                            "first_name": {
+                                                "type": "string"
+                                            },
+                                            "gender": {
+                                                "type": "string"
+                                            },
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "last_name": {
+                                                "type": "string"
+                                            },
+                                            "organization_name": {
+                                                "type": "string"
+                                            },
+                                            "reference_id": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials",
+                        "schema": {}
+                    },
+                    "403": {
+                        "description": "Unauthorized",
+                        "schema": {}
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Creates a Patient",
+                "description": "Save a patient object with the input specified.",
+                "operationId": "store",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Patient body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Patient"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created Patient",
+                        "schema": {
+                            "$ref": "#/definitions/Patient"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid credentials"
+                    },
+                    "500": {
+                        "description": "Internal Error"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/patients/{patientId}": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Retrieves a Patient",
+                "description": "Find a Patient by ID",
+                "operationId": "show",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "patientId",
+                        "in": "path",
+                        "description": "ID of patient to return",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Patient Record",
+                        "schema": {
+                            "$ref": "#/definitions/Patient"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials"
+                    },
+                    "404": {
+                        "description": "Patient not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Updates a patient",
+                "description": "Updates a patient using its id",
+                "operationId": "update",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Patient body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Patient"
+                        }
+                    },
+                    {
+                        "name": "patientId",
+                        "in": "path",
+                        "description": "ID of patient",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated Patient",
+                        "schema": {
+                            "$ref": "#/definitions/Patient"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid credentials"
+                    },
+                    "500": {
+                        "description": "Internal Error"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Patches a patient",
+                "description": "Patches a patient using its id",
+                "operationId": "patch",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Patient body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Patient"
+                        }
+                    },
+                    {
+                        "name": "patientId",
+                        "in": "path",
+                        "description": "ID of patient",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "operation",
+                        "in": "query",
+                        "description": "Patch operation",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "assets",
+                        "in": "query",
+                        "description": "assets array",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated Patient",
+                        "schema": {
+                            "$ref": "#/definitions/Patient"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid credentials"
+                    },
+                    "500": {
+                        "description": "Internal Error"
+                    }
+                }
+            }
+        },
+        "/patients/search": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Return a user object specified. If the id is set to self the function will return an instance of the currently logged in user",
+                "description": "Finds patients by last name or elements that match with a provided text.",
+                "operationId": "show",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "data[last_name]",
+                        "in": "query",
+                        "description": "Filter by last name",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "data[q]",
+                        "in": "query",
+                        "description": "Filter by elements matching the provided text.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "rest",
+                        "in": "query",
+                        "description": "ID of user we want to get info.",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Patient Record",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Patient"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials"
+                    },
+                    "404": {
+                        "description": "Patient not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/patients/top-patients/{length}": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "TopReferral",
+                "description": "it returns a list with the length received of the top patients",
+                "operationId": "getTopReferralPatients",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "length",
+                        "in": "path",
+                        "description": "length of the top patients",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "draw": {
+                                    "type": "integer"
+                                },
+                                "recordsTotal": {
+                                    "type": "integer"
+                                },
+                                "recordsFiltered": {
+                                    "type": "integer"
+                                },
+                                "aaData": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "patient_id": {
+                                                "type": "integer"
+                                            },
+                                            "count": {
+                                                "type": "integer"
+                                            },
+                                            "reference_id": {
+                                                "type": "string"
+                                            },
+                                            "onsite_approver_id": {
+                                                "type": "integer"
+                                            },
+                                            "requesting_physician_comment": {
+                                                "type": "string"
+                                            },
+                                            "diagnosis": {
+                                                "type": "string"
+                                            },
+                                            "service_type": {
+                                                "type": "string"
+                                            },
+                                            "priority": {
+                                                "type": "string"
+                                            },
+                                            "transfer_method": {
+                                                "type": "string"
+                                            },
+                                            "dispositioner_id": {
+                                                "type": "integer"
+                                            },
+                                            "e_signature": {
+                                                "type": "string"
+                                            },
+                                            "unscheduled_reason": {
+                                                "type": "string"
+                                            },
+                                            "viewed_by": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials"
+                    },
+                    "404": {
+                        "description": "Patient not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/patients/{patientId}/history": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Patient's History",
+                "description": "Get the patient's history of referrals and econsults",
+                "operationId": "history",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "patientId",
+                        "in": "path",
+                        "description": "ID of patient to return",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "draw": {
+                                    "type": "integer"
+                                },
+                                "recordsTotal": {
+                                    "type": "integer"
+                                },
+                                "recordsFiltered": {
+                                    "type": "integer"
+                                },
+                                "aaData": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "DT_RowId": {
+                                                "type": "integer"
+                                            },
+                                            "model": {
+                                                "type": "string"
+                                            },
+                                            "empty": {
+                                                "type": "string"
+                                            },
+                                            "request_date": {
+                                                "type": "integer"
+                                            },
+                                            "chief_complaint": {
+                                                "type": "string"
+                                            },
+                                            "service_type": {
+                                                "type": "string"
+                                            },
+                                            "requesting_physician": {
+                                                "type": "string"
+                                            },
+                                            "specialty": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Patient not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/patients/{patientId}/identifiers": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Patient's External Identifiers",
+                "description": "Get the patient's external identifiers",
+                "operationId": "identifiers",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "patientId",
+                        "in": "path",
+                        "description": "ID of patient to return",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "identifier_name",
+                        "in": "query",
+                        "description": "Identifier name",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "auth_provider_id",
+                        "in": "query",
+                        "description": "Auth Provider ID",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "identifiable_id": {
+                                        "type": "integer"
+                                    },
+                                    "identifier": {
+                                        "type": "string"
+                                    },
+                                    "created_at": {
+                                        "properties": {
+                                            "date": {
+                                                "type": "string"
+                                            },
+                                            "timezone_type": {
+                                                "type": "integer"
+                                            },
+                                            "timezone": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "updated_at": {
+                                        "properties": {
+                                            "date": {
+                                                "type": "string"
+                                            },
+                                            "timezone_type": {
+                                                "type": "integer"
+                                            },
+                                            "timezone": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "identifiable_type": {
+                                        "type": "string"
+                                    },
+                                    "identifier_name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Patient not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/reviews": {
+            "get": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Returns a review from a Request",
+                "description": "Returns the review identified by the id from a Request",
+                "operationId": "get",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "association_type",
+                        "in": "query",
+                        "description": "Type of request we want to filter",
+                        "required": false,
+                        "type": "string",
+                        "default": "econsult"
+                    },
+                    {
+                        "name": "association_id",
+                        "in": "query",
+                        "description": "Id of the request we want to filter",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "question_type",
+                        "in": "query",
+                        "description": "Question type we want to filter",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Review not found"
+                    },
+                    "200": {
+                        "description": "Review",
+                        "schema": {
+                            "$ref": "#/definitions/Review"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Adds reviews to a Request",
+                "description": "Adds a lists of questions and answeas for a request review.",
+                "operationId": "post",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Review Lists",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Review"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Review Lists",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Review"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/reviews/{id}": {
+            "get": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Returns a review from a Request",
+                "description": "Returns the review identified by the id from a Request",
+                "operationId": "get",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Review to update",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Review not found"
+                    },
+                    "200": {
+                        "description": "Review",
+                        "schema": {
+                            "$ref": "#/definitions/Review"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Update a review from a Request",
+                "description": "Updates the review identified by the id from a Request",
+                "operationId": "post",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Review to update",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Review to update",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Review"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Review",
+                        "schema": {
+                            "$ref": "#/definitions/Review"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/specialties/{specialtyId}": {
+            "get": {
+                "tags": [
+                    "Specialty"
+                ],
+                "summary": "Retrieves a Specialty",
+                "description": "Finds Specialty by ID",
+                "operationId": "show",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "specialtyId",
+                        "in": "path",
+                        "description": "ID of specialty to return",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Specialty Record",
+                        "schema": {
+                            "$ref": "#/definitions/Specialty"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials"
+                    },
+                    "404": {
+                        "description": "Specilaty not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Specialties"
+                ],
+                "summary": "Updates a specialty instance",
+                "description": "Updates a main specialty or sub specialty based on the provided input",
+                "operationId": "update",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Specialty body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Specialty"
+                        }
+                    },
+                    {
+                        "name": "Specialty Id",
+                        "in": "path",
+                        "description": "Id of the specialty to update",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Updated Specialty",
+                        "schema": {
+                            "$ref": "#/definitions/Specialty"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid credentials"
+                    },
+                    "500": {
+                        "description": "Internal Error"
+                    },
+                    "402": {
+                        "description": "Unprocessable entity"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/specialties": {
+            "post": {
+                "tags": [
+                    "Specialties"
+                ],
+                "summary": "Creates a new specialty instance",
+                "description": "Creates a main specialty or sub specialty based on the provided input",
+                "operationId": "store",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Specialty body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Specialty"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created Specialty",
+                        "schema": {
+                            "$ref": "#/definitions/Specialty"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid credentials"
+                    },
+                    "500": {
+                        "description": "Internal Error"
+                    },
+                    "402": {
+                        "description": "Unprocessable entity"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/specialties/withAvailablePanelists/{filter}": {
+            "get": {
+                "tags": [
+                    "Specialties"
+                ],
+                "summary": "Retrieves a list of specialties with available panelists.",
+                "description": "Retrieves a list of specialties with available panelists",
+                "operationId": "index",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "in": "path",
+                        "description": "Filter that we should apply to the specialties list. You can include into the path the filter options: pediatrics or non-pediatrics.",
+                        "required": false,
+                        "type": "string",
+                        "default": "null"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "code": {
+                                        "type": "string"
+                                    },
+                                    "display_name": {
+                                        "type": "string"
+                                    },
+                                    "parent_specialty_id": {
+                                        "type": "string"
+                                    },
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "keywords": {
+                                        "type": "string"
+                                    },
+                                    "pediatrics_only": {
+                                        "type": "boolean"
+                                    },
+                                    "nameKeywords": {
+                                        "type": "string"
+                                    },
+                                    "specialist_form_version": {
+                                        "type": "integer"
+                                    },
+                                    "subspecialties": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "code": {
+                                                    "type": "string"
+                                                },
+                                                "display_name": {
+                                                    "type": "string"
+                                                },
+                                                "parent_specialty_id": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "keywords": {
+                                                    "type": "string"
+                                                },
+                                                "pediatrics_only": {
+                                                    "type": "boolean"
+                                                },
+                                                "nameKeywords": {
+                                                    "type": "string"
+                                                },
+                                                "specialist_form_version": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials",
+                        "schema": {}
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Retrieves a list of users",
+                "description": "Retrieves a list of users based on its offset. Allows to order the records and perform a search",
+                "operationId": "index",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "start",
+                        "in": "query",
+                        "description": "Offset of records",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "length",
+                        "in": "query",
+                        "description": "How many items should bring",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "orderColumn",
+                        "in": "query",
+                        "description": "Column used to do the sort",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "orderDir",
+                        "in": "query",
+                        "description": "Direction of sort",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "searchValue",
+                        "in": "query",
+                        "description": "Search term",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "searchStatus",
+                        "in": "query",
+                        "description": "Filter user's list by status",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "totalCount": {
+                                    "type": "integer"
+                                },
+                                "filteredCount": {
+                                    "type": "integer"
+                                },
+                                "users": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "username": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "authentication_provider": {
+                                                "type": "string"
+                                            },
+                                            "first_name": {
+                                                "type": "string"
+                                            },
+                                            "last_name": {
+                                                "type": "string"
+                                            },
+                                            "status": {
+                                                "type": "string"
+                                            },
+                                            "last_login": {
+                                                "type": "string"
+                                            },
+                                            "created_at": {
+                                                "type": "string"
+                                            },
+                                            "updated_at": {
+                                                "type": "string"
+                                            },
+                                            "suffix": {
+                                                "type": "string"
+                                            },
+                                            "base_dn": {
+                                                "type": "string"
+                                            },
+                                            "primary_site_id": {
+                                                "type": "integer"
+                                            },
+                                            "full_name": {
+                                                "type": "string"
+                                            },
+                                            "organization": {
+                                                "type": "string"
+                                            },
+                                            "phone": {
+                                                "type": "string"
+                                            },
+                                            "mobile": {
+                                                "type": "string"
+                                            },
+                                            "last_active_organization_id": {
+                                                "type": "integer"
+                                            },
+                                            "notification_email": {
+                                                "type": "string"
+                                            },
+                                            "notification_phone": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials",
+                        "schema": {}
+                    }
+                }
+            }
+        },
+        "/users/{user_id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Return a user object specified. If the id is set to self the function will return an instance of the currently logged in user",
+                "description": "Finds EConsult by ID",
+                "operationId": "show",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "ID of user we want to get info.",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User Record",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/users/search": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Retrieves a user object specified. If the id is set to self the function will return an instance of the currently logged in user",
+                "description": "Retrieves a list of users based on its offset. Allows to order the records and perform a search",
+                "operationId": "index",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Username of the user required",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "first_name",
+                        "in": "query",
+                        "description": "First Name or Last Name or the required user",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "role",
+                        "in": "query",
+                        "description": "Role's name assigned to the users we want to get",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "permission",
+                        "in": "query",
+                        "description": "Permission's name assigned to the users we want to get",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "organizationId",
+                        "in": "query",
+                        "description": "Id of the organization we are filtering for",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status name we are filtering for",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "total_hits": {
+                                    "type": "integer"
+                                },
+                                "hits": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "username": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "authentication_provider": {
+                                                "type": "string"
+                                            },
+                                            "first_name": {
+                                                "type": "string"
+                                            },
+                                            "last_name": {
+                                                "type": "string"
+                                            },
+                                            "status": {
+                                                "type": "string"
+                                            },
+                                            "last_login": {
+                                                "type": "string"
+                                            },
+                                            "created_at": {
+                                                "type": "string"
+                                            },
+                                            "updated_at": {
+                                                "type": "string"
+                                            },
+                                            "suffix": {
+                                                "type": "string"
+                                            },
+                                            "base_dn": {
+                                                "type": "string"
+                                            },
+                                            "primary_site_id": {
+                                                "type": "integer"
+                                            },
+                                            "full_name": {
+                                                "type": "string"
+                                            },
+                                            "organization": {
+                                                "type": "string"
+                                            },
+                                            "phone": {
+                                                "type": "string"
+                                            },
+                                            "mobile": {
+                                                "type": "string"
+                                            },
+                                            "last_active_organization_id": {
+                                                "type": "integer"
+                                            },
+                                            "notification_email": {
+                                                "type": "string"
+                                            },
+                                            "notification_phone": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials",
+                        "schema": {}
+                    }
+                }
+            }
+        },
+        "/users/update": {
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Updates a specific field on a user",
+                "description": "Updates a specific field on a user",
+                "operationId": "update",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "description": "Id if the user to be updated",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Unexpected failure"
+                    }
+                }
+            }
+        },
+        "/workup-checklists/specialties": {
+            "get": {
+                "tags": [
+                    "Workup Checklists"
+                ],
+                "summary": "Workup checklists specialties",
+                "description": "Retrieves available specialties for the existent workup checklists",
+                "operationId": "specialties",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Available specialties of current checklists",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Specialty"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials"
+                    },
+                    "500": {
+                        "description": "Internal Server error"
+                    }
+                }
+            }
+        },
+        "/workup-checklists/specialties/{specialtyCode}/chief-complaints": {
+            "get": {
+                "tags": [
+                    "Workup Checklists"
+                ],
+                "summary": "Specialty chief complaints",
+                "description": "Retrieves available specialties for the existent workup checklists",
+                "operationId": "chiefComplaints",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "specialtyCode",
+                        "in": "path",
+                        "description": "Specialty code to find chief complaints",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Available chief complaints of selected specialty in the current checklists",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ChiefComplaint"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal Server error"
+                    }
+                }
+            }
+        },
+        "/workup-checklists/specialties/{specialtyCode}/chief-complaints/{chiefComplaintCode}": {
+            "get": {
+                "tags": [
+                    "Workup Checklists"
+                ],
+                "summary": "Specialty / Chief Complaint Search",
+                "description": "Search checklist by specialty and chief complaint",
+                "operationId": "searchBySpecialtyAndChiefComplaint",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "specialtyCode",
+                        "in": "path",
+                        "description": "Specialty code",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "chiefComplaintCode",
+                        "in": "path",
+                        "description": "Chief complaint code",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Checklist retrieved from specialty and chief complaint",
+                        "schema": {
+                            "$ref": "#/definitions/ThirdPartyWorkupChecklist"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Credentials or invalid request"
+                    },
+                    "404": {
+                        "description": "Specialty or Chief complaint not found"
+                    },
+                    "204": {
+                        "description": "No results available"
+                    },
+                    "500": {
+                        "description": "Internal Server error"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Asset": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "security_profile": {
+                    "type": "string"
+                },
+                "mime_type": {
+                    "type": "string"
+                },
+                "hash": {
+                    "type": "string"
+                },
+                "size": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "Asset"
+            }
+        },
+        "ChiefComplaint": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "specialties": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Specialty"
+                    }
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "ChiefComplaint"
+            }
+        },
+        "Comment": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "association_type": {
+                    "type": "string"
+                },
+                "association_id": {
+                    "type": "integer"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "properties": {
+                        "date": {
+                            "type": "string"
+                        },
+                        "timezone_type": {
+                            "type": "integer"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "updated_at": {
+                    "properties": {
+                        "date": {
+                            "type": "string"
+                        },
+                        "timezone_type": {
+                            "type": "integer"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request_date": {
+                    "properties": {
+                        "date": {
+                            "type": "string"
+                        },
+                        "timezone_type": {
+                            "type": "integer"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "deleted_at": {
+                    "properties": {
+                        "date": {
+                            "type": "string"
+                        },
+                        "timezone_type": {
+                            "type": "integer"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "Comment"
+            }
+        },
+        "Coverage": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "patient_id": {
+                    "type": "integer"
+                },
+                "insurance_plan_name": {
+                    "type": "string"
+                },
+                "insurance_provider_name": {
+                    "type": "string"
+                },
+                "member_id": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "properties": {
+                        "date": {
+                            "type": "string"
+                        },
+                        "timezone_type": {
+                            "type": "integer"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "updated_at": {
+                    "properties": {
+                        "date": {
+                            "type": "string"
+                        },
+                        "timezone_type": {
+                            "type": "integer"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "payor_organization_id": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "Coverage"
+            }
+        },
+        "EConsult": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "organization_id": {
+                    "type": "integer"
+                },
+                "requester_id": {
+                    "type": "integer"
+                },
+                "requesting_physician_id": {
+                    "type": "integer"
+                },
+                "panelist_id": {
+                    "type": "integer"
+                },
+                "patient_id": {
+                    "type": "integer"
+                },
+                "coverage_id": {
+                    "type": "integer"
+                },
+                "specialty_id": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "response_date": {
+                    "properties": {
+                        "date": {
+                            "type": "string"
+                        },
+                        "timezone_type": {
+                            "type": "integer"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request_date": {
+                    "type": "string"
+                },
+                "panelist_status": {
+                    "type": "string"
+                },
+                "referral_id": {
+                    "type": "integer"
+                },
+                "patient_version": {
+                    "type": "string"
+                },
+                "requester_is_DES_agent": {
+                    "type": "boolean"
+                },
+                "rounds": {
+                    "type": "integer"
+                },
+                "masked_id": {
+                    "type": "string"
+                },
+                "diagnosis": {
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "display_name": {
+                            "type": "string"
+                        },
+                        "type": {
+                            "type": "string"
+                        },
+                        "parent_id": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "main_question": {
+                    "type": "string"
+                },
+                "service_type": {
+                    "type": "string"
+                },
+                "supporting_details": {
+                    "type": "string"
+                },
+                "first_request_date": {
+                    "properties": {
+                        "date": {
+                            "type": "string"
+                        },
+                        "timezone_type": {
+                            "type": "integer"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "last_edit_by_id": {
+                    "type": "integer"
+                },
+                "last_status_before_reassign": {
+                    "type": "string"
+                },
+                "last_panelist_user_id_before_reassign": {
+                    "type": "integer"
+                },
+                "created_by_des_agent": {
+                    "type": "string"
+                },
+                "info_required": {
+                    "type": "string"
+                },
+                "appropriateness": {
+                    "type": "string"
+                },
+                "disposition_date": {
+                    "properties": {
+                        "date": {
+                            "type": "string"
+                        },
+                        "timezone_type": {
+                            "type": "integer"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "answer_specialty": {
+                    "type": "string"
+                },
+                "initials": {
+                    "type": "string"
+                },
+                "recommendation_support": {
+                    "type": "string"
+                },
+                "recommended_specialty": {
+                    "type": "string"
+                },
+                "face_recommendation_support": {
+                    "type": "string"
+                },
+                "saved": {
+                    "type": "string"
+                },
+                "additional_diagnostics": {
+                    "type": "string"
+                },
+                "actions_pcp": {
+                    "type": "string"
+                },
+                "actions_patient": {
+                    "type": "string"
+                },
+                "follow_up": {
+                    "type": "string"
+                },
+                "organization": {
+                    "type": "object",
+                    "$ref": "#/definitions/Organization"
+                },
+                "requesting_physician": {
+                    "type": "object",
+                    "$ref": "#/definitions/User"
+                },
+                "requester": {
+                    "type": "object",
+                    "$ref": "#/definitions/User"
+                },
+                "patient": {
+                    "type": "object",
+                    "$ref": "#/definitions/Patient"
+                },
+                "coverage": {
+                    "type": "object",
+                    "$ref": "#/definitions/Coverage"
+                },
+                "specialty": {
+                    "type": "object",
+                    "$ref": "#/definitions/Specialty"
+                },
+                "panelist": {
+                    "type": "object",
+                    "$ref": "#/definitions/PanelistDetail"
+                },
+                "comments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Comment"
+                    }
+                },
+                "attachments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Asset"
+                    }
+                },
+                "econsult_handoffs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EConsultHandoff"
+                    }
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "EConsult"
+            }
+        },
+        "EConsultHandoff": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "econsult_id": {
+                    "type": "integer"
+                },
+                "from_user_id": {
+                    "type": "integer"
+                },
+                "to_user_id": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "properties": {
+                        "date": {
+                            "type": "string"
+                        },
+                        "timezone_type": {
+                            "type": "integer"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "EConsultHandoff"
+            }
+        },
+        "EConsultRoutingMetric": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "econsult_id": {
+                    "type": "integer"
+                },
+                "specialty_id": {
+                    "type": "integer"
+                },
+                "econsult_assignment_profile_id": {
+                    "type": "integer"
+                },
+                "medicaid_specialists_over_capacity": {
+                    "type": "boolean"
+                },
+                "assigned_to_next_available": {
+                    "type": "boolean"
+                },
+                "assigned_to_usual": {
+                    "type": "boolean"
+                },
+                "available_specialists": {
+                    "type": "integer"
+                },
+                "exit_rule": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "timestamp"
+                },
+                "updated_at": {
+                    "type": "timestamp"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "EConsultRoutingMetric"
+            }
+        },
+        "EConsultRoutingSpecialistMetric": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "panelist_detail_id": {
+                    "type": "integer"
+                },
+                "econsult_routing_metric_id": {
+                    "type": "integer"
+                },
+                "medicaid_certified": {
+                    "type": "boolean"
+                },
+                "submitted_date": {
+                    "type": "date"
+                },
+                "assignment_date": {
+                    "type": "date"
+                },
+                "assignment_count": {
+                    "type": "integer"
+                },
+                "daily_capacity": {
+                    "type": "integer"
+                },
+                "assignment_average_7_days": {
+                    "type": "double"
+                },
+                "assignment_average_30_days": {
+                    "type": "double"
+                },
+                "created_at": {
+                    "type": "timestamp"
+                },
+                "updated_at": {
+                    "type": "timestamp"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "EConsultRoutingMetric"
+            }
+        },
+        "EconsultAssignmentMetric": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "panelist_id": {
+                    "type": "integer"
+                },
+                "assignment_date": {
+                    "type": "timestamp"
+                },
+                "assignment_count": {
+                    "type": "int"
+                },
+                "assignment_average_7_days": {
+                    "type": "double"
+                },
+                "assignment_average_30_days": {
+                    "type": "double"
+                },
+                "created_at": {
+                    "type": "timestamp"
+                },
+                "updated_at": {
+                    "type": "timestamp"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "EconsultAssignmentMetric"
+            }
+        },
+        "EconsultAssignmentProfile": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "EconsultAssigmentProfile"
+            }
+        },
+        "FacilityCode": {
+            "properties": {
+                "id": {
+                    "description": "FacilityCode Model",
+                    "type": "integer"
+                },
+                "specialty_id": {
+                    "description": "FacilityCode Model",
+                    "type": "integer"
+                },
+                "organization_id": {
+                    "description": "FacilityCode Model",
+                    "type": "integer"
+                },
+                "code": {
+                    "description": "FacilityCode Model",
+                    "type": "string"
+                },
+                "display_name": {
+                    "description": "FacilityCode Model",
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "FacilityCode"
+            }
+        },
+        "Location": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "street_address_1": {
+                    "type": "string"
+                },
+                "street_address_2": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "county": {
+                    "type": "string"
+                },
+                "postal_code": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "time_zone": {
+                    "type": "string"
+                },
+                "latitude": {
+                    "type": "string"
+                },
+                "longitude": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "fax": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "Location"
+            }
+        },
+        "Organization": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "parent_organization_id": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "domain": {
+                    "type": "string"
+                },
+                "formal_name": {
+                    "type": "string"
+                },
+                "namespace": {
+                    "type": "string"
+                },
+                "workup_checklist_set_id": {
+                    "type": "integer"
+                },
+                "site_name": {
+                    "type": "string"
+                },
+                "settings": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                },
+                "service_types": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "urgency_ratings": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "expected_release_date_options": {
+                    "properties": {
+                        "date": {
+                            "type": "string"
+                        },
+                        "timezone_type": {
+                            "type": "integer"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "pivot": {
+                    "properties": {
+                        "user_id": {
+                            "type": "integer"
+                        },
+                        "organization_id": {
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                },
+                "parent_organization": {
+                    "type": "object"
+                },
+                "locations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Location"
+                    }
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "Organization"
+            }
+        },
+        "PanelistAvailability": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "available_date": {
+                    "type": "string"
+                },
+                "panelist_id": {
+                    "type": "integer"
+                },
+                "specialty_id": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "PanelistAvailability"
+            }
+        },
+        "PanelistDetail": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "suffix": {
+                    "type": "string"
+                },
+                "website": {
+                    "type": "string"
+                },
+                "mobile_number": {
+                    "type": "string"
+                },
+                "fax_number": {
+                    "type": "string"
+                },
+                "notes": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "profile_photo": {
+                    "type": "string"
+                },
+                "main_practice_location": {
+                    "type": "string"
+                },
+                "source_id": {
+                    "type": "integer"
+                },
+                "certifications": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "date": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "education": {
+                    "type": "string"
+                },
+                "fellowships": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "date": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "user": {
+                    "type": "object",
+                    "$ref": "#/definitions/User"
+                },
+                "availability": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PanelistAvailability"
+                    }
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "PanelistDetail"
+            }
+        },
+        "Patient": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "organization_id": {
+                    "type": "integer"
+                },
+                "coverage_id": {
+                    "type": "integer"
+                },
+                "system_of_record": {
+                    "type": "string"
+                },
+                "reference_id": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "date_of_birth": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                },
+                "AB109": {
+                    "type": "boolean"
+                },
+                "chronic_conditions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "estimated_release_date": {
+                    "type": "string"
+                },
+                "ccd_file": {
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "booking_history": {
+                    "type": "string"
+                },
+                "booking_date": {
+                    "properties": {
+                        "date": {
+                            "type": "string"
+                        },
+                        "timezone_type": {
+                            "type": "integer"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "Patient"
+            }
+        },
+        "Permission": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "permission_types_id": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "Permission"
+            }
+        },
+        "Review": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "question_type": {
+                    "type": "string"
+                },
+                "answer": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "Review"
+            }
+        },
+        "Role": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "notifications": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "permissions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Permission"
+                    }
+                },
+                "perms": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Permission"
+                    }
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "Role"
+            }
+        },
+        "RoleType": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "RoleType"
+            }
+        },
+        "Specialty": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "parent_specialty_id": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "keywords": {
+                    "type": "string"
+                },
+                "pediatrics_only": {
+                    "type": "boolean"
+                },
+                "nameKeywords": {
+                    "type": "string"
+                },
+                "specialist_form_version": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "Specialty"
+            }
+        },
+        "StateTransition": {
+            "properties": {
+                "id": {
+                    "description": "StateTransition Model",
+                    "type": "integer"
+                },
+                "object_type": {
+                    "description": "StateTransition Model",
+                    "type": "string"
+                },
+                "object_id": {
+                    "description": "StateTransition Model",
+                    "type": "integer"
+                },
+                "transition": {
+                    "description": "StateTransition Model",
+                    "type": "string"
+                },
+                "from_status": {
+                    "description": "StateTransition Model",
+                    "type": "string"
+                },
+                "to_status": {
+                    "description": "StateTransition Model",
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "StateTransition"
+            }
+        },
+        "User": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "authentication_provider": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "last_login": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "suffix": {
+                    "type": "string"
+                },
+                "base_dn": {
+                    "type": "string"
+                },
+                "primary_site_id": {
+                    "type": "integer"
+                },
+                "full_name": {
+                    "type": "string"
+                },
+                "organization": {
+                    "type": "object",
+                    "$ref": "#/definitions/Organization"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "string"
+                },
+                "last_active_organization_id": {
+                    "type": "integer"
+                },
+                "notification_email": {
+                    "type": "string"
+                },
+                "notification_phone": {
+                    "type": "string"
+                },
+                "organizations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Organization"
+                    }
+                },
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Role"
+                    }
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "User"
+            }
+        },
+        "WorkupChecklist": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                },
+                "base_workup_checklist_version": {
+                    "type": "string"
+                },
+                "base_workup_checklist_id": {
+                    "type": "integer"
+                },
+                "chief_complaint_id": {
+                    "type": "integer"
+                },
+                "organization_id": {
+                    "type": "integer"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "specialty_id": {
+                    "type": "integer"
+                },
+                "version_tag": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "update_status": {
+                    "type": "string"
+                },
+                "DT_RowId": {
+                    "type": "integer"
+                },
+                "chief_complaint_name": {
+                    "type": "string"
+                },
+                "specialty_title": {
+                    "type": "string"
+                },
+                "specialty_name": {
+                    "type": "string"
+                },
+                "asHtml": {
+                    "type": "string"
+                },
+                "assessments": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "question": {
+                                "type": "string"
+                            },
+                            "question_type": {
+                                "type": "string"
+                            },
+                            "created_at": {
+                                "type": "string"
+                            },
+                            "updated_at": {
+                                "type": "string"
+                            },
+                            "choices": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "prompt": {
+                                "type": "string"
+                            },
+                            "alert": {
+                                "type": "string"
+                            },
+                            "filter": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "diagnostics": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "diagnostic_id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "category": {
+                                "type": "string"
+                            },
+                            "diagnostic_type": {
+                                "type": "string"
+                            },
+                            "conditions": {
+                                "type": "string"
+                            },
+                            "required": {
+                                "type": "boolean"
+                            },
+                            "alert": {
+                                "type": "string"
+                            },
+                            "conditional": {
+                                "type": "boolean"
+                            },
+                            "requires_aoe": {
+                                "type": "boolean"
+                            },
+                            "created_at": {
+                                "type": "string"
+                            },
+                            "updated_at": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "special_note": {
+                    "type": "string"
+                },
+                "disclaimer": {
+                    "type": "string"
+                },
+                "clinical_pearl_note": {
+                    "type": "string"
+                },
+                "organization": {
+                    "type": "object",
+                    "$ref": "#/definitions/Organization"
+                },
+                "chief_complaint": {
+                    "type": "object",
+                    "$ref": "#/definitions/ChiefComplaint"
+                },
+                "workup_checklist_sets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/WorkupChecklistSet"
+                    }
+                },
+                "specialty": {
+                    "type": "object",
+                    "$ref": "#/definitions/Specialty"
+                },
+                "health_language_code_group_id": {
+                    "type": "string"
+                },
+                "health_language_code_group_version": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "WorkupChecklist"
+            }
+        },
+        "WorkupChecklistSet": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                },
+                "pivot": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "workup_checklist_id": {
+                                "type": "integer"
+                            },
+                            "workup_checklist_set_id": {
+                                "type": "integer"
+                            },
+                            "workup_checklist_version": {
+                                "type": "string"
+                            },
+                            "status": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "WorkupChecklistSet"
+            }
+        },
+        "ThirdPartyWorkupChecklist": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "specialty": {
+                    "type": "string"
+                },
+                "chief_complaint": {
+                    "type": "string"
+                },
+                "created_by": {
+                    "type": "string"
+                },
+                "assessments": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "question": {
+                                "type": "string"
+                            },
+                            "question_type": {
+                                "type": "string"
+                            },
+                            "created_at": {
+                                "type": "string"
+                            },
+                            "updated_at": {
+                                "type": "string"
+                            },
+                            "choices": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "prompt": {
+                                "type": "string"
+                            },
+                            "alert": {
+                                "type": "string"
+                            },
+                            "filter": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "diagnostics": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "diagnostic_id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "category": {
+                                "type": "string"
+                            },
+                            "diagnostic_type": {
+                                "type": "string"
+                            },
+                            "conditions": {
+                                "type": "string"
+                            },
+                            "required": {
+                                "type": "boolean"
+                            },
+                            "alert": {
+                                "type": "string"
+                            },
+                            "conditional": {
+                                "type": "boolean"
+                            },
+                            "requires_aoe": {
+                                "type": "boolean"
+                            },
+                            "created_at": {
+                                "type": "string"
+                            },
+                            "updated_at": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "special_note": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "ThirdPartyWorkupChecklist"
+            }
+        }
+    }
+}

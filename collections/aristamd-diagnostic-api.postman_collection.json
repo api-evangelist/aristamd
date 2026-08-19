@@ -1,0 +1,184 @@
+{
+  "item": [
+    {
+      "id": "7ab98d1c-53af-45b4-8ec7-741175c7c89a",
+      "name": "Diagnostic",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a3992372-91d0-4300-ae59-190b00d4b9a7",
+          "name": "Deletes a diagnostic",
+          "request": {
+            "name": "Deletes a diagnostic",
+            "description": {
+              "content": "Destroys a Diagnostic using its id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "diagnostics",
+                ":diagnosticId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "diagnosticId",
+                  "description": "(Required) ID of diagnostic to be deleted"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2a678344-b39f-42a7-9051-fe100407d3b0",
+              "name": "Deleted diagnostic",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "diagnostics",
+                    ":diagnosticId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "diagnosticId",
+                      "description": "(Required) ID of diagnostic to be deleted"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d42d75b4-ea1b-4287-b342-8c1ae7ce32c7",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "diagnostics",
+                    ":diagnosticId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "diagnosticId",
+                      "description": "(Required) ID of diagnostic to be deleted"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "15a64603-ed11-4505-be05-a021070dc604",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "diagnostics",
+                    ":diagnosticId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "diagnosticId",
+                      "description": "(Required) ID of diagnostic to be deleted"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fc6f69ad-0648-4115-b6a1-cce9e4698de0",
+    "name": "Arista MD Diagnostic API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the business logic core that serves all Arista MD sites, tools, and integrations",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,447 @@
+openapi: 3.2.0
+info:
+  title: Arista MD Panelists API
+  description: This is the business logic core that serves all Arista MD sites, tools, and integrations
+  version: 1.0.0
+tags:
+- name: Panelists
+paths:
+  /panelists:
+    get:
+      tags:
+      - Panelists
+      summary: Find panelists based on provided parameters
+      description: Find panelists based on provided parameters
+      operationId: index
+      parameters:
+      - name: specialty_code
+        in: query
+        description: Code of the specialty that we want to get panelists.
+        required: false
+        schema:
+          type: string
+      - name: statusGroup
+        in: query
+        description: Code of the specialty that we want to get panelists.
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PanelistDetail'
+        '400':
+          description: Invalid Credentials
+          content:
+            application/json:
+              schema: {}
+  /panelists/getNextAvailable/{code}/{patient_id}:
+    get:
+      tags:
+      - Panelists
+      summary: Find the next available panelist for a given specialty
+      description: "Find the next available panelist for a given specialty\n      If patient id is provided\
+        \ and this patient has seen a specialist in the past\n      1. Select last seen specialist if\
+        \ available on the next 24 hrs\n      2. If last seen specialist is not available on the next\
+        \ 24 hrs\n      but he is available in the next 30 days, send both the last seen and next\n  \
+        \    available panelist to frontend so requester can choose either\n      3. If last seen specialist\
+        \ is not available at all, send both the last seen\n      and next available panelist to frontend\
+        \ so requester can choose between\n      consulting the next available panelist or not consulting\
+        \ at all"
+      operationId: index
+      parameters:
+      - name: code
+        in: path
+        description: Code of the specialty that we want to get panelists.
+        required: true
+        schema:
+          type: string
+      - name: patient_id
+        in: path
+        description: Code of the specialty that we want to get panelists.
+        required: true
+        schema:
+          type: string
+          default: ''
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                  suffix:
+                    type: string
+                  website:
+                    type: string
+                  mobile_number:
+                    type: string
+                  fax_number:
+                    type: string
+                  notes:
+                    type: string
+                  user_id:
+                    type: integer
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  profile_photo:
+                    type: string
+                  main_practice_location:
+                    type: string
+                  source_id:
+                    type: integer
+                  available_date:
+                    type: string
+                  econsults_count:
+                    type: integer
+                  user_first_name:
+                    type: string
+                  user_last_name:
+                    type: string
+                  certifications:
+                    type: array
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        date:
+                          type: string
+                      type: object
+                  education:
+                    type: array
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        date:
+                          type: string
+                      type: object
+                  fellowships:
+                    type: array
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        date:
+                          type: string
+                      type: object
+                  specialties:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Specialty'
+                  availability:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PanelistAvailability'
+                type: object
+        '400':
+          description: Invalid Credentials
+          content:
+            application/json:
+              schema: {}
+components:
+  schemas:
+    Role:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        display_name:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        notifications:
+          type: array
+          items:
+            type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        perms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+      type: object
+      xml:
+        name: Role
+    PanelistAvailability:
+      properties:
+        id:
+          type: integer
+        available_date:
+          type: string
+        panelist_id:
+          type: integer
+        specialty_id:
+          type: integer
+      type: object
+      xml:
+        name: PanelistAvailability
+    Organization:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        display_name:
+          type: string
+        parent_organization_id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        deleted_at:
+          type: string
+        domain:
+          type: string
+        formal_name:
+          type: string
+        namespace:
+          type: string
+        workup_checklist_set_id:
+          type: integer
+        site_name:
+          type: string
+        settings:
+          type: array
+          items:
+            type: object
+        service_types:
+          type: array
+          items:
+            type: string
+        urgency_ratings:
+          type: array
+          items:
+            type: string
+        expected_release_date_options:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        pivot:
+          properties:
+            user_id:
+              type: integer
+            organization_id:
+              type: integer
+          type: object
+        parent_organization:
+          type: object
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+      type: object
+      xml:
+        name: Organization
+    User:
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        email:
+          type: string
+        authentication_provider:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        status:
+          type: string
+        last_login:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        suffix:
+          type: string
+        base_dn:
+          type: string
+        primary_site_id:
+          type: integer
+        full_name:
+          type: string
+        organization:
+          type: object
+          $ref: '#/components/schemas/Organization'
+        phone:
+          type: string
+        mobile:
+          type: string
+        last_active_organization_id:
+          type: integer
+        notification_email:
+          type: string
+        notification_phone:
+          type: string
+        organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+      type: object
+      xml:
+        name: User
+    Permission:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        display_name:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        permission_types_id:
+          type: integer
+      type: object
+      xml:
+        name: Permission
+    Specialty:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        display_name:
+          type: string
+        parent_specialty_id:
+          type: integer
+        title:
+          type: string
+        keywords:
+          type: string
+        pediatrics_only:
+          type: boolean
+        nameKeywords:
+          type: string
+        specialist_form_version:
+          type: integer
+      type: object
+      xml:
+        name: Specialty
+    Location:
+      properties:
+        id:
+          type: integer
+        display_name:
+          type: string
+        street_address_1:
+          type: string
+        street_address_2:
+          type: string
+        city:
+          type: string
+        county:
+          type: string
+        postal_code:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        time_zone:
+          type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        phone_number:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        type:
+          type: string
+        fax:
+          type: string
+      type: object
+      xml:
+        name: Location
+    PanelistDetail:
+      properties:
+        id:
+          type: integer
+        suffix:
+          type: string
+        website:
+          type: string
+        mobile_number:
+          type: string
+        fax_number:
+          type: string
+        notes:
+          type: string
+        user_id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        profile_photo:
+          type: string
+        main_practice_location:
+          type: string
+        source_id:
+          type: integer
+        certifications:
+          type: array
+          items:
+            properties:
+              name:
+                type: string
+              date:
+                type: string
+            type: object
+        education:
+          type: string
+        fellowships:
+          type: array
+          items:
+            properties:
+              name:
+                type: string
+              date:
+                type: string
+            type: object
+        user:
+          type: object
+          $ref: '#/components/schemas/User'
+        availability:
+          type: array
+          items:
+            $ref: '#/components/schemas/PanelistAvailability'
+      type: object
+      xml:
+        name: PanelistDetail

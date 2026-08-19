@@ -1,0 +1,699 @@
+{
+  "item": [
+    {
+      "id": "32020509-80bd-4f13-962d-d8072fce46d2",
+      "name": "Specialties",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c5f7b78a-7c93-42d4-bdb8-9242a432645f",
+          "name": "Updates a specialty instance",
+          "request": {
+            "name": "Updates a specialty instance",
+            "description": {
+              "content": "Updates a main specialty or sub specialty based on the provided input",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "specialties",
+                ":specialtyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "Specialty Id",
+                  "description": "(Required) Id of the specialty to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"parent_specialty_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"keywords\": \"<string>\",\n  \"pediatrics_only\": \"<boolean>\",\n  \"nameKeywords\": \"<string>\",\n  \"specialist_form_version\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "70c4ebf8-bd97-4682-b871-fda7cbf5b845",
+              "name": "Updated Specialty",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "specialties",
+                    ":specialtyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "Specialty Id",
+                      "description": "(Required) Id of the specialty to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"parent_specialty_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"keywords\": \"<string>\",\n  \"pediatrics_only\": \"<boolean>\",\n  \"nameKeywords\": \"<string>\",\n  \"specialist_form_version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"parent_specialty_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"keywords\": \"<string>\",\n  \"pediatrics_only\": \"<boolean>\",\n  \"nameKeywords\": \"<string>\",\n  \"specialist_form_version\": \"<integer>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b3eb71a-d927-45e3-8c55-e01e71235388",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "specialties",
+                    ":specialtyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "Specialty Id",
+                      "description": "(Required) Id of the specialty to update"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"parent_specialty_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"keywords\": \"<string>\",\n  \"pediatrics_only\": \"<boolean>\",\n  \"nameKeywords\": \"<string>\",\n  \"specialist_form_version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e730f01e-37f1-4030-8288-6ef64e3d5a1b",
+              "name": "Unprocessable entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "specialties",
+                    ":specialtyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "Specialty Id",
+                      "description": "(Required) Id of the specialty to update"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"parent_specialty_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"keywords\": \"<string>\",\n  \"pediatrics_only\": \"<boolean>\",\n  \"nameKeywords\": \"<string>\",\n  \"specialist_form_version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2e6df681-ff89-4cef-b5cf-e5a4313a8bf8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "specialties",
+                    ":specialtyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "Specialty Id",
+                      "description": "(Required) Id of the specialty to update"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"parent_specialty_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"keywords\": \"<string>\",\n  \"pediatrics_only\": \"<boolean>\",\n  \"nameKeywords\": \"<string>\",\n  \"specialist_form_version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "45d1f4e1-bf0f-4773-9025-9fdf676bb7bc",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "specialties",
+                    ":specialtyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "Specialty Id",
+                      "description": "(Required) Id of the specialty to update"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"parent_specialty_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"keywords\": \"<string>\",\n  \"pediatrics_only\": \"<boolean>\",\n  \"nameKeywords\": \"<string>\",\n  \"specialist_form_version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e0d47c0-0920-41a4-94e5-3a556e280d82",
+          "name": "Creates a new specialty instance",
+          "request": {
+            "name": "Creates a new specialty instance",
+            "description": {
+              "content": "Creates a main specialty or sub specialty based on the provided input",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "specialties"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"parent_specialty_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"keywords\": \"<string>\",\n  \"pediatrics_only\": \"<boolean>\",\n  \"nameKeywords\": \"<string>\",\n  \"specialist_form_version\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b1b59488-5302-4f9d-a374-f5dd91b889fd",
+              "name": "Created Specialty",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "specialties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"parent_specialty_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"keywords\": \"<string>\",\n  \"pediatrics_only\": \"<boolean>\",\n  \"nameKeywords\": \"<string>\",\n  \"specialist_form_version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"parent_specialty_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"keywords\": \"<string>\",\n  \"pediatrics_only\": \"<boolean>\",\n  \"nameKeywords\": \"<string>\",\n  \"specialist_form_version\": \"<integer>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb6797ac-a48b-46cb-8780-76cbb3171b63",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "specialties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"parent_specialty_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"keywords\": \"<string>\",\n  \"pediatrics_only\": \"<boolean>\",\n  \"nameKeywords\": \"<string>\",\n  \"specialist_form_version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a78b8a77-580a-4fb0-aef0-7c0b25aae584",
+              "name": "Unprocessable entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "specialties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"parent_specialty_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"keywords\": \"<string>\",\n  \"pediatrics_only\": \"<boolean>\",\n  \"nameKeywords\": \"<string>\",\n  \"specialist_form_version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "969f5f63-001f-45b1-b564-40bd8d231255",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "specialties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"parent_specialty_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"keywords\": \"<string>\",\n  \"pediatrics_only\": \"<boolean>\",\n  \"nameKeywords\": \"<string>\",\n  \"specialist_form_version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2b9d0519-fc21-4320-8670-e98b33ccfdac",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "specialties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"parent_specialty_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"keywords\": \"<string>\",\n  \"pediatrics_only\": \"<boolean>\",\n  \"nameKeywords\": \"<string>\",\n  \"specialist_form_version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "866dfe3f-a567-48df-89c8-7944247427b0",
+          "name": "Retrieves a list of specialties with available panelists.",
+          "request": {
+            "name": "Retrieves a list of specialties with available panelists.",
+            "description": {
+              "content": "Retrieves a list of specialties with available panelists",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "specialties",
+                "withAvailablePanelists",
+                ":filter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "null",
+                  "key": "filter",
+                  "description": "(Required) Filter that we should apply to the specialties list. You can include into the path the filter options: pediatrics or non-pediatrics."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9a09ab04-53a6-4b1e-a1ee-9cb1ae388d71",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "specialties",
+                    "withAvailablePanelists",
+                    ":filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "null",
+                      "key": "filter",
+                      "description": "(Required) Filter that we should apply to the specialties list. You can include into the path the filter options: pediatrics or non-pediatrics."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 3980,\n    \"code\": \"string\",\n    \"display_name\": \"string\",\n    \"parent_specialty_id\": \"string\",\n    \"title\": \"string\",\n    \"keywords\": \"string\",\n    \"pediatrics_only\": false,\n    \"nameKeywords\": \"string\",\n    \"specialist_form_version\": 7788,\n    \"subspecialties\": [\n      {\n        \"id\": 5109,\n        \"code\": \"string\",\n        \"display_name\": \"string\",\n        \"parent_specialty_id\": \"string\",\n        \"title\": \"string\",\n        \"keywords\": \"string\",\n        \"pediatrics_only\": true,\n        \"nameKeywords\": \"string\",\n        \"specialist_form_version\": 621\n      },\n      {\n        \"id\": 1065,\n        \"code\": \"string\",\n        \"display_name\": \"string\",\n        \"parent_specialty_id\": \"string\",\n        \"title\": \"string\",\n        \"keywords\": \"string\",\n        \"pediatrics_only\": false,\n        \"nameKeywords\": \"string\",\n        \"specialist_form_version\": 2890\n      }\n    ]\n  },\n  {\n    \"id\": 1132,\n    \"code\": \"string\",\n    \"display_name\": \"string\",\n    \"parent_specialty_id\": \"string\",\n    \"title\": \"string\",\n    \"keywords\": \"string\",\n    \"pediatrics_only\": true,\n    \"nameKeywords\": \"string\",\n    \"specialist_form_version\": 2132,\n    \"subspecialties\": [\n      {\n        \"id\": 2126,\n        \"code\": \"string\",\n        \"display_name\": \"string\",\n        \"parent_specialty_id\": \"string\",\n        \"title\": \"string\",\n        \"keywords\": \"string\",\n        \"pediatrics_only\": true,\n        \"nameKeywords\": \"string\",\n        \"specialist_form_version\": 4738\n      },\n      {\n        \"id\": 8970,\n        \"code\": \"string\",\n        \"display_name\": \"string\",\n        \"parent_specialty_id\": \"string\",\n        \"title\": \"string\",\n        \"keywords\": \"string\",\n        \"pediatrics_only\": false,\n        \"nameKeywords\": \"string\",\n        \"specialist_form_version\": 352\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e834357-8f6b-4310-83ca-7be8d1e1f309",
+              "name": "Invalid Credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "specialties",
+                    "withAvailablePanelists",
+                    ":filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "null",
+                      "key": "filter",
+                      "description": "(Required) Filter that we should apply to the specialties list. You can include into the path the filter options: pediatrics or non-pediatrics."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "41c85a07-38d7-451d-84c7-98e8a78f531b",
+    "name": "Arista MD Specialties API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the business logic core that serves all Arista MD sites, tools, and integrations",
+      "type": "text/plain"
+    }
+  }
+}

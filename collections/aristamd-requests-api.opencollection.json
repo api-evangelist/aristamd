@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arista MD Requests API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request diagnostics event handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/:request/:requestId/diagnostics/:diagnosticId/events",
+            "params": [
+              {
+                "name": "request",
+                "value": "",
+                "type": "path",
+                "description": "Request type that will be transitioned"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "ID of Request that will be transitioned"
+              },
+              {
+                "name": "diagnosticId",
+                "value": "",
+                "type": "path",
+                "description": "ID of Diagnostic that will be transitioned"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Handles the event for a Request diagnostics"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

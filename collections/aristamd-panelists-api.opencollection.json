@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arista MD Panelists API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Panelists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find panelists based on provided parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/panelists",
+            "params": [
+              {
+                "name": "specialty_code",
+                "value": "",
+                "type": "query",
+                "description": "Code of the specialty that we want to get panelists."
+              },
+              {
+                "name": "statusGroup",
+                "value": "",
+                "type": "query",
+                "description": "Code of the specialty that we want to get panelists."
+              }
+            ]
+          },
+          "docs": "Find panelists based on provided parameters"
+        },
+        {
+          "info": {
+            "name": "Find the next available panelist for a given specialty",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/panelists/getNextAvailable/:code/:patient_id",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "path",
+                "description": "Code of the specialty that we want to get panelists."
+              },
+              {
+                "name": "patient_id",
+                "value": "",
+                "type": "path",
+                "description": "Code of the specialty that we want to get panelists."
+              }
+            ]
+          },
+          "docs": "Find the next available panelist for a given specialty\n      If patient id is provided and this patient has seen a specialist in the past\n      1. Select last seen specialist if available on the next 24 hrs\n      2. If last seen specialist is not available on the next 24 hrs\n      but he is available in the next 30 days, send both the last seen and next\n      available panelist to frontend so requester can choose either\n      3. If last seen specialist is not available at all, send both the last"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

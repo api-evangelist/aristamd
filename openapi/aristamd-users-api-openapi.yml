@@ -1,0 +1,479 @@
+openapi: 3.2.0
+info:
+  title: Arista MD Users API
+  description: This is the business logic core that serves all Arista MD sites, tools, and integrations
+  version: 1.0.0
+tags:
+- name: Users
+paths:
+  /users:
+    get:
+      tags:
+      - Users
+      summary: Retrieves a list of users
+      description: Retrieves a list of users based on its offset. Allows to order the records and perform
+        a search
+      operationId: index
+      parameters:
+      - name: start
+        in: query
+        description: Offset of records
+        required: false
+        schema:
+          type: integer
+      - name: length
+        in: query
+        description: How many items should bring
+        required: false
+        schema:
+          type: integer
+      - name: orderColumn
+        in: query
+        description: Column used to do the sort
+        required: false
+        schema:
+          type: string
+      - name: orderDir
+        in: query
+        description: Direction of sort
+        required: false
+        schema:
+          type: string
+      - name: searchValue
+        in: query
+        description: Search term
+        required: false
+        schema:
+          type: string
+      - name: searchStatus
+        in: query
+        description: Filter user's list by status
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  totalCount:
+                    type: integer
+                  filteredCount:
+                    type: integer
+                  users:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                        username:
+                          type: string
+                        email:
+                          type: string
+                        authentication_provider:
+                          type: string
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+                        status:
+                          type: string
+                        last_login:
+                          type: string
+                        created_at:
+                          type: string
+                        updated_at:
+                          type: string
+                        suffix:
+                          type: string
+                        base_dn:
+                          type: string
+                        primary_site_id:
+                          type: integer
+                        full_name:
+                          type: string
+                        organization:
+                          type: string
+                        phone:
+                          type: string
+                        mobile:
+                          type: string
+                        last_active_organization_id:
+                          type: integer
+                        notification_email:
+                          type: string
+                        notification_phone:
+                          type: string
+                      type: object
+                type: object
+        '400':
+          description: Invalid Credentials
+          content:
+            application/json:
+              schema: {}
+  /users/{user_id}:
+    get:
+      tags:
+      - Users
+      summary: Return a user object specified. If the id is set to self the function will return an instance
+        of the currently logged in user
+      description: Finds EConsult by ID
+      operationId: show
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of user we want to get info.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: User Record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid Credentials
+        '404':
+          description: User not found
+        '403':
+          description: Unauthorized
+  /users/search:
+    post:
+      tags:
+      - Users
+      summary: Retrieves a user object specified. If the id is set to self the function will return an
+        instance of the currently logged in user
+      description: Retrieves a list of users based on its offset. Allows to order the records and perform
+        a search
+      operationId: index
+      parameters:
+      - name: username
+        in: query
+        description: Username of the user required
+        required: false
+        schema:
+          type: string
+      - name: first_name
+        in: query
+        description: First Name or Last Name or the required user
+        required: false
+        schema:
+          type: integer
+      - name: role
+        in: query
+        description: Role's name assigned to the users we want to get
+        required: false
+        schema:
+          type: string
+      - name: permission
+        in: query
+        description: Permission's name assigned to the users we want to get
+        required: false
+        schema:
+          type: string
+      - name: organizationId
+        in: query
+        description: Id of the organization we are filtering for
+        required: false
+        schema:
+          type: integer
+      - name: status
+        in: query
+        description: Status name we are filtering for
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  total_hits:
+                    type: integer
+                  hits:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                        username:
+                          type: string
+                        email:
+                          type: string
+                        authentication_provider:
+                          type: string
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+                        status:
+                          type: string
+                        last_login:
+                          type: string
+                        created_at:
+                          type: string
+                        updated_at:
+                          type: string
+                        suffix:
+                          type: string
+                        base_dn:
+                          type: string
+                        primary_site_id:
+                          type: integer
+                        full_name:
+                          type: string
+                        organization:
+                          type: string
+                        phone:
+                          type: string
+                        mobile:
+                          type: string
+                        last_active_organization_id:
+                          type: integer
+                        notification_email:
+                          type: string
+                        notification_phone:
+                          type: string
+                      type: object
+                type: object
+        '400':
+          description: Invalid Credentials
+          content:
+            application/json:
+              schema: {}
+  /users/update:
+    patch:
+      tags:
+      - Users
+      summary: Updates a specific field on a user
+      description: Updates a specific field on a user
+      operationId: update
+      parameters:
+      - name: userId
+        in: query
+        description: Id if the user to be updated
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '403':
+          description: Unauthorized
+        '500':
+          description: Unexpected failure
+components:
+  schemas:
+    Role:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        display_name:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        notifications:
+          type: array
+          items:
+            type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        perms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+      type: object
+      xml:
+        name: Role
+    Organization:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        display_name:
+          type: string
+        parent_organization_id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        deleted_at:
+          type: string
+        domain:
+          type: string
+        formal_name:
+          type: string
+        namespace:
+          type: string
+        workup_checklist_set_id:
+          type: integer
+        site_name:
+          type: string
+        settings:
+          type: array
+          items:
+            type: object
+        service_types:
+          type: array
+          items:
+            type: string
+        urgency_ratings:
+          type: array
+          items:
+            type: string
+        expected_release_date_options:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        pivot:
+          properties:
+            user_id:
+              type: integer
+            organization_id:
+              type: integer
+          type: object
+        parent_organization:
+          type: object
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+      type: object
+      xml:
+        name: Organization
+    User:
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        email:
+          type: string
+        authentication_provider:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        status:
+          type: string
+        last_login:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        suffix:
+          type: string
+        base_dn:
+          type: string
+        primary_site_id:
+          type: integer
+        full_name:
+          type: string
+        organization:
+          type: object
+          $ref: '#/components/schemas/Organization'
+        phone:
+          type: string
+        mobile:
+          type: string
+        last_active_organization_id:
+          type: integer
+        notification_email:
+          type: string
+        notification_phone:
+          type: string
+        organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+      type: object
+      xml:
+        name: User
+    Permission:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        display_name:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        permission_types_id:
+          type: integer
+      type: object
+      xml:
+        name: Permission
+    Location:
+      properties:
+        id:
+          type: integer
+        display_name:
+          type: string
+        street_address_1:
+          type: string
+        street_address_2:
+          type: string
+        city:
+          type: string
+        county:
+          type: string
+        postal_code:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        time_zone:
+          type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        phone_number:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        type:
+          type: string
+        fax:
+          type: string
+      type: object
+      xml:
+        name: Location

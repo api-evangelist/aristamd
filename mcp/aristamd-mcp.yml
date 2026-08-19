@@ -4,160 +4,243 @@ status: candidate
 source: openapi/aristamd-openapi-original.json
 searched:
   official_server: none
-  evidence: >-
-    No MCP server is published by AristaMD. Searched the provider's site, its
-    GitHub organization (38 public repos), and probed for a hosted endpoint. No
-    /mcp surface, no llms.txt tool list, no registry entry. The company has no
-    public developer program at all.
-description: >-
-  A CANDIDATE tool surface derived by API Evangelist from AristaMD's published
-  Swagger 2.0 document. This is NOT an AristaMD product and no such server is
-  running. It exists to show what an MCP server over this API would look like,
-  and to make the agent-facing shape of the API reviewable.
+  evidence: No MCP server is published by AristaMD. Searched the provider's site, its GitHub organization
+    (38 public repos), and probed for a hosted endpoint. No /mcp surface, no llms.txt tool list, no registry
+    entry. The company has no public developer program at all.
+description: 'A CANDIDATE tool surface derived by API Evangelist from AristaMD''s published Swagger 2.0
+  document. This is NOT an AristaMD product and no such server is running. It exists to show what an MCP
+  server over this API would look like, and to make the agent-facing shape of the API reviewable.
 
-  No `MCPServer` pointer is wired into apis.yml, because AristaMD does not
-  operate one. Wiring it would credit the provider with an agent surface it does
-  not have.
-
+  No `MCPServer` pointer is wired into apis.yml, because AristaMD does not operate one. Wiring it would
+  credit the provider with an agent surface it does not have.'
 warnings:
 - id: phi
   severity: critical
-  detail: >-
-    Every patient- and econsult-scoped tool below returns US protected health
-    information. Any real MCP deployment over this API needs a BAA, per-tool
-    authorization, PHI-safe logging and human review of writes. The tool list is
-    the easy part; the governance is not.
+  detail: Every patient- and econsult-scoped tool below returns US protected health information. Any real
+    MCP deployment over this API needs a BAA, per-tool authorization, PHI-safe logging and human review
+    of writes. The tool list is the easy part; the governance is not.
 - id: no-idempotency
   severity: high
-  detail: >-
-    The API has no idempotency key. Agent retries on create_econsult or
-    create_patient can produce duplicate clinical records. Any server built here
-    must implement idempotency itself.
+  detail: The API has no idempotency key. Agent retries on create_econsult or create_patient can produce
+    duplicate clinical records. Any server built here must implement idempotency itself.
 - id: non-unique-operation-ids
   severity: high
-  detail: >-
-    The source document reuses operationIds (index x8, show x5, store x4,
-    update x4). Tools below are therefore bound to METHOD + PATH, which is
-    unambiguous, rather than to operationId, which is not.
-
+  detail: The source document reuses operationIds (index x8, show x5, store x4, update x4). Tools below
+    are therefore bound to METHOD + PATH, which is unambiguous, rather than to operationId, which is not.
 server:
   name: aristamd
   transport: http
   url: null
   status: not-published
-
 tools:
-# Read-only discovery
-- {name: list_econsults, description: 'List eConsults, filtered by status, site,
-    request date range or panelist', source_operation: 'GET /econsults',
-  action_class: read}
-- {name: get_econsult, description: Retrieve a single eConsult by id,
-  source_operation: 'GET /econsults/{econsultId}', action_class: read}
-- {name: search_econsults_by_status, description: Find eConsult ids by status,
-  source_operation: 'GET /econsults/search', action_class: read}
-- {name: list_patients, description: 'List patients with offset pagination, sort
-    and free-text search', source_operation: 'GET /patients', action_class: read,
-  phi: true}
-- {name: get_patient, description: Retrieve a single patient by id,
-  source_operation: 'GET /patients/{patientId}', action_class: read, phi: true}
-- {name: search_patients, description: Search patients by last name or free-text
-    query, source_operation: 'GET /patients/search', action_class: read, phi: true}
-- {name: get_patient_history, description: Retrieve a patient's history,
-  source_operation: 'GET /patients/{patientId}/history', action_class: read, phi: true}
-- {name: get_patient_identifiers, description: Retrieve a patient's external
-    identifiers, source_operation: 'GET /patients/{patientId}/identifiers',
-  action_class: read, phi: true}
-- {name: get_top_referral_patients, description: Retrieve the top referral
-    patients, source_operation: 'GET /patients/top-patients/{length}',
-  action_class: read, phi: true}
-- {name: list_panelists, description: Find panelists by specialty code and status
-    group, source_operation: 'GET /panelists', action_class: read}
-- {name: get_next_available_panelist, description: Resolve the next available
-    panelist for a specialty and patient, source_operation: 'GET /panelists/getNextAvailable/{code}/{patient_id}',
-  action_class: read}
-- {name: get_specialty, description: Retrieve a specialty, source_operation: 'GET
-    /specialties/{specialtyId}', action_class: read}
-- {name: list_specialties_with_available_panelists, description: List specialties
-    that currently have available panelists, source_operation: 'GET /specialties/withAvailablePanelists/{filter}',
-  action_class: read}
-- {name: list_workup_checklist_specialties, description: List workup checklist
-    specialties, source_operation: GET /workup-checklists/specialties, action_class: read}
-- {name: list_chief_complaints, description: List chief complaints for a specialty,
-  source_operation: 'GET /workup-checklists/specialties/{specialtyCode}/chief-complaints',
-  action_class: read}
-- {name: get_workup_checklist, description: Retrieve the workup checklist for a
-    specialty and chief complaint, source_operation: 'GET /workup-checklists/specialties/{specialtyCode}/chief-complaints/{chiefComplaintCode}',
-  action_class: read}
-- {name: list_reviews, description: 'Retrieve reviews filtered by association type,
-    association id or question type', source_operation: 'GET /reviews', action_class: read}
-- {name: get_review, description: Retrieve a review by id, source_operation: 'GET
-    /reviews/{id}', action_class: read}
-- {name: list_users, description: 'List users with offset pagination, sort, search
-    and status filter', source_operation: 'GET /users', action_class: read}
-- {name: get_user, description: Retrieve a user by id, source_operation: 'GET /users/{user_id}',
-  action_class: read}
-- {name: search_users, description: 'Search users by username, name, role,
-    permission, organization or status', source_operation: POST /users/search,
-  action_class: read, note: 'POST-shaped search — reads, does not write'}
-- {name: get_intergy_patient, description: Retrieve patient information from the
-    Greenway Intergy EHR, source_operation: 'GET /intergy/patients/{id}',
-  action_class: read, phi: true}
-
-# Writes — every one of these needs human-in-the-loop in a clinical setting
-- {name: create_econsult, description: Create an eConsult, source_operation: POST
-    /econsults, action_class: write, consequence: clinical, human_in_the_loop: required}
-- {name: update_econsult, description: Replace an eConsult, source_operation: 'PUT
-    /econsults/{econsultId}', action_class: write, consequence: clinical,
-  human_in_the_loop: required}
-- {name: patch_econsult, description: Partially update an eConsult,
-  source_operation: 'PATCH /econsults/{econsultId}', action_class: write,
-  consequence: clinical, human_in_the_loop: required}
-- {name: delete_econsult, description: Delete an eConsult, source_operation: 'DELETE
-    /econsults/{econsultId}', action_class: write, consequence: destructive,
-  human_in_the_loop: required}
-- {name: assign_econsult_to_me, description: Assign an eConsult to the current user,
-  source_operation: 'PATCH /econsults/{econsultId}/assign-to-me', action_class: write,
-  consequence: routing}
-- {name: transition_econsult, description: Drive an eConsult state transition via
-    an action string, source_operation: 'POST /econsults/{eConsultId}/events',
-  action_class: write, consequence: clinical, human_in_the_loop: required}
-- {name: econsult_heartbeat, description: Record specialist consult-time-progress
-    heartbeat, source_operation: 'POST /econsults/{eConsultId}/heartbeat',
-  action_class: write, consequence: telemetry}
-- {name: log_panelist_availability, description: Log panelist availability,
-  source_operation: POST /econsults/logAvailability, action_class: write,
-  consequence: routing}
-- {name: create_patient, description: Create a patient record, source_operation: POST
-    /patients, action_class: write, consequence: clinical, phi: true,
-  human_in_the_loop: required}
-- {name: create_patient_from_hl7, description: Create a patient from an HL7 v2
-    message, source_operation: POST /HL7/messages, action_class: write,
-  consequence: clinical, phi: true, human_in_the_loop: required}
-- {name: update_patient, description: Replace a patient record, source_operation: 'PUT
-    /patients/{patientId}', action_class: write, consequence: clinical, phi: true,
-  human_in_the_loop: required}
-- {name: patch_patient, description: Partially update a patient record,
-  source_operation: 'PATCH /patients/{patientId}', action_class: write,
-  consequence: clinical, phi: true, human_in_the_loop: required}
-- {name: add_comment, description: Add a comment to a request, source_operation: POST
-    /comments, action_class: write, consequence: clinical}
-- {name: create_review, description: Add reviews to a request, source_operation: POST
-    /reviews, action_class: write}
-- {name: update_review, description: Update a review, source_operation: 'PUT /reviews/{id}',
-  action_class: write}
-- {name: create_specialty, description: Create a specialty, source_operation: POST
-    /specialties, action_class: write, consequence: configuration}
-- {name: update_specialty, description: Update a specialty, source_operation: 'PUT
-    /specialties/{specialtyId}', action_class: write, consequence: configuration}
-- {name: update_user, description: Update a specific field on a user,
-  source_operation: PATCH /users/update, action_class: write, consequence: identity}
-- {name: delete_diagnostic, description: Delete a diagnostic, source_operation: 'DELETE
-    /diagnostics/{diagnosticId}', action_class: write, consequence: destructive,
-  human_in_the_loop: required}
-- {name: transition_request_diagnostic, description: Drive a request-diagnostic
-    state transition, source_operation: 'POST /{request}/{requestId}/diagnostics/{diagnosticId}/events',
-  action_class: write, consequence: clinical}
-
+- name: list_econsults
+  description: List eConsults, filtered by status, site, request date range or panelist
+  source_operation: GET /econsults
+  action_class: read
+- name: get_econsult
+  description: Retrieve a single eConsult by id
+  source_operation: GET /econsults/{econsultId}
+  action_class: read
+- name: search_econsults_by_status
+  description: Find eConsult ids by status
+  source_operation: GET /econsults/search
+  action_class: read
+- name: list_patients
+  description: List patients with offset pagination, sort and free-text search
+  source_operation: GET /patients
+  action_class: read
+  phi: true
+- name: get_patient
+  description: Retrieve a single patient by id
+  source_operation: GET /patients/{patientId}
+  action_class: read
+  phi: true
+- name: search_patients
+  description: Search patients by last name or free-text query
+  source_operation: GET /patients/search
+  action_class: read
+  phi: true
+- name: get_patient_history
+  description: Retrieve a patient's history
+  source_operation: GET /patients/{patientId}/history
+  action_class: read
+  phi: true
+- name: get_patient_identifiers
+  description: Retrieve a patient's external identifiers
+  source_operation: GET /patients/{patientId}/identifiers
+  action_class: read
+  phi: true
+- name: get_top_referral_patients
+  description: Retrieve the top referral patients
+  source_operation: GET /patients/top-patients/{length}
+  action_class: read
+  phi: true
+- name: list_panelists
+  description: Find panelists by specialty code and status group
+  source_operation: GET /panelists
+  action_class: read
+- name: get_next_available_panelist
+  description: Resolve the next available panelist for a specialty and patient
+  source_operation: GET /panelists/getNextAvailable/{code}/{patient_id}
+  action_class: read
+- name: get_specialty
+  description: Retrieve a specialty
+  source_operation: GET /specialties/{specialtyId}
+  action_class: read
+- name: list_specialties_with_available_panelists
+  description: List specialties that currently have available panelists
+  source_operation: GET /specialties/withAvailablePanelists/{filter}
+  action_class: read
+- name: list_workup_checklist_specialties
+  description: List workup checklist specialties
+  source_operation: GET /workup-checklists/specialties
+  action_class: read
+- name: list_chief_complaints
+  description: List chief complaints for a specialty
+  source_operation: GET /workup-checklists/specialties/{specialtyCode}/chief-complaints
+  action_class: read
+- name: get_workup_checklist
+  description: Retrieve the workup checklist for a specialty and chief complaint
+  source_operation: GET /workup-checklists/specialties/{specialtyCode}/chief-complaints/{chiefComplaintCode}
+  action_class: read
+- name: list_reviews
+  description: Retrieve reviews filtered by association type, association id or question type
+  source_operation: GET /reviews
+  action_class: read
+- name: get_review
+  description: Retrieve a review by id
+  source_operation: GET /reviews/{id}
+  action_class: read
+- name: list_users
+  description: List users with offset pagination, sort, search and status filter
+  source_operation: GET /users
+  action_class: read
+- name: get_user
+  description: Retrieve a user by id
+  source_operation: GET /users/{user_id}
+  action_class: read
+- name: search_users
+  description: Search users by username, name, role, permission, organization or status
+  source_operation: POST /users/search
+  action_class: read
+  note: POST-shaped search — reads, does not write
+- name: get_intergy_patient
+  description: Retrieve patient information from the Greenway Intergy EHR
+  source_operation: GET /intergy/patients/{id}
+  action_class: read
+  phi: true
+- name: create_econsult
+  description: Create an eConsult
+  source_operation: POST /econsults
+  action_class: write
+  consequence: clinical
+  human_in_the_loop: required
+- name: update_econsult
+  description: Replace an eConsult
+  source_operation: PUT /econsults/{econsultId}
+  action_class: write
+  consequence: clinical
+  human_in_the_loop: required
+- name: patch_econsult
+  description: Partially update an eConsult
+  source_operation: PATCH /econsults/{econsultId}
+  action_class: write
+  consequence: clinical
+  human_in_the_loop: required
+- name: delete_econsult
+  description: Delete an eConsult
+  source_operation: DELETE /econsults/{econsultId}
+  action_class: write
+  consequence: destructive
+  human_in_the_loop: required
+- name: assign_econsult_to_me
+  description: Assign an eConsult to the current user
+  source_operation: PATCH /econsults/{econsultId}/assign-to-me
+  action_class: write
+  consequence: routing
+- name: transition_econsult
+  description: Drive an eConsult state transition via an action string
+  source_operation: POST /econsults/{eConsultId}/events
+  action_class: write
+  consequence: clinical
+  human_in_the_loop: required
+- name: econsult_heartbeat
+  description: Record specialist consult-time-progress heartbeat
+  source_operation: POST /econsults/{eConsultId}/heartbeat
+  action_class: write
+  consequence: telemetry
+- name: log_panelist_availability
+  description: Log panelist availability
+  source_operation: POST /econsults/logAvailability
+  action_class: write
+  consequence: routing
+- name: create_patient
+  description: Create a patient record
+  source_operation: POST /patients
+  action_class: write
+  consequence: clinical
+  phi: true
+  human_in_the_loop: required
+- name: create_patient_from_hl7
+  description: Create a patient from an HL7 v2 message
+  source_operation: POST /HL7/messages
+  action_class: write
+  consequence: clinical
+  phi: true
+  human_in_the_loop: required
+- name: update_patient
+  description: Replace a patient record
+  source_operation: PUT /patients/{patientId}
+  action_class: write
+  consequence: clinical
+  phi: true
+  human_in_the_loop: required
+- name: patch_patient
+  description: Partially update a patient record
+  source_operation: PATCH /patients/{patientId}
+  action_class: write
+  consequence: clinical
+  phi: true
+  human_in_the_loop: required
+- name: add_comment
+  description: Add a comment to a request
+  source_operation: POST /comments
+  action_class: write
+  consequence: clinical
+- name: create_review
+  description: Add reviews to a request
+  source_operation: POST /reviews
+  action_class: write
+- name: update_review
+  description: Update a review
+  source_operation: PUT /reviews/{id}
+  action_class: write
+- name: create_specialty
+  description: Create a specialty
+  source_operation: POST /specialties
+  action_class: write
+  consequence: configuration
+- name: update_specialty
+  description: Update a specialty
+  source_operation: PUT /specialties/{specialtyId}
+  action_class: write
+  consequence: configuration
+- name: update_user
+  description: Update a specific field on a user
+  source_operation: PATCH /users/update
+  action_class: write
+  consequence: identity
+- name: delete_diagnostic
+  description: Delete a diagnostic
+  source_operation: DELETE /diagnostics/{diagnosticId}
+  action_class: write
+  consequence: destructive
+  human_in_the_loop: required
+- name: transition_request_diagnostic
+  description: Drive a request-diagnostic state transition
+  source_operation: POST /{request}/{requestId}/diagnostics/{diagnosticId}/events
+  action_class: write
+  consequence: clinical
 coverage:
   rest_operations_total: 42
   tools_derived: 42
@@ -165,8 +248,9 @@ coverage:
   write_tools: 20
   phi_bearing_tools: 9
   human_in_the_loop_recommended: 10
-
-# No tool crosswalk artifact is emitted. A crosswalk binds a provider's REAL
-# published MCP tools to their backing REST operations; AristaMD publishes no MCP
-# tools, so a crosswalk would only map this derived list back onto the same spec
-# it was derived from.
+deployment:
+  mode: none
+  verified: derived
+  tools: 42
+  checked: '2026-08-12'
+  source: catalog MCP census

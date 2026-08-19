@@ -1,0 +1,30 @@
+openapi: 3.2.0
+info:
+  title: Arista MD Diagnostic API
+  description: This is the business logic core that serves all Arista MD sites, tools, and integrations
+  version: 1.0.0
+tags:
+- name: Diagnostic
+paths:
+  /diagnostics/{diagnosticId}:
+    delete:
+      tags:
+      - Diagnostic
+      summary: Deletes a diagnostic
+      description: Destroys a Diagnostic using its id
+      operationId: destroy
+      parameters:
+      - name: diagnosticId
+        in: path
+        description: ID of diagnostic to be deleted
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Deleted diagnostic
+        '400':
+          description: Invalid credentials
+        '404':
+          description: Not found

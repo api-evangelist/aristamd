@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arista MD Workup Checklists API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workup Checklists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workup checklists specialties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/workup-checklists/specialties"
+          },
+          "docs": "Retrieves available specialties for the existent workup checklists"
+        },
+        {
+          "info": {
+            "name": "Specialty chief complaints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/workup-checklists/specialties/:specialtyCode/chief-complaints",
+            "params": [
+              {
+                "name": "specialtyCode",
+                "value": "",
+                "type": "path",
+                "description": "Specialty code to find chief complaints"
+              }
+            ]
+          },
+          "docs": "Retrieves available specialties for the existent workup checklists"
+        },
+        {
+          "info": {
+            "name": "Specialty / Chief Complaint Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/workup-checklists/specialties/:specialtyCode/chief-complaints/:chiefComplaintCode",
+            "params": [
+              {
+                "name": "specialtyCode",
+                "value": "",
+                "type": "path",
+                "description": "Specialty code"
+              },
+              {
+                "name": "chiefComplaintCode",
+                "value": "",
+                "type": "path",
+                "description": "Chief complaint code"
+              }
+            ]
+          },
+          "docs": "Search checklist by specialty and chief complaint"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,56 @@
+openapi: 3.2.0
+info:
+  title: Arista MD Requests API
+  description: This is the business logic core that serves all Arista MD sites, tools, and integrations
+  version: 1.0.0
+tags:
+- name: Requests
+paths:
+  /{request}/{requestId}/diagnostics/{diagnosticId}/events:
+    post:
+      tags:
+      - Requests
+      summary: Request diagnostics event handler
+      description: Handles the event for a Request diagnostics
+      operationId: events
+      parameters:
+      - name: request
+        in: path
+        description: Request type that will be transitioned
+        required: true
+        schema:
+          type: string
+      - name: requestId
+        in: path
+        description: ID of Request that will be transitioned
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: diagnosticId
+        in: path
+        description: ID of Diagnostic that will be transitioned
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Event Transition was success
+        '500':
+          description: Internal Error
+        '404':
+          description: Not Found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                action:
+                  type: string
+                id:
+                  type: string
+                note:
+                  type: string
+              type: object
+        description: Message body
+        required: true

@@ -1,0 +1,559 @@
+openapi: 3.2.0
+info:
+  title: Arista MD Patients API
+  description: This is the business logic core that serves all Arista MD sites, tools, and integrations
+  version: 1.0.0
+tags:
+- name: Patients
+paths:
+  /HL7/messages:
+    post:
+      tags:
+      - Patients
+      summary: Creates a Patient from an HL7 message
+      description: Save a patient object with the input specified.
+      operationId: store
+      responses:
+        '201':
+          description: Created Patient
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '400':
+          description: Invalid credentials
+        '500':
+          description: Internal Error
+        '404':
+          description: Not Found
+        '403':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+        description: HL7 message
+        required: true
+  /patients:
+    get:
+      tags:
+      - Patients
+      summary: Retrieves a list of patients
+      description: Retrieves a list of patient based on its offset. Allows to order the records and perform
+        a search
+      operationId: index
+      parameters:
+      - name: start
+        in: query
+        description: Offset of records
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: length
+        in: query
+        description: How many items should bring
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: orderColumn
+        in: query
+        description: Column used to do the sort
+        required: true
+        schema:
+          type: string
+          enum:
+          - id
+          - first_name
+          - last_name
+          - organization
+          - organization_name
+          - date_of_birth
+          - reference_id
+          - gender
+      - name: orderDir
+        in: query
+        description: Direction of sort
+        required: true
+        schema:
+          type: string
+          enum:
+          - desc
+          - asc
+      - name: searchValue
+        in: query
+        description: Search term
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  draw:
+                    type: integer
+                  recordsFiltered:
+                    type: integer
+                  recordsTotal:
+                    type: integer
+                  aaData:
+                    type: array
+                    items:
+                      properties:
+                        DT_RowId:
+                          type: integer
+                        date_of_birth:
+                          type: string
+                        empty:
+                          type: string
+                        first_name:
+                          type: string
+                        gender:
+                          type: string
+                        id:
+                          type: integer
+                        last_name:
+                          type: string
+                        organization_name:
+                          type: string
+                        reference_id:
+                          type: string
+                      type: object
+                type: object
+        '400':
+          description: Invalid Credentials
+          content:
+            application/json:
+              schema: {}
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: {}
+    post:
+      tags:
+      - Patients
+      summary: Creates a Patient
+      description: Save a patient object with the input specified.
+      operationId: store
+      responses:
+        '201':
+          description: Created Patient
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '400':
+          description: Invalid credentials
+        '500':
+          description: Internal Error
+        '404':
+          description: Not Found
+        '403':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+        description: Patient body
+        required: true
+  /patients/{patientId}:
+    get:
+      tags:
+      - Patients
+      summary: Retrieves a Patient
+      description: Find a Patient by ID
+      operationId: show
+      parameters:
+      - name: patientId
+        in: path
+        description: ID of patient to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Patient Record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '400':
+          description: Invalid Credentials
+        '404':
+          description: Patient not found
+        '403':
+          description: Unauthorized
+    put:
+      tags:
+      - Patients
+      summary: Updates a patient
+      description: Updates a patient using its id
+      operationId: update
+      parameters:
+      - name: patientId
+        in: path
+        description: ID of patient
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Updated Patient
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '400':
+          description: Invalid credentials
+        '500':
+          description: Internal Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+        description: Patient body
+        required: true
+    patch:
+      tags:
+      - Patients
+      summary: Patches a patient
+      description: Patches a patient using its id
+      operationId: patch
+      parameters:
+      - name: patientId
+        in: path
+        description: ID of patient
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: operation
+        in: query
+        description: Patch operation
+        required: false
+        schema:
+          type: string
+      - name: assets
+        in: query
+        description: assets array
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Updated Patient
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '400':
+          description: Invalid credentials
+        '500':
+          description: Internal Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+        description: Patient body
+        required: true
+  /patients/search:
+    get:
+      tags:
+      - Patients
+      summary: Return a user object specified. If the id is set to self the function will return an instance
+        of the currently logged in user
+      description: Finds patients by last name or elements that match with a provided text.
+      operationId: show
+      parameters:
+      - name: data[last_name]
+        in: query
+        description: Filter by last name
+        required: false
+        schema:
+          type: boolean
+      - name: data[q]
+        in: query
+        description: Filter by elements matching the provided text.
+        required: false
+        schema:
+          type: string
+      - name: rest
+        in: query
+        description: ID of user we want to get info.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Patient Record
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Patient'
+        '400':
+          description: Invalid Credentials
+        '404':
+          description: Patient not found
+        '403':
+          description: Unauthorized
+  /patients/top-patients/{length}:
+    get:
+      tags:
+      - Patients
+      summary: TopReferral
+      description: it returns a list with the length received of the top patients
+      operationId: getTopReferralPatients
+      parameters:
+      - name: length
+        in: path
+        description: length of the top patients
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  draw:
+                    type: integer
+                  recordsTotal:
+                    type: integer
+                  recordsFiltered:
+                    type: integer
+                  aaData:
+                    type: array
+                    items:
+                      properties:
+                        patient_id:
+                          type: integer
+                        count:
+                          type: integer
+                        reference_id:
+                          type: string
+                        onsite_approver_id:
+                          type: integer
+                        requesting_physician_comment:
+                          type: string
+                        diagnosis:
+                          type: string
+                        service_type:
+                          type: string
+                        priority:
+                          type: string
+                        transfer_method:
+                          type: string
+                        dispositioner_id:
+                          type: integer
+                        e_signature:
+                          type: string
+                        unscheduled_reason:
+                          type: string
+                        viewed_by:
+                          type: string
+                      type: object
+                type: object
+        '400':
+          description: Invalid Credentials
+        '404':
+          description: Patient not found
+        '403':
+          description: Unauthorized
+  /patients/{patientId}/history:
+    get:
+      tags:
+      - Patients
+      summary: Patient's History
+      description: Get the patient's history of referrals and econsults
+      operationId: history
+      parameters:
+      - name: patientId
+        in: path
+        description: ID of patient to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  draw:
+                    type: integer
+                  recordsTotal:
+                    type: integer
+                  recordsFiltered:
+                    type: integer
+                  aaData:
+                    type: array
+                    items:
+                      properties:
+                        DT_RowId:
+                          type: integer
+                        model:
+                          type: string
+                        empty:
+                          type: string
+                        request_date:
+                          type: integer
+                        chief_complaint:
+                          type: string
+                        service_type:
+                          type: string
+                        requesting_physician:
+                          type: string
+                        specialty:
+                          type: string
+                      type: object
+                type: object
+        '404':
+          description: Patient not found
+        '403':
+          description: Unauthorized
+  /patients/{patientId}/identifiers:
+    get:
+      tags:
+      - Patients
+      summary: Patient's External Identifiers
+      description: Get the patient's external identifiers
+      operationId: identifiers
+      parameters:
+      - name: patientId
+        in: path
+        description: ID of patient to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: identifier_name
+        in: query
+        description: Identifier name
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: auth_provider_id
+        in: query
+        description: Auth Provider ID
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                    identifiable_id:
+                      type: integer
+                    identifier:
+                      type: string
+                    created_at:
+                      properties:
+                        date:
+                          type: string
+                        timezone_type:
+                          type: integer
+                        timezone:
+                          type: string
+                      type: object
+                    updated_at:
+                      properties:
+                        date:
+                          type: string
+                        timezone_type:
+                          type: integer
+                        timezone:
+                          type: string
+                      type: object
+                    identifiable_type:
+                      type: string
+                    identifier_name:
+                      type: string
+                  type: object
+        '404':
+          description: Patient not found
+        '403':
+          description: Unauthorized
+components:
+  schemas:
+    Patient:
+      properties:
+        id:
+          type: integer
+        organization_id:
+          type: integer
+        coverage_id:
+          type: integer
+        system_of_record:
+          type: string
+        reference_id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        date_of_birth:
+          type: string
+        gender:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        version:
+          type: string
+        AB109:
+          type: boolean
+        chronic_conditions:
+          type: array
+          items:
+            type: string
+        estimated_release_date:
+          type: string
+        ccd_file:
+          properties:
+            id:
+              type: string
+          type: object
+        booking_history:
+          type: string
+        booking_date:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+      type: object
+      xml:
+        name: Patient

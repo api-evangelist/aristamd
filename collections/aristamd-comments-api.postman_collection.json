@@ -1,0 +1,197 @@
+{
+  "item": [
+    {
+      "id": "0a54e08d-d454-4d2f-a4b3-dde3e3016dbb",
+      "name": "Comments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4a38c5f7-8001-4ef7-a449-ababc3346c58",
+          "name": "Adds a comment to a Request",
+          "request": {
+            "name": "Adds a comment to a Request",
+            "description": {
+              "content": "Adds a comment for a request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"user_id\": \"<integer>\",\n  \"association_type\": \"<string>\",\n  \"association_id\": \"<integer>\",\n  \"text\": \"<string>\",\n  \"created_at\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"updated_at\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"request_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"deleted_at\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "782e21a0-a928-4ab4-a33b-a64bdf3264c7",
+              "name": "Saved Comment",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"user_id\": \"<integer>\",\n  \"association_type\": \"<string>\",\n  \"association_id\": \"<integer>\",\n  \"text\": \"<string>\",\n  \"created_at\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"updated_at\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"request_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"deleted_at\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<integer>\",\n  \"user_id\": \"<integer>\",\n  \"association_type\": \"<string>\",\n  \"association_id\": \"<integer>\",\n  \"text\": \"<string>\",\n  \"created_at\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"updated_at\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"request_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"deleted_at\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"type\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "385650ae-33f0-443a-b894-37fdce38b033",
+              "name": "Invalid Credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"user_id\": \"<integer>\",\n  \"association_type\": \"<string>\",\n  \"association_id\": \"<integer>\",\n  \"text\": \"<string>\",\n  \"created_at\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"updated_at\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"request_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"deleted_at\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dec407a7-116a-4469-9ded-a4aef4435907",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"user_id\": \"<integer>\",\n  \"association_type\": \"<string>\",\n  \"association_id\": \"<integer>\",\n  \"text\": \"<string>\",\n  \"created_at\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"updated_at\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"request_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"deleted_at\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4fe8ef94-3ac9-40d9-891a-b22a627d0f3b",
+    "name": "Arista MD Comments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the business logic core that serves all Arista MD sites, tools, and integrations",
+      "type": "text/plain"
+    }
+  }
+}

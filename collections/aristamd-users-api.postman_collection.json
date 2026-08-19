@@ -1,0 +1,775 @@
+{
+  "item": [
+    {
+      "id": "490b1747-4b97-4a45-822d-ebfde1f6038e",
+      "name": "Users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "198f7be9-66e2-4601-9015-601f5005e0de",
+          "name": "Retrieves a list of users",
+          "request": {
+            "name": "Retrieves a list of users",
+            "description": {
+              "content": "Retrieves a list of users based on its offset. Allows to order the records and perform a search",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<integer>",
+                  "description": "Offset of records"
+                },
+                {
+                  "disabled": false,
+                  "key": "length",
+                  "value": "<integer>",
+                  "description": "How many items should bring"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderColumn",
+                  "value": "<string>",
+                  "description": "Column used to do the sort"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderDir",
+                  "value": "<string>",
+                  "description": "Direction of sort"
+                },
+                {
+                  "disabled": false,
+                  "key": "searchValue",
+                  "value": "<string>",
+                  "description": "Search term"
+                },
+                {
+                  "disabled": false,
+                  "key": "searchStatus",
+                  "value": "<string>",
+                  "description": "Filter user's list by status"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e549ebac-5c80-4a69-bd64-aea30104e78c",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "length",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "orderColumn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderDir",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchValue",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchStatus",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalCount\": 8420,\n  \"filteredCount\": 7950,\n  \"users\": [\n    {\n      \"id\": 6371,\n      \"username\": \"string\",\n      \"email\": \"string\",\n      \"authentication_provider\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"status\": \"string\",\n      \"last_login\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"suffix\": \"string\",\n      \"base_dn\": \"string\",\n      \"primary_site_id\": 20,\n      \"full_name\": \"string\",\n      \"organization\": \"string\",\n      \"phone\": \"string\",\n      \"mobile\": \"string\",\n      \"last_active_organization_id\": 5385,\n      \"notification_email\": \"string\",\n      \"notification_phone\": \"string\"\n    },\n    {\n      \"id\": 8716,\n      \"username\": \"string\",\n      \"email\": \"string\",\n      \"authentication_provider\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"status\": \"string\",\n      \"last_login\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"suffix\": \"string\",\n      \"base_dn\": \"string\",\n      \"primary_site_id\": 335,\n      \"full_name\": \"string\",\n      \"organization\": \"string\",\n      \"phone\": \"string\",\n      \"mobile\": \"string\",\n      \"last_active_organization_id\": 8494,\n      \"notification_email\": \"string\",\n      \"notification_phone\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1baa9a54-5a07-4f51-95c3-d1751f99abbf",
+              "name": "Invalid Credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "length",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "orderColumn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderDir",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchValue",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchStatus",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89d17297-620a-4cc0-b19b-d2e6b7e8974f",
+          "name": "Return a user object specified. If the id is set to self the function will return an instance of the currently logged in user",
+          "request": {
+            "name": "Return a user object specified. If the id is set to self the function will return an instance of the currently logged in user",
+            "description": {
+              "content": "Finds EConsult by ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "user_id",
+                  "description": "(Required) ID of user we want to get info."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bcdd34b5-ceb4-43f5-b246-5f036ce0a423",
+              "name": "User Record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "user_id",
+                      "description": "(Required) ID of user we want to get info."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9846,\n  \"username\": \"string\",\n  \"email\": \"string\",\n  \"authentication_provider\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"status\": \"string\",\n  \"last_login\": \"string\",\n  \"created_at\": \"string\",\n  \"updated_at\": \"string\",\n  \"suffix\": \"string\",\n  \"base_dn\": \"string\",\n  \"primary_site_id\": 455,\n  \"full_name\": \"string\",\n  \"organization\": {\n    \"id\": 3261,\n    \"code\": \"string\",\n    \"display_name\": \"string\",\n    \"parent_organization_id\": 7651,\n    \"created_at\": \"string\",\n    \"updated_at\": \"string\",\n    \"deleted_at\": \"string\",\n    \"domain\": \"string\",\n    \"formal_name\": \"string\",\n    \"namespace\": \"string\",\n    \"workup_checklist_set_id\": 8090,\n    \"site_name\": \"string\",\n    \"service_types\": [\n      \"string\",\n      \"string\"\n    ],\n    \"urgency_ratings\": [\n      \"string\",\n      \"string\"\n    ],\n    \"expected_release_date_options\": {\n      \"date\": \"string\",\n      \"timezone_type\": 9549,\n      \"timezone\": \"string\"\n    },\n    \"pivot\": {\n      \"user_id\": 4077,\n      \"organization_id\": 1659\n    },\n    \"parent_organization\": {},\n    \"locations\": [\n      {\n        \"id\": 9417,\n        \"display_name\": \"string\",\n        \"street_address_1\": \"string\",\n        \"street_address_2\": \"string\",\n        \"city\": \"string\",\n        \"county\": \"string\",\n        \"postal_code\": \"string\",\n        \"state\": \"string\",\n        \"country\": \"string\",\n        \"time_zone\": \"string\",\n        \"latitude\": \"string\",\n        \"longitude\": \"string\",\n        \"phone_number\": \"string\",\n        \"created_at\": \"string\",\n        \"updated_at\": \"string\",\n        \"type\": \"string\",\n        \"fax\": \"string\"\n      },\n      {\n        \"id\": 6159,\n        \"display_name\": \"string\",\n        \"street_address_1\": \"string\",\n        \"street_address_2\": \"string\",\n        \"city\": \"string\",\n        \"county\": \"string\",\n        \"postal_code\": \"string\",\n        \"state\": \"string\",\n        \"country\": \"string\",\n        \"time_zone\": \"string\",\n        \"latitude\": \"string\",\n        \"longitude\": \"string\",\n        \"phone_number\": \"string\",\n        \"created_at\": \"string\",\n        \"updated_at\": \"string\",\n        \"type\": \"string\",\n        \"fax\": \"string\"\n      }\n    ]\n  },\n  \"phone\": \"string\",\n  \"mobile\": \"string\",\n  \"last_active_organization_id\": 6489,\n  \"notification_email\": \"string\",\n  \"notification_phone\": \"string\",\n  \"organizations\": [\n    {\n      \"id\": 1557,\n      \"code\": \"string\",\n      \"display_name\": \"string\",\n      \"parent_organization_id\": 3515,\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"deleted_at\": \"string\",\n      \"domain\": \"string\",\n      \"formal_name\": \"string\",\n      \"namespace\": \"string\",\n      \"workup_checklist_set_id\": 6952,\n      \"site_name\": \"string\",\n      \"service_types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"urgency_ratings\": [\n        \"string\",\n        \"string\"\n      ],\n      \"expected_release_date_options\": {\n        \"date\": \"string\",\n        \"timezone_type\": 9495,\n        \"timezone\": \"string\"\n      },\n      \"pivot\": {\n        \"user_id\": 3871,\n        \"organization_id\": 9560\n      },\n      \"parent_organization\": {},\n      \"locations\": [\n        {\n          \"id\": 8909,\n          \"display_name\": \"string\",\n          \"street_address_1\": \"string\",\n          \"street_address_2\": \"string\",\n          \"city\": \"string\",\n          \"county\": \"string\",\n          \"postal_code\": \"string\",\n          \"state\": \"string\",\n          \"country\": \"string\",\n          \"time_zone\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"phone_number\": \"string\",\n          \"created_at\": \"string\",\n          \"updated_at\": \"string\",\n          \"type\": \"string\",\n          \"fax\": \"string\"\n        },\n        {\n          \"id\": 8595,\n          \"display_name\": \"string\",\n          \"street_address_1\": \"string\",\n          \"street_address_2\": \"string\",\n          \"city\": \"string\",\n          \"county\": \"string\",\n          \"postal_code\": \"string\",\n          \"state\": \"string\",\n          \"country\": \"string\",\n          \"time_zone\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"phone_number\": \"string\",\n          \"created_at\": \"string\",\n          \"updated_at\": \"string\",\n          \"type\": \"string\",\n          \"fax\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": 1051,\n      \"code\": \"string\",\n      \"display_name\": \"string\",\n      \"parent_organization_id\": 6528,\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"deleted_at\": \"string\",\n      \"domain\": \"string\",\n      \"formal_name\": \"string\",\n      \"namespace\": \"string\",\n      \"workup_checklist_set_id\": 8349,\n      \"site_name\": \"string\",\n      \"service_types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"urgency_ratings\": [\n        \"string\",\n        \"string\"\n      ],\n      \"expected_release_date_options\": {\n        \"date\": \"string\",\n        \"timezone_type\": 709,\n        \"timezone\": \"string\"\n      },\n      \"pivot\": {\n        \"user_id\": 6266,\n        \"organization_id\": 1525\n      },\n      \"parent_organization\": {},\n      \"locations\": [\n        {\n          \"id\": 281,\n          \"display_name\": \"string\",\n          \"street_address_1\": \"string\",\n          \"street_address_2\": \"string\",\n          \"city\": \"string\",\n          \"county\": \"string\",\n          \"postal_code\": \"string\",\n          \"state\": \"string\",\n          \"country\": \"string\",\n          \"time_zone\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"phone_number\": \"string\",\n          \"created_at\": \"string\",\n          \"updated_at\": \"string\",\n          \"type\": \"string\",\n          \"fax\": \"string\"\n        },\n        {\n          \"id\": 5283,\n          \"display_name\": \"string\",\n          \"street_address_1\": \"string\",\n          \"street_address_2\": \"string\",\n          \"city\": \"string\",\n          \"county\": \"string\",\n          \"postal_code\": \"string\",\n          \"state\": \"string\",\n          \"country\": \"string\",\n          \"time_zone\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"phone_number\": \"string\",\n          \"created_at\": \"string\",\n          \"updated_at\": \"string\",\n          \"type\": \"string\",\n          \"fax\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"roles\": [\n    {\n      \"id\": 6353,\n      \"name\": \"string\",\n      \"display_name\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"notifications\": [\n        \"string\",\n        \"string\"\n      ],\n      \"permissions\": [\n        {\n          \"id\": 1314,\n          \"name\": \"string\",\n          \"display_name\": \"string\",\n          \"created_at\": \"string\",\n          \"updated_at\": \"string\",\n          \"permission_types_id\": 6429\n        },\n        {\n          \"id\": 63,\n          \"name\": \"string\",\n          \"display_name\": \"string\",\n          \"created_at\": \"string\",\n          \"updated_at\": \"string\",\n          \"permission_types_id\": 3995\n        }\n      ],\n      \"perms\": [\n        {\n          \"id\": 158,\n          \"name\": \"string\",\n          \"display_name\": \"string\",\n          \"created_at\": \"string\",\n          \"updated_at\": \"string\",\n          \"permission_types_id\": 3513\n        },\n        {\n          \"id\": 1940,\n          \"name\": \"string\",\n          \"display_name\": \"string\",\n          \"created_at\": \"string\",\n          \"updated_at\": \"string\",\n          \"permission_types_id\": 7581\n        }\n      ]\n    },\n    {\n      \"id\": 6531,\n      \"name\": \"string\",\n      \"display_name\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"notifications\": [\n        \"string\",\n        \"string\"\n      ],\n      \"permissions\": [\n        {\n          \"id\": 3306,\n          \"name\": \"string\",\n          \"display_name\": \"string\",\n          \"created_at\": \"string\",\n          \"updated_at\": \"string\",\n          \"permission_types_id\": 2210\n        },\n        {\n          \"id\": 8100,\n          \"name\": \"string\",\n          \"display_name\": \"string\",\n          \"created_at\": \"string\",\n          \"updated_at\": \"string\",\n          \"permission_types_id\": 8000\n        }\n      ],\n      \"perms\": [\n        {\n          \"id\": 8267,\n          \"name\": \"string\",\n          \"display_name\": \"string\",\n          \"created_at\": \"string\",\n          \"updated_at\": \"string\",\n          \"permission_types_id\": 231\n        },\n        {\n          \"id\": 167,\n          \"name\": \"string\",\n          \"display_name\": \"string\",\n          \"created_at\": \"string\",\n          \"updated_at\": \"string\",\n          \"permission_types_id\": 358\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00108ef2-ba95-4534-bd80-1ac6e33ed4f2",
+              "name": "Invalid Credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "user_id",
+                      "description": "(Required) ID of user we want to get info."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "19677aa5-0aa7-44ce-945e-9cbd38bfb066",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "user_id",
+                      "description": "(Required) ID of user we want to get info."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fe79f31e-50fc-4345-ad51-2a880021a652",
+              "name": "User not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "user_id",
+                      "description": "(Required) ID of user we want to get info."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c54b5c08-0f4b-46c0-9c74-ec55e07f1264",
+          "name": "Retrieves a user object specified. If the id is set to self the function will return an instance of the currently logged in user",
+          "request": {
+            "name": "Retrieves a user object specified. If the id is set to self the function will return an instance of the currently logged in user",
+            "description": {
+              "content": "Retrieves a list of users based on its offset. Allows to order the records and perform a search",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "username",
+                  "value": "<string>",
+                  "description": "Username of the user required"
+                },
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": "<integer>",
+                  "description": "First Name or Last Name or the required user"
+                },
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<string>",
+                  "description": "Role's name assigned to the users we want to get"
+                },
+                {
+                  "disabled": false,
+                  "key": "permission",
+                  "value": "<string>",
+                  "description": "Permission's name assigned to the users we want to get"
+                },
+                {
+                  "disabled": false,
+                  "key": "organizationId",
+                  "value": "<integer>",
+                  "description": "Id of the organization we are filtering for"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status name we are filtering for"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f5dd61f-cbd5-4c95-a494-e194602b1afd",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "permission",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organizationId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total_hits\": 7485,\n  \"hits\": [\n    {\n      \"id\": 2043,\n      \"username\": \"string\",\n      \"email\": \"string\",\n      \"authentication_provider\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"status\": \"string\",\n      \"last_login\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"suffix\": \"string\",\n      \"base_dn\": \"string\",\n      \"primary_site_id\": 5842,\n      \"full_name\": \"string\",\n      \"organization\": \"string\",\n      \"phone\": \"string\",\n      \"mobile\": \"string\",\n      \"last_active_organization_id\": 1251,\n      \"notification_email\": \"string\",\n      \"notification_phone\": \"string\"\n    },\n    {\n      \"id\": 9990,\n      \"username\": \"string\",\n      \"email\": \"string\",\n      \"authentication_provider\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"status\": \"string\",\n      \"last_login\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"suffix\": \"string\",\n      \"base_dn\": \"string\",\n      \"primary_site_id\": 7463,\n      \"full_name\": \"string\",\n      \"organization\": \"string\",\n      \"phone\": \"string\",\n      \"mobile\": \"string\",\n      \"last_active_organization_id\": 4435,\n      \"notification_email\": \"string\",\n      \"notification_phone\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01de040a-a56c-42ab-8a44-b12110685395",
+              "name": "Invalid Credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "permission",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organizationId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "169be815-194b-4dac-b712-25a9a3e0443a",
+          "name": "Updates a specific field on a user",
+          "request": {
+            "name": "Updates a specific field on a user",
+            "description": {
+              "content": "Updates a specific field on a user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "userId",
+                  "value": "<string>",
+                  "description": "Id if the user to be updated"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42fa7f4e-5fb9-4b37-bcd9-f15f2c300cb3",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "userId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 5125,\n    \"username\": \"string\",\n    \"email\": \"string\",\n    \"authentication_provider\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"status\": \"string\",\n    \"last_login\": \"string\",\n    \"created_at\": \"string\",\n    \"updated_at\": \"string\",\n    \"suffix\": \"string\",\n    \"base_dn\": \"string\",\n    \"primary_site_id\": 4761,\n    \"full_name\": \"string\",\n    \"organization\": {\n      \"id\": 2642,\n      \"code\": \"string\",\n      \"display_name\": \"string\",\n      \"parent_organization_id\": 4219,\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"deleted_at\": \"string\",\n      \"domain\": \"string\",\n      \"formal_name\": \"string\",\n      \"namespace\": \"string\",\n      \"workup_checklist_set_id\": 8286,\n      \"site_name\": \"string\",\n      \"service_types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"urgency_ratings\": [\n        \"string\",\n        \"string\"\n      ],\n      \"expected_release_date_options\": {\n        \"date\": \"string\",\n        \"timezone_type\": 5438,\n        \"timezone\": \"string\"\n      },\n      \"pivot\": {\n        \"user_id\": 4415,\n        \"organization_id\": 1125\n      },\n      \"parent_organization\": {},\n      \"locations\": [\n        {\n          \"id\": 4161,\n          \"display_name\": \"string\",\n          \"street_address_1\": \"string\",\n          \"street_address_2\": \"string\",\n          \"city\": \"string\",\n          \"county\": \"string\",\n          \"postal_code\": \"string\",\n          \"state\": \"string\",\n          \"country\": \"string\",\n          \"time_zone\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"phone_number\": \"string\",\n          \"created_at\": \"string\",\n          \"updated_at\": \"string\",\n          \"type\": \"string\",\n          \"fax\": \"string\"\n        },\n        {\n          \"id\": 5691,\n          \"display_name\": \"string\",\n          \"street_address_1\": \"string\",\n          \"street_address_2\": \"string\",\n          \"city\": \"string\",\n          \"county\": \"string\",\n          \"postal_code\": \"string\",\n          \"state\": \"string\",\n          \"country\": \"string\",\n          \"time_zone\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"phone_number\": \"string\",\n          \"created_at\": \"string\",\n          \"updated_at\": \"string\",\n          \"type\": \"string\",\n          \"fax\": \"string\"\n        }\n      ]\n    },\n    \"phone\": \"string\",\n    \"mobile\": \"string\",\n    \"last_active_organization_id\": 3128,\n    \"notification_email\": \"string\",\n    \"notification_phone\": \"string\",\n    \"organizations\": [\n      {\n        \"id\": 8876,\n        \"code\": \"string\",\n        \"display_name\": \"string\",\n        \"parent_organization_id\": 4908,\n        \"created_at\": \"string\",\n        \"updated_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"domain\": \"string\",\n        \"formal_name\": \"string\",\n        \"namespace\": \"string\",\n        \"workup_checklist_set_id\": 7042,\n        \"site_name\": \"string\",\n        \"service_types\": [\n          \"string\",\n          \"string\"\n        ],\n        \"urgency_ratings\": [\n          \"string\",\n          \"string\"\n        ],\n        \"expected_release_date_options\": {\n          \"date\": \"string\",\n          \"timezone_type\": 3742,\n          \"timezone\": \"string\"\n        },\n        \"pivot\": {\n          \"user_id\": 3356,\n          \"organization_id\": 5727\n        },\n        \"parent_organization\": {},\n        \"locations\": [\n          {\n            \"id\": 7284,\n            \"display_name\": \"string\",\n            \"street_address_1\": \"string\",\n            \"street_address_2\": \"string\",\n            \"city\": \"string\",\n            \"county\": \"string\",\n            \"postal_code\": \"string\",\n            \"state\": \"string\",\n            \"country\": \"string\",\n            \"time_zone\": \"string\",\n            \"latitude\": \"string\",\n            \"longitude\": \"string\",\n            \"phone_number\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"type\": \"string\",\n            \"fax\": \"string\"\n          },\n          {\n            \"id\": 2108,\n            \"display_name\": \"string\",\n            \"street_address_1\": \"string\",\n            \"street_address_2\": \"string\",\n            \"city\": \"string\",\n            \"county\": \"string\",\n            \"postal_code\": \"string\",\n            \"state\": \"string\",\n            \"country\": \"string\",\n            \"time_zone\": \"string\",\n            \"latitude\": \"string\",\n            \"longitude\": \"string\",\n            \"phone_number\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"type\": \"string\",\n            \"fax\": \"string\"\n          }\n        ]\n      },\n      {\n        \"id\": 716,\n        \"code\": \"string\",\n        \"display_name\": \"string\",\n        \"parent_organization_id\": 9395,\n        \"created_at\": \"string\",\n        \"updated_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"domain\": \"string\",\n        \"formal_name\": \"string\",\n        \"namespace\": \"string\",\n        \"workup_checklist_set_id\": 5701,\n        \"site_name\": \"string\",\n        \"service_types\": [\n          \"string\",\n          \"string\"\n        ],\n        \"urgency_ratings\": [\n          \"string\",\n          \"string\"\n        ],\n        \"expected_release_date_options\": {\n          \"date\": \"string\",\n          \"timezone_type\": 3741,\n          \"timezone\": \"string\"\n        },\n        \"pivot\": {\n          \"user_id\": 6059,\n          \"organization_id\": 1892\n        },\n        \"parent_organization\": {},\n        \"locations\": [\n          {\n            \"id\": 5614,\n            \"display_name\": \"string\",\n            \"street_address_1\": \"string\",\n            \"street_address_2\": \"string\",\n            \"city\": \"string\",\n            \"county\": \"string\",\n            \"postal_code\": \"string\",\n            \"state\": \"string\",\n            \"country\": \"string\",\n            \"time_zone\": \"string\",\n            \"latitude\": \"string\",\n            \"longitude\": \"string\",\n            \"phone_number\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"type\": \"string\",\n            \"fax\": \"string\"\n          },\n          {\n            \"id\": 9992,\n            \"display_name\": \"string\",\n            \"street_address_1\": \"string\",\n            \"street_address_2\": \"string\",\n            \"city\": \"string\",\n            \"county\": \"string\",\n            \"postal_code\": \"string\",\n            \"state\": \"string\",\n            \"country\": \"string\",\n            \"time_zone\": \"string\",\n            \"latitude\": \"string\",\n            \"longitude\": \"string\",\n            \"phone_number\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"type\": \"string\",\n            \"fax\": \"string\"\n          }\n        ]\n      }\n    ],\n    \"roles\": [\n      {\n        \"id\": 2187,\n        \"name\": \"string\",\n        \"display_name\": \"string\",\n        \"created_at\": \"string\",\n        \"updated_at\": \"string\",\n        \"notifications\": [\n          \"string\",\n          \"string\"\n        ],\n        \"permissions\": [\n          {\n            \"id\": 5387,\n            \"name\": \"string\",\n            \"display_name\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"permission_types_id\": 6382\n          },\n          {\n            \"id\": 1554,\n            \"name\": \"string\",\n            \"display_name\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"permission_types_id\": 9281\n          }\n        ],\n        \"perms\": [\n          {\n            \"id\": 9580,\n            \"name\": \"string\",\n            \"display_name\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"permission_types_id\": 9892\n          },\n          {\n            \"id\": 3397,\n            \"name\": \"string\",\n            \"display_name\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"permission_types_id\": 6485\n          }\n        ]\n      },\n      {\n        \"id\": 8042,\n        \"name\": \"string\",\n        \"display_name\": \"string\",\n        \"created_at\": \"string\",\n        \"updated_at\": \"string\",\n        \"notifications\": [\n          \"string\",\n          \"string\"\n        ],\n        \"permissions\": [\n          {\n            \"id\": 1518,\n            \"name\": \"string\",\n            \"display_name\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"permission_types_id\": 6743\n          },\n          {\n            \"id\": 8065,\n            \"name\": \"string\",\n            \"display_name\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"permission_types_id\": 9928\n          }\n        ],\n        \"perms\": [\n          {\n            \"id\": 175,\n            \"name\": \"string\",\n            \"display_name\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"permission_types_id\": 7195\n          },\n          {\n            \"id\": 8128,\n            \"name\": \"string\",\n            \"display_name\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"permission_types_id\": 6960\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": 171,\n    \"username\": \"string\",\n    \"email\": \"string\",\n    \"authentication_provider\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"status\": \"string\",\n    \"last_login\": \"string\",\n    \"created_at\": \"string\",\n    \"updated_at\": \"string\",\n    \"suffix\": \"string\",\n    \"base_dn\": \"string\",\n    \"primary_site_id\": 1897,\n    \"full_name\": \"string\",\n    \"organization\": {\n      \"id\": 5023,\n      \"code\": \"string\",\n      \"display_name\": \"string\",\n      \"parent_organization_id\": 6022,\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"deleted_at\": \"string\",\n      \"domain\": \"string\",\n      \"formal_name\": \"string\",\n      \"namespace\": \"string\",\n      \"workup_checklist_set_id\": 655,\n      \"site_name\": \"string\",\n      \"service_types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"urgency_ratings\": [\n        \"string\",\n        \"string\"\n      ],\n      \"expected_release_date_options\": {\n        \"date\": \"string\",\n        \"timezone_type\": 721,\n        \"timezone\": \"string\"\n      },\n      \"pivot\": {\n        \"user_id\": 8236,\n        \"organization_id\": 9927\n      },\n      \"parent_organization\": {},\n      \"locations\": [\n        {\n          \"id\": 1039,\n          \"display_name\": \"string\",\n          \"street_address_1\": \"string\",\n          \"street_address_2\": \"string\",\n          \"city\": \"string\",\n          \"county\": \"string\",\n          \"postal_code\": \"string\",\n          \"state\": \"string\",\n          \"country\": \"string\",\n          \"time_zone\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"phone_number\": \"string\",\n          \"created_at\": \"string\",\n          \"updated_at\": \"string\",\n          \"type\": \"string\",\n          \"fax\": \"string\"\n        },\n        {\n          \"id\": 314,\n          \"display_name\": \"string\",\n          \"street_address_1\": \"string\",\n          \"street_address_2\": \"string\",\n          \"city\": \"string\",\n          \"county\": \"string\",\n          \"postal_code\": \"string\",\n          \"state\": \"string\",\n          \"country\": \"string\",\n          \"time_zone\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"phone_number\": \"string\",\n          \"created_at\": \"string\",\n          \"updated_at\": \"string\",\n          \"type\": \"string\",\n          \"fax\": \"string\"\n        }\n      ]\n    },\n    \"phone\": \"string\",\n    \"mobile\": \"string\",\n    \"last_active_organization_id\": 3125,\n    \"notification_email\": \"string\",\n    \"notification_phone\": \"string\",\n    \"organizations\": [\n      {\n        \"id\": 6957,\n        \"code\": \"string\",\n        \"display_name\": \"string\",\n        \"parent_organization_id\": 2017,\n        \"created_at\": \"string\",\n        \"updated_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"domain\": \"string\",\n        \"formal_name\": \"string\",\n        \"namespace\": \"string\",\n        \"workup_checklist_set_id\": 1448,\n        \"site_name\": \"string\",\n        \"service_types\": [\n          \"string\",\n          \"string\"\n        ],\n        \"urgency_ratings\": [\n          \"string\",\n          \"string\"\n        ],\n        \"expected_release_date_options\": {\n          \"date\": \"string\",\n          \"timezone_type\": 6660,\n          \"timezone\": \"string\"\n        },\n        \"pivot\": {\n          \"user_id\": 8345,\n          \"organization_id\": 2819\n        },\n        \"parent_organization\": {},\n        \"locations\": [\n          {\n            \"id\": 7659,\n            \"display_name\": \"string\",\n            \"street_address_1\": \"string\",\n            \"street_address_2\": \"string\",\n            \"city\": \"string\",\n            \"county\": \"string\",\n            \"postal_code\": \"string\",\n            \"state\": \"string\",\n            \"country\": \"string\",\n            \"time_zone\": \"string\",\n            \"latitude\": \"string\",\n            \"longitude\": \"string\",\n            \"phone_number\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"type\": \"string\",\n            \"fax\": \"string\"\n          },\n          {\n            \"id\": 1693,\n            \"display_name\": \"string\",\n            \"street_address_1\": \"string\",\n            \"street_address_2\": \"string\",\n            \"city\": \"string\",\n            \"county\": \"string\",\n            \"postal_code\": \"string\",\n            \"state\": \"string\",\n            \"country\": \"string\",\n            \"time_zone\": \"string\",\n            \"latitude\": \"string\",\n            \"longitude\": \"string\",\n            \"phone_number\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"type\": \"string\",\n            \"fax\": \"string\"\n          }\n        ]\n      },\n      {\n        \"id\": 6638,\n        \"code\": \"string\",\n        \"display_name\": \"string\",\n        \"parent_organization_id\": 28,\n        \"created_at\": \"string\",\n        \"updated_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"domain\": \"string\",\n        \"formal_name\": \"string\",\n        \"namespace\": \"string\",\n        \"workup_checklist_set_id\": 2797,\n        \"site_name\": \"string\",\n        \"service_types\": [\n          \"string\",\n          \"string\"\n        ],\n        \"urgency_ratings\": [\n          \"string\",\n          \"string\"\n        ],\n        \"expected_release_date_options\": {\n          \"date\": \"string\",\n          \"timezone_type\": 2984,\n          \"timezone\": \"string\"\n        },\n        \"pivot\": {\n          \"user_id\": 2092,\n          \"organization_id\": 1605\n        },\n        \"parent_organization\": {},\n        \"locations\": [\n          {\n            \"id\": 7010,\n            \"display_name\": \"string\",\n            \"street_address_1\": \"string\",\n            \"street_address_2\": \"string\",\n            \"city\": \"string\",\n            \"county\": \"string\",\n            \"postal_code\": \"string\",\n            \"state\": \"string\",\n            \"country\": \"string\",\n            \"time_zone\": \"string\",\n            \"latitude\": \"string\",\n            \"longitude\": \"string\",\n            \"phone_number\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"type\": \"string\",\n            \"fax\": \"string\"\n          },\n          {\n            \"id\": 1961,\n            \"display_name\": \"string\",\n            \"street_address_1\": \"string\",\n            \"street_address_2\": \"string\",\n            \"city\": \"string\",\n            \"county\": \"string\",\n            \"postal_code\": \"string\",\n            \"state\": \"string\",\n            \"country\": \"string\",\n            \"time_zone\": \"string\",\n            \"latitude\": \"string\",\n            \"longitude\": \"string\",\n            \"phone_number\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"type\": \"string\",\n            \"fax\": \"string\"\n          }\n        ]\n      }\n    ],\n    \"roles\": [\n      {\n        \"id\": 7405,\n        \"name\": \"string\",\n        \"display_name\": \"string\",\n        \"created_at\": \"string\",\n        \"updated_at\": \"string\",\n        \"notifications\": [\n          \"string\",\n          \"string\"\n        ],\n        \"permissions\": [\n          {\n            \"id\": 4751,\n            \"name\": \"string\",\n            \"display_name\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"permission_types_id\": 4277\n          },\n          {\n            \"id\": 5201,\n            \"name\": \"string\",\n            \"display_name\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"permission_types_id\": 7223\n          }\n        ],\n        \"perms\": [\n          {\n            \"id\": 6818,\n            \"name\": \"string\",\n            \"display_name\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"permission_types_id\": 4641\n          },\n          {\n            \"id\": 1289,\n            \"name\": \"string\",\n            \"display_name\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"permission_types_id\": 3991\n          }\n        ]\n      },\n      {\n        \"id\": 6074,\n        \"name\": \"string\",\n        \"display_name\": \"string\",\n        \"created_at\": \"string\",\n        \"updated_at\": \"string\",\n        \"notifications\": [\n          \"string\",\n          \"string\"\n        ],\n        \"permissions\": [\n          {\n            \"id\": 1613,\n            \"name\": \"string\",\n            \"display_name\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"permission_types_id\": 7056\n          },\n          {\n            \"id\": 6926,\n            \"name\": \"string\",\n            \"display_name\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"permission_types_id\": 1788\n          }\n        ],\n        \"perms\": [\n          {\n            \"id\": 1355,\n            \"name\": \"string\",\n            \"display_name\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"permission_types_id\": 6590\n          },\n          {\n            \"id\": 5751,\n            \"name\": \"string\",\n            \"display_name\": \"string\",\n            \"created_at\": \"string\",\n            \"updated_at\": \"string\",\n            \"permission_types_id\": 8388\n          }\n        ]\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf318b78-5091-44e4-bb84-ef251f57dc04",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "userId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "49d89ec9-9b26-4f34-9ee2-a8214a1edde5",
+              "name": "Unexpected failure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "userId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "26991b68-d6f0-4edb-bd03-f635877a07a9",
+    "name": "Arista MD Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the business logic core that serves all Arista MD sites, tools, and integrations",
+      "type": "text/plain"
+    }
+  }
+}

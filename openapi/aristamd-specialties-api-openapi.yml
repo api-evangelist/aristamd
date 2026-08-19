@@ -1,0 +1,171 @@
+openapi: 3.2.0
+info:
+  title: Arista MD Specialties API
+  description: This is the business logic core that serves all Arista MD sites, tools, and integrations
+  version: 1.0.0
+tags:
+- name: Specialties
+paths:
+  /specialties/{specialtyId}:
+    put:
+      tags:
+      - Specialties
+      summary: Updates a specialty instance
+      description: Updates a main specialty or sub specialty based on the provided input
+      operationId: update
+      parameters:
+      - name: Specialty Id
+        in: path
+        description: Id of the specialty to update
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '201':
+          description: Updated Specialty
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Specialty'
+        '400':
+          description: Invalid credentials
+        '500':
+          description: Internal Error
+        '402':
+          description: Unprocessable entity
+        '403':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Specialty'
+        description: Specialty body
+        required: true
+  /specialties:
+    post:
+      tags:
+      - Specialties
+      summary: Creates a new specialty instance
+      description: Creates a main specialty or sub specialty based on the provided input
+      operationId: store
+      responses:
+        '201':
+          description: Created Specialty
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Specialty'
+        '400':
+          description: Invalid credentials
+        '500':
+          description: Internal Error
+        '402':
+          description: Unprocessable entity
+        '403':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Specialty'
+        description: Specialty body
+        required: true
+  /specialties/withAvailablePanelists/{filter}:
+    get:
+      tags:
+      - Specialties
+      summary: Retrieves a list of specialties with available panelists.
+      description: Retrieves a list of specialties with available panelists
+      operationId: index
+      parameters:
+      - name: filter
+        in: path
+        description: 'Filter that we should apply to the specialties list. You can include into the path
+          the filter options: pediatrics or non-pediatrics.'
+        required: true
+        schema:
+          type: string
+          default: 'null'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                    code:
+                      type: string
+                    display_name:
+                      type: string
+                    parent_specialty_id:
+                      type: string
+                    title:
+                      type: string
+                    keywords:
+                      type: string
+                    pediatrics_only:
+                      type: boolean
+                    nameKeywords:
+                      type: string
+                    specialist_form_version:
+                      type: integer
+                    subspecialties:
+                      type: array
+                      items:
+                        properties:
+                          id:
+                            type: integer
+                          code:
+                            type: string
+                          display_name:
+                            type: string
+                          parent_specialty_id:
+                            type: string
+                          title:
+                            type: string
+                          keywords:
+                            type: string
+                          pediatrics_only:
+                            type: boolean
+                          nameKeywords:
+                            type: string
+                          specialist_form_version:
+                            type: integer
+                        type: object
+                  type: object
+        '400':
+          description: Invalid Credentials
+          content:
+            application/json:
+              schema: {}
+components:
+  schemas:
+    Specialty:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        display_name:
+          type: string
+        parent_specialty_id:
+          type: integer
+        title:
+          type: string
+        keywords:
+          type: string
+        pediatrics_only:
+          type: boolean
+        nameKeywords:
+          type: string
+        specialist_form_version:
+          type: integer
+      type: object
+      xml:
+        name: Specialty

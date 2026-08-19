@@ -1,0 +1,1032 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arista MD API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adds a comment to a Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/comments"
+          },
+          "docs": "Adds a comment for a request."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Diagnostic",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deletes a diagnostic",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/diagnostics/:diagnosticId",
+            "params": [
+              {
+                "name": "diagnosticId",
+                "value": "",
+                "type": "path",
+                "description": "ID of diagnostic to be deleted"
+              }
+            ]
+          },
+          "docs": "Destroys a Diagnostic using its id"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request diagnostics event handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/:request/:requestId/diagnostics/:diagnosticId/events",
+            "params": [
+              {
+                "name": "request",
+                "value": "",
+                "type": "path",
+                "description": "Request type that will be transitioned"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "ID of Request that will be transitioned"
+              },
+              {
+                "name": "diagnosticId",
+                "value": "",
+                "type": "path",
+                "description": "ID of Diagnostic that will be transitioned"
+              }
+            ]
+          },
+          "docs": "Handles the event for a Request diagnostics"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "EConsults",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of econsults",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/econsults",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status(es)"
+              },
+              {
+                "name": "site",
+                "value": "",
+                "type": "query",
+                "description": "Filter econsults by site using the site ID"
+              },
+              {
+                "name": "request_date[from]",
+                "value": "",
+                "type": "query",
+                "description": "Filter econsults by its request date starting from the received date. (yyyy-mm-dd)"
+              },
+              {
+                "name": "request_date[to]",
+                "value": "",
+                "type": "query",
+                "description": "Filter econsults by its request date to the received date. (yyyy-mm-dd)"
+              },
+              {
+                "name": "panelistId",
+                "value": "",
+                "type": "query",
+                "description": "Filter econsults by panelist using the panelist ID"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of econsults based on its offset. Allows to order the records and perform a\n     *     search"
+        },
+        {
+          "info": {
+            "name": "Creates an EConsult",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/econsults"
+          },
+          "docs": "Save an econsult object with the input specified. The STORE method should ONLY deal with the\n     *                 eConsult object. It should not touch the User/Patient/ etc. Those items that need to be helped\n     *                 onto the model should be a seperate class that is responsible for helping 'build' the perfect\n     *                 econsult model Default state is saved by requester."
+        },
+        {
+          "info": {
+            "name": "Retrieves an EConsult",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/econsults/:econsultId",
+            "params": [
+              {
+                "name": "econsultId",
+                "value": "",
+                "type": "path",
+                "description": "ID of econsult to return"
+              }
+            ]
+          },
+          "docs": "Finds EConsult by ID"
+        },
+        {
+          "info": {
+            "name": "Updates an econsult",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/econsults/:econsultId",
+            "params": [
+              {
+                "name": "econsultId",
+                "value": "",
+                "type": "path",
+                "description": "ID of econsult to update"
+              }
+            ]
+          },
+          "docs": "Updates an econsult using its id"
+        },
+        {
+          "info": {
+            "name": "Updates an econsult",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/econsults/:econsultId",
+            "params": [
+              {
+                "name": "econsultId",
+                "value": "",
+                "type": "path",
+                "description": "ID of econsult to update"
+              }
+            ]
+          },
+          "docs": "Updates one or more fields of a econsult resource"
+        },
+        {
+          "info": {
+            "name": "Deletes an econsult",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/econsults/:econsultId",
+            "params": [
+              {
+                "name": "econsultId",
+                "value": "",
+                "type": "path",
+                "description": "ID of econsult to be deleted"
+              }
+            ]
+          },
+          "docs": "Destroys an EConsult using its id"
+        },
+        {
+          "info": {
+            "name": "Assign econsult to current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/econsults/:econsultId/assign-to-me",
+            "params": [
+              {
+                "name": "econsultId",
+                "value": "",
+                "type": "path",
+                "description": "ID of econsult to update"
+              }
+            ]
+          },
+          "docs": "Updates econsult panelist id to current user id"
+        },
+        {
+          "info": {
+            "name": "Find EConsult ids by status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/econsults/search",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter status"
+              }
+            ]
+          },
+          "docs": "Returns a list of eConsult Ids for the specified requesterId"
+        },
+        {
+          "info": {
+            "name": "Log panelist availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/econsults/logAvailability"
+          },
+          "docs": "Create a log for panelist available times"
+        },
+        {
+          "info": {
+            "name": "EConsult Event Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/econsults/:eConsultId/events",
+            "params": [
+              {
+                "name": "eConsultId",
+                "value": "",
+                "type": "path",
+                "description": "ID of EConsult that will be transitioned"
+              }
+            ]
+          },
+          "docs": "Handles the event for an EConsult"
+        },
+        {
+          "info": {
+            "name": "EConsult Event Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/econsults/:eConsultId/heartbeat",
+            "params": [
+              {
+                "name": "eConsultId",
+                "value": "",
+                "type": "path",
+                "description": "ID of EConsult that will be updated"
+              }
+            ]
+          },
+          "docs": "Handles the event for an EConsult"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Patients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a Patient from an HL7 message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/HL7/messages"
+          },
+          "docs": "Save a patient object with the input specified."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of patients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/patients",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Offset of records"
+              },
+              {
+                "name": "length",
+                "value": "",
+                "type": "query",
+                "description": "How many items should bring"
+              },
+              {
+                "name": "orderColumn",
+                "value": "",
+                "type": "query",
+                "description": "Column used to do the sort"
+              },
+              {
+                "name": "orderDir",
+                "value": "",
+                "type": "query",
+                "description": "Direction of sort"
+              },
+              {
+                "name": "searchValue",
+                "value": "",
+                "type": "query",
+                "description": "Search term"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of patient based on its offset. Allows to order the records and perform a search"
+        },
+        {
+          "info": {
+            "name": "Creates a Patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/patients"
+          },
+          "docs": "Save a patient object with the input specified."
+        },
+        {
+          "info": {
+            "name": "Retrieves a Patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/patients/:patientId",
+            "params": [
+              {
+                "name": "patientId",
+                "value": "",
+                "type": "path",
+                "description": "ID of patient to return"
+              }
+            ]
+          },
+          "docs": "Find a Patient by ID"
+        },
+        {
+          "info": {
+            "name": "Updates a patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/patients/:patientId",
+            "params": [
+              {
+                "name": "patientId",
+                "value": "",
+                "type": "path",
+                "description": "ID of patient"
+              }
+            ]
+          },
+          "docs": "Updates a patient using its id"
+        },
+        {
+          "info": {
+            "name": "Patches a patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/patients/:patientId",
+            "params": [
+              {
+                "name": "patientId",
+                "value": "",
+                "type": "path",
+                "description": "ID of patient"
+              },
+              {
+                "name": "operation",
+                "value": "",
+                "type": "query",
+                "description": "Patch operation"
+              },
+              {
+                "name": "assets",
+                "value": "",
+                "type": "query",
+                "description": "assets array"
+              }
+            ]
+          },
+          "docs": "Patches a patient using its id"
+        },
+        {
+          "info": {
+            "name": "Return a user object specified. If the id is set to self the function will return an instance of the currently logged in user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/patients/search",
+            "params": [
+              {
+                "name": "data[last_name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last name"
+              },
+              {
+                "name": "data[q]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by elements matching the provided text."
+              },
+              {
+                "name": "rest",
+                "value": "",
+                "type": "query",
+                "description": "ID of user we want to get info."
+              }
+            ]
+          },
+          "docs": "Finds patients by last name or elements that match with a provided text."
+        },
+        {
+          "info": {
+            "name": "TopReferral",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/patients/top-patients/:length",
+            "params": [
+              {
+                "name": "length",
+                "value": "",
+                "type": "path",
+                "description": "length of the top patients"
+              }
+            ]
+          },
+          "docs": "it returns a list with the length received of the top patients"
+        },
+        {
+          "info": {
+            "name": "Patient's History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/patients/:patientId/history",
+            "params": [
+              {
+                "name": "patientId",
+                "value": "",
+                "type": "path",
+                "description": "ID of patient to return"
+              }
+            ]
+          },
+          "docs": "Get the patient's history of referrals and econsults"
+        },
+        {
+          "info": {
+            "name": "Patient's External Identifiers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/patients/:patientId/identifiers",
+            "params": [
+              {
+                "name": "patientId",
+                "value": "",
+                "type": "path",
+                "description": "ID of patient to return"
+              },
+              {
+                "name": "identifier_name",
+                "value": "",
+                "type": "query",
+                "description": "Identifier name"
+              },
+              {
+                "name": "auth_provider_id",
+                "value": "",
+                "type": "query",
+                "description": "Auth Provider ID"
+              }
+            ]
+          },
+          "docs": "Get the patient's external identifiers"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Intergy/Patients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves Patient information from Intergy API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/intergy/patients/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Patient's Id"
+              },
+              {
+                "name": "practice_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the practice we want to search"
+              }
+            ]
+          },
+          "docs": "Retrieves Patient Record, if the patient was already included then we are goin to update patient's information,if not then we are going to return a new patient record."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Panelists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find panelists based on provided parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/panelists",
+            "params": [
+              {
+                "name": "specialty_code",
+                "value": "",
+                "type": "query",
+                "description": "Code of the specialty that we want to get panelists."
+              },
+              {
+                "name": "statusGroup",
+                "value": "",
+                "type": "query",
+                "description": "Code of the specialty that we want to get panelists."
+              }
+            ]
+          },
+          "docs": "Find panelists based on provided parameters"
+        },
+        {
+          "info": {
+            "name": "Find the next available panelist for a given specialty",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/panelists/getNextAvailable/:code/:patient_id",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "path",
+                "description": "Code of the specialty that we want to get panelists."
+              },
+              {
+                "name": "patient_id",
+                "value": "",
+                "type": "path",
+                "description": "Code of the specialty that we want to get panelists."
+              }
+            ]
+          },
+          "docs": "Find the next available panelist for a given specialty\n      If patient id is provided and this patient has seen a specialist in the past\n      1. Select last seen specialist if available on the next 24 hrs\n      2. If last seen specialist is not available on the next 24 hrs\n      but he is available in the next 30 days, send both the last seen and next\n      available panelist to frontend so requester can choose either\n      3. If last seen specialist is not available at all, send both the last"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reviews",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns a review from a Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/reviews",
+            "params": [
+              {
+                "name": "association_type",
+                "value": "",
+                "type": "query",
+                "description": "Type of request we want to filter"
+              },
+              {
+                "name": "association_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the request we want to filter"
+              },
+              {
+                "name": "question_type",
+                "value": "",
+                "type": "query",
+                "description": "Question type we want to filter"
+              }
+            ]
+          },
+          "docs": "Returns the review identified by the id from a Request"
+        },
+        {
+          "info": {
+            "name": "Adds reviews to a Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/reviews"
+          },
+          "docs": "Adds a lists of questions and answeas for a request review."
+        },
+        {
+          "info": {
+            "name": "Returns a review from a Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/reviews/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Review to update"
+              }
+            ]
+          },
+          "docs": "Returns the review identified by the id from a Request"
+        },
+        {
+          "info": {
+            "name": "Update a review from a Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/reviews/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Review to update"
+              }
+            ]
+          },
+          "docs": "Updates the review identified by the id from a Request"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Specialty",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a Specialty",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/specialties/:specialtyId",
+            "params": [
+              {
+                "name": "specialtyId",
+                "value": "",
+                "type": "path",
+                "description": "ID of specialty to return"
+              }
+            ]
+          },
+          "docs": "Finds Specialty by ID"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Specialties",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Updates a specialty instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/specialties/:specialtyId",
+            "params": [
+              {
+                "name": "Specialty Id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the specialty to update"
+              }
+            ]
+          },
+          "docs": "Updates a main specialty or sub specialty based on the provided input"
+        },
+        {
+          "info": {
+            "name": "Creates a new specialty instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/specialties"
+          },
+          "docs": "Creates a main specialty or sub specialty based on the provided input"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of specialties with available panelists.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/specialties/withAvailablePanelists/:filter",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "path",
+                "description": "Filter that we should apply to the specialties list. You can include into the path the filter options: pediatrics or non-pediatrics."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of specialties with available panelists"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Offset of records"
+              },
+              {
+                "name": "length",
+                "value": "",
+                "type": "query",
+                "description": "How many items should bring"
+              },
+              {
+                "name": "orderColumn",
+                "value": "",
+                "type": "query",
+                "description": "Column used to do the sort"
+              },
+              {
+                "name": "orderDir",
+                "value": "",
+                "type": "query",
+                "description": "Direction of sort"
+              },
+              {
+                "name": "searchValue",
+                "value": "",
+                "type": "query",
+                "description": "Search term"
+              },
+              {
+                "name": "searchStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filter user's list by status"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of users based on its offset. Allows to order the records and perform a search"
+        },
+        {
+          "info": {
+            "name": "Return a user object specified. If the id is set to self the function will return an instance of the currently logged in user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of user we want to get info."
+              }
+            ]
+          },
+          "docs": "Finds EConsult by ID"
+        },
+        {
+          "info": {
+            "name": "Retrieves a user object specified. If the id is set to self the function will return an instance of the currently logged in user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users/search",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "Username of the user required"
+              },
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query",
+                "description": "First Name or Last Name or the required user"
+              },
+              {
+                "name": "role",
+                "value": "",
+                "type": "query",
+                "description": "Role's name assigned to the users we want to get"
+              },
+              {
+                "name": "permission",
+                "value": "",
+                "type": "query",
+                "description": "Permission's name assigned to the users we want to get"
+              },
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "query",
+                "description": "Id of the organization we are filtering for"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status name we are filtering for"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of users based on its offset. Allows to order the records and perform a search"
+        },
+        {
+          "info": {
+            "name": "Updates a specific field on a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/users/update",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Id if the user to be updated"
+              }
+            ]
+          },
+          "docs": "Updates a specific field on a user"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Workup Checklists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workup checklists specialties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/workup-checklists/specialties"
+          },
+          "docs": "Retrieves available specialties for the existent workup checklists"
+        },
+        {
+          "info": {
+            "name": "Specialty chief complaints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/workup-checklists/specialties/:specialtyCode/chief-complaints",
+            "params": [
+              {
+                "name": "specialtyCode",
+                "value": "",
+                "type": "path",
+                "description": "Specialty code to find chief complaints"
+              }
+            ]
+          },
+          "docs": "Retrieves available specialties for the existent workup checklists"
+        },
+        {
+          "info": {
+            "name": "Specialty / Chief Complaint Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/workup-checklists/specialties/:specialtyCode/chief-complaints/:chiefComplaintCode",
+            "params": [
+              {
+                "name": "specialtyCode",
+                "value": "",
+                "type": "path",
+                "description": "Specialty code"
+              },
+              {
+                "name": "chiefComplaintCode",
+                "value": "",
+                "type": "path",
+                "description": "Chief complaint code"
+              }
+            ]
+          },
+          "docs": "Search checklist by specialty and chief complaint"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

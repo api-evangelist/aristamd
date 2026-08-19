@@ -1,0 +1,676 @@
+{
+  "item": [
+    {
+      "id": "a388f5f5-bbcf-4db4-8363-9d79f246a2af",
+      "name": "Workup Checklists",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "df9bc245-884e-40ed-870f-6dcd8cbf4155",
+          "name": "Workup checklists specialties",
+          "request": {
+            "name": "Workup checklists specialties",
+            "description": {
+              "content": "Retrieves available specialties for the existent workup checklists",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "workup-checklists",
+                "specialties"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ace3b4c8-044a-4038-8862-244a210e043f",
+              "name": "Available specialties of current checklists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workup-checklists",
+                    "specialties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 3201,\n    \"code\": \"string\",\n    \"display_name\": \"string\",\n    \"parent_specialty_id\": 6417,\n    \"title\": \"string\",\n    \"keywords\": \"string\",\n    \"pediatrics_only\": true,\n    \"nameKeywords\": \"string\",\n    \"specialist_form_version\": 8437\n  },\n  {\n    \"id\": 4753,\n    \"code\": \"string\",\n    \"display_name\": \"string\",\n    \"parent_specialty_id\": 3059,\n    \"title\": \"string\",\n    \"keywords\": \"string\",\n    \"pediatrics_only\": false,\n    \"nameKeywords\": \"string\",\n    \"specialist_form_version\": 2567\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6a3ccf2-c20f-40f8-a4a7-b7b1ab1ad33f",
+              "name": "Invalid Credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workup-checklists",
+                    "specialties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "14dc3de0-74f4-484d-b202-78392dadd30c",
+              "name": "Internal Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workup-checklists",
+                    "specialties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b83b09a-7c42-403b-99ad-bc84a6dd1ac9",
+          "name": "Specialty chief complaints",
+          "request": {
+            "name": "Specialty chief complaints",
+            "description": {
+              "content": "Retrieves available specialties for the existent workup checklists",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "workup-checklists",
+                "specialties",
+                ":specialtyCode",
+                "chief-complaints"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "specialtyCode",
+                  "description": "(Required) Specialty code to find chief complaints"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc5aa71c-880c-4a86-a39f-7e82b3adb790",
+              "name": "Available chief complaints of selected specialty in the current checklists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workup-checklists",
+                    "specialties",
+                    ":specialtyCode",
+                    "chief-complaints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "specialtyCode",
+                      "description": "(Required) Specialty code to find chief complaints"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 4026,\n    \"code\": \"string\",\n    \"display_name\": \"string\",\n    \"specialties\": [\n      {\n        \"id\": 4007,\n        \"code\": \"string\",\n        \"display_name\": \"string\",\n        \"parent_specialty_id\": 3431,\n        \"title\": \"string\",\n        \"keywords\": \"string\",\n        \"pediatrics_only\": false,\n        \"nameKeywords\": \"string\",\n        \"specialist_form_version\": 391\n      },\n      {\n        \"id\": 7559,\n        \"code\": \"string\",\n        \"display_name\": \"string\",\n        \"parent_specialty_id\": 7475,\n        \"title\": \"string\",\n        \"keywords\": \"string\",\n        \"pediatrics_only\": true,\n        \"nameKeywords\": \"string\",\n        \"specialist_form_version\": 738\n      }\n    ]\n  },\n  {\n    \"id\": 470,\n    \"code\": \"string\",\n    \"display_name\": \"string\",\n    \"specialties\": [\n      {\n        \"id\": 4575,\n        \"code\": \"string\",\n        \"display_name\": \"string\",\n        \"parent_specialty_id\": 9562,\n        \"title\": \"string\",\n        \"keywords\": \"string\",\n        \"pediatrics_only\": true,\n        \"nameKeywords\": \"string\",\n        \"specialist_form_version\": 4444\n      },\n      {\n        \"id\": 843,\n        \"code\": \"string\",\n        \"display_name\": \"string\",\n        \"parent_specialty_id\": 5756,\n        \"title\": \"string\",\n        \"keywords\": \"string\",\n        \"pediatrics_only\": false,\n        \"nameKeywords\": \"string\",\n        \"specialist_form_version\": 3742\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3ce63d7-c69f-4abb-b72f-484819952ad7",
+              "name": "Invalid Credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workup-checklists",
+                    "specialties",
+                    ":specialtyCode",
+                    "chief-complaints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "specialtyCode",
+                      "description": "(Required) Specialty code to find chief complaints"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "025c4d3d-7873-46f0-a709-65e30e2c9841",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workup-checklists",
+                    "specialties",
+                    ":specialtyCode",
+                    "chief-complaints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "specialtyCode",
+                      "description": "(Required) Specialty code to find chief complaints"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "997db827-90e2-4209-a3c4-b032ad7d7f83",
+              "name": "Internal Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workup-checklists",
+                    "specialties",
+                    ":specialtyCode",
+                    "chief-complaints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "specialtyCode",
+                      "description": "(Required) Specialty code to find chief complaints"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b477416-e80b-45d7-92a8-997b32a895bb",
+          "name": "Specialty / Chief Complaint Search",
+          "request": {
+            "name": "Specialty / Chief Complaint Search",
+            "description": {
+              "content": "Search checklist by specialty and chief complaint",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "workup-checklists",
+                "specialties",
+                ":specialtyCode",
+                "chief-complaints",
+                ":chiefComplaintCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "specialtyCode",
+                  "description": "(Required) Specialty code"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chiefComplaintCode",
+                  "description": "(Required) Chief complaint code"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "753acce3-26fe-46cd-a199-d6e822b3daee",
+              "name": "Checklist retrieved from specialty and chief complaint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workup-checklists",
+                    "specialties",
+                    ":specialtyCode",
+                    "chief-complaints",
+                    ":chiefComplaintCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "specialtyCode",
+                      "description": "(Required) Specialty code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chiefComplaintCode",
+                      "description": "(Required) Chief complaint code"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 7931,\n  \"specialty\": \"string\",\n  \"chief_complaint\": \"string\",\n  \"created_by\": \"string\",\n  \"assessments\": [\n    {\n      \"id\": \"string\",\n      \"question\": \"string\",\n      \"question_type\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"choices\": [\n        \"string\",\n        \"string\"\n      ],\n      \"prompt\": \"string\",\n      \"alert\": \"string\",\n      \"filter\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"question\": \"string\",\n      \"question_type\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"choices\": [\n        \"string\",\n        \"string\"\n      ],\n      \"prompt\": \"string\",\n      \"alert\": \"string\",\n      \"filter\": \"string\"\n    }\n  ],\n  \"diagnostics\": [\n    {\n      \"id\": \"string\",\n      \"diagnostic_id\": 2853,\n      \"name\": \"string\",\n      \"category\": \"string\",\n      \"diagnostic_type\": \"string\",\n      \"conditions\": \"string\",\n      \"required\": true,\n      \"alert\": \"string\",\n      \"conditional\": false,\n      \"requires_aoe\": false,\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"diagnostic_id\": 5711,\n      \"name\": \"string\",\n      \"category\": \"string\",\n      \"diagnostic_type\": \"string\",\n      \"conditions\": \"string\",\n      \"required\": true,\n      \"alert\": \"string\",\n      \"conditional\": true,\n      \"requires_aoe\": true,\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\"\n    }\n  ],\n  \"special_note\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eeeffd6c-30b8-422b-9340-d58639c2941d",
+              "name": "No results available",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workup-checklists",
+                    "specialties",
+                    ":specialtyCode",
+                    "chief-complaints",
+                    ":chiefComplaintCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "specialtyCode",
+                      "description": "(Required) Specialty code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chiefComplaintCode",
+                      "description": "(Required) Chief complaint code"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4ad115ed-d410-46a5-9167-b9a403160976",
+              "name": "Invalid Credentials or invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workup-checklists",
+                    "specialties",
+                    ":specialtyCode",
+                    "chief-complaints",
+                    ":chiefComplaintCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "specialtyCode",
+                      "description": "(Required) Specialty code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chiefComplaintCode",
+                      "description": "(Required) Chief complaint code"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dea991c1-c195-4982-8838-e5f82cca2b7d",
+              "name": "Specialty or Chief complaint not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workup-checklists",
+                    "specialties",
+                    ":specialtyCode",
+                    "chief-complaints",
+                    ":chiefComplaintCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "specialtyCode",
+                      "description": "(Required) Specialty code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chiefComplaintCode",
+                      "description": "(Required) Chief complaint code"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e144d242-360d-4451-9ce6-073894bc00b3",
+              "name": "Internal Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workup-checklists",
+                    "specialties",
+                    ":specialtyCode",
+                    "chief-complaints",
+                    ":chiefComplaintCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "specialtyCode",
+                      "description": "(Required) Specialty code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chiefComplaintCode",
+                      "description": "(Required) Chief complaint code"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f88727f7-ead2-43a0-b198-3bf90b954bd8",
+    "name": "Arista MD Workup Checklists API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the business logic core that serves all Arista MD sites, tools, and integrations",
+      "type": "text/plain"
+    }
+  }
+}

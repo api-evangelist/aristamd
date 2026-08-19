@@ -1,0 +1,102 @@
+openapi: 3.2.0
+info:
+  title: Arista MD Intergy/Patients API
+  description: This is the business logic core that serves all Arista MD sites, tools, and integrations
+  version: 1.0.0
+tags:
+- name: Intergy/Patients
+paths:
+  /intergy/patients/{id}:
+    get:
+      tags:
+      - Intergy/Patients
+      summary: Retrieves Patient information from Intergy API
+      description: Retrieves Patient Record, if the patient was already included then we are goin to update
+        patient's information,if not then we are going to return a new patient record.
+      operationId: index
+      parameters:
+      - name: id
+        in: path
+        description: Patient's Id
+        required: true
+        schema:
+          type: integer
+      - name: practice_id
+        in: query
+        description: Id of the practice we want to search
+        required: false
+        schema:
+          type: integer
+          default: null
+      responses:
+        '200':
+          description: Patient Record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '400':
+          description: Invalid Credentials
+          content:
+            application/json:
+              schema: {}
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: {}
+components:
+  schemas:
+    Patient:
+      properties:
+        id:
+          type: integer
+        organization_id:
+          type: integer
+        coverage_id:
+          type: integer
+        system_of_record:
+          type: string
+        reference_id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        date_of_birth:
+          type: string
+        gender:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        version:
+          type: string
+        AB109:
+          type: boolean
+        chronic_conditions:
+          type: array
+          items:
+            type: string
+        estimated_release_date:
+          type: string
+        ccd_file:
+          properties:
+            id:
+              type: string
+          type: object
+        booking_history:
+          type: string
+        booking_date:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+      type: object
+      xml:
+        name: Patient

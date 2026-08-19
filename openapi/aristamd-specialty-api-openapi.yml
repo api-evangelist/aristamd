@@ -1,0 +1,61 @@
+openapi: 3.2.0
+info:
+  title: Arista MD Specialty API
+  description: This is the business logic core that serves all Arista MD sites, tools, and integrations
+  version: 1.0.0
+tags:
+- name: Specialty
+paths:
+  /specialties/{specialtyId}:
+    get:
+      tags:
+      - Specialty
+      summary: Retrieves a Specialty
+      description: Finds Specialty by ID
+      operationId: show
+      parameters:
+      - name: specialtyId
+        in: path
+        description: ID of specialty to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Specialty Record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Specialty'
+        '400':
+          description: Invalid Credentials
+        '404':
+          description: Specilaty not found
+        '403':
+          description: Unauthorized
+components:
+  schemas:
+    Specialty:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        display_name:
+          type: string
+        parent_specialty_id:
+          type: integer
+        title:
+          type: string
+        keywords:
+          type: string
+        pediatrics_only:
+          type: boolean
+        nameKeywords:
+          type: string
+        specialist_form_version:
+          type: integer
+      type: object
+      xml:
+        name: Specialty

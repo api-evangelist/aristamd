@@ -1,0 +1,153 @@
+openapi: 3.2.0
+info:
+  title: Arista MD Reviews API
+  description: This is the business logic core that serves all Arista MD sites, tools, and integrations
+  version: 1.0.0
+tags:
+- name: Reviews
+paths:
+  /reviews:
+    get:
+      tags:
+      - Reviews
+      summary: Returns a review from a Request
+      description: Returns the review identified by the id from a Request
+      operationId: get
+      parameters:
+      - name: association_type
+        in: query
+        description: Type of request we want to filter
+        required: false
+        schema:
+          type: string
+          default: econsult
+      - name: association_id
+        in: query
+        description: Id of the request we want to filter
+        required: false
+        schema:
+          type: string
+      - name: question_type
+        in: query
+        description: Question type we want to filter
+        required: false
+        schema:
+          type: string
+      responses:
+        '404':
+          description: Review not found
+        '200':
+          description: Review
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        '400':
+          description: Invalid Credentials
+        '403':
+          description: Unauthorized
+    post:
+      tags:
+      - Reviews
+      summary: Adds reviews to a Request
+      description: Adds a lists of questions and answeas for a request review.
+      operationId: post
+      responses:
+        '200':
+          description: Review Lists
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+        '400':
+          description: Invalid Credentials
+        '403':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Review'
+        description: Review Lists
+        required: true
+  /reviews/{id}:
+    get:
+      tags:
+      - Reviews
+      summary: Returns a review from a Request
+      description: Returns the review identified by the id from a Request
+      operationId: get
+      parameters:
+      - name: id
+        in: path
+        description: Review to update
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '404':
+          description: Review not found
+        '200':
+          description: Review
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        '400':
+          description: Invalid Credentials
+        '403':
+          description: Unauthorized
+    put:
+      tags:
+      - Reviews
+      summary: Update a review from a Request
+      description: Updates the review identified by the id from a Request
+      operationId: post
+      parameters:
+      - name: id
+        in: path
+        description: Review to update
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Review
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        '400':
+          description: Invalid Credentials
+        '403':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+        description: Review to update
+        required: true
+components:
+  schemas:
+    Review:
+      properties:
+        id:
+          type: integer
+        question_type:
+          type: string
+        answer:
+          type: string
+        updated_at:
+          type: string
+        created_at:
+          type: string
+      type: object
+      xml:
+        name: Review

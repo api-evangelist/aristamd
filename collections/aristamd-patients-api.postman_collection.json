@@ -1,0 +1,2228 @@
+{
+  "item": [
+    {
+      "id": "70462484-082a-4697-b7e6-70a5fb5db0ca",
+      "name": "Patients",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e4cbc65f-6dd0-437d-9329-b8d457571e61",
+          "name": "Creates a Patient from an HL7 message",
+          "request": {
+            "name": "Creates a Patient from an HL7 message",
+            "description": {
+              "content": "Save a patient object with the input specified.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "HL7",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bddf111c-fa31-4374-b268-b1fe35d7882c",
+              "name": "Created Patient",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "HL7",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df36f961-094d-4afc-ad8b-e4800cf89fcf",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "HL7",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ff8340d8-fb23-4eed-9860-b10007e2ce27",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "HL7",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c5158d27-2f4d-4688-aa65-ad9231cdcfd1",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "HL7",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "44035852-cc8c-41de-801b-03b8d5a6a127",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "HL7",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f05fe35-4708-434e-9e96-3f4ba264f81b",
+          "name": "Retrieves a list of patients",
+          "request": {
+            "name": "Retrieves a list of patients",
+            "description": {
+              "content": "Retrieves a list of patient based on its offset. Allows to order the records and perform a search",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "0",
+                  "description": "Offset of records"
+                },
+                {
+                  "disabled": false,
+                  "key": "length",
+                  "value": "20",
+                  "description": "How many items should bring"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderColumn",
+                  "value": "<string>",
+                  "description": "(Required) Column used to do the sort"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderDir",
+                  "value": "<string>",
+                  "description": "(Required) Direction of sort"
+                },
+                {
+                  "disabled": false,
+                  "key": "searchValue",
+                  "value": "<string>",
+                  "description": "Search term"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "663f7d05-ce5f-410e-886a-854a6e3cf54e",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "0"
+                    },
+                    {
+                      "key": "length",
+                      "value": "20"
+                    },
+                    {
+                      "key": "orderColumn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderDir",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchValue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"draw\": 7626,\n  \"recordsFiltered\": 3122,\n  \"recordsTotal\": 1786,\n  \"aaData\": [\n    {\n      \"DT_RowId\": 4019,\n      \"date_of_birth\": \"string\",\n      \"empty\": \"string\",\n      \"first_name\": \"string\",\n      \"gender\": \"string\",\n      \"id\": 1309,\n      \"last_name\": \"string\",\n      \"organization_name\": \"string\",\n      \"reference_id\": \"string\"\n    },\n    {\n      \"DT_RowId\": 6905,\n      \"date_of_birth\": \"string\",\n      \"empty\": \"string\",\n      \"first_name\": \"string\",\n      \"gender\": \"string\",\n      \"id\": 563,\n      \"last_name\": \"string\",\n      \"organization_name\": \"string\",\n      \"reference_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4087f2f-92e7-46c4-821c-e556cb5343e1",
+              "name": "Invalid Credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "0"
+                    },
+                    {
+                      "key": "length",
+                      "value": "20"
+                    },
+                    {
+                      "key": "orderColumn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderDir",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchValue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13ae801d-b5ea-48ef-ad63-8c57cf3a23c3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "0"
+                    },
+                    {
+                      "key": "length",
+                      "value": "20"
+                    },
+                    {
+                      "key": "orderColumn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderDir",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchValue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7670b48a-3e6f-4c4b-a655-32e7dd9de9a5",
+          "name": "Creates a Patient",
+          "request": {
+            "name": "Creates a Patient",
+            "description": {
+              "content": "Save a patient object with the input specified.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "df5b2d77-d116-4f1d-b95c-98b149cd7fbf",
+              "name": "Created Patient",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fa849c9-197c-4ed8-92f1-e3a5c4d05828",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2441a28e-77f6-4f67-8fa4-2374f34eaff8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f1f8faff-80e6-472f-883d-27726b5d05f6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e26482cf-c5c1-4d85-897f-5352a2b4c5ea",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5ea8327-41f0-4341-8c93-b339f921e019",
+          "name": "Retrieves a Patient",
+          "request": {
+            "name": "Retrieves a Patient",
+            "description": {
+              "content": "Find a Patient by ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients",
+                ":patientId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "patientId",
+                  "description": "(Required) ID of patient to return"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fb555eb9-c556-42af-8438-26fe7bba4b88",
+              "name": "Patient Record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":patientId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "patientId",
+                      "description": "(Required) ID of patient to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b700abb5-3ea5-433a-b1b2-b3bd8777bb66",
+              "name": "Invalid Credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":patientId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "patientId",
+                      "description": "(Required) ID of patient to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "633e087a-7a47-4c65-8609-54b0646395e1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":patientId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "patientId",
+                      "description": "(Required) ID of patient to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "db01e8f7-3a22-4740-8172-3242de8853e4",
+              "name": "Patient not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":patientId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "patientId",
+                      "description": "(Required) ID of patient to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9aba33c1-02db-4182-b369-dc78e648d043",
+          "name": "Updates a patient",
+          "request": {
+            "name": "Updates a patient",
+            "description": {
+              "content": "Updates a patient using its id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients",
+                ":patientId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "patientId",
+                  "description": "(Required) ID of patient"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e00bd218-b110-40e5-858c-131431925302",
+              "name": "Updated Patient",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":patientId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "patientId",
+                      "description": "(Required) ID of patient"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b1bd9d6-1ce0-4295-94a6-4d57cbab3c00",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":patientId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "patientId",
+                      "description": "(Required) ID of patient"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f89233e2-c054-4162-a5f5-abe166a704f8",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":patientId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "patientId",
+                      "description": "(Required) ID of patient"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22a97053-558c-436e-a866-4ed979eb19fe",
+          "name": "Patches a patient",
+          "request": {
+            "name": "Patches a patient",
+            "description": {
+              "content": "Patches a patient using its id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients",
+                ":patientId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "operation",
+                  "value": "<string>",
+                  "description": "Patch operation"
+                },
+                {
+                  "disabled": false,
+                  "key": "assets",
+                  "value": "<string>",
+                  "description": "assets array"
+                },
+                {
+                  "disabled": false,
+                  "key": "assets",
+                  "value": "<string>",
+                  "description": "assets array"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "patientId",
+                  "description": "(Required) ID of patient"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d42845f1-ba43-4bc6-acb2-02e24b14c082",
+              "name": "Updated Patient",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":patientId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "operation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assets",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "patientId",
+                      "description": "(Required) ID of patient"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3f2cc0c-8e7a-49c1-8352-d354ea43006d",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":patientId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "operation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assets",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "patientId",
+                      "description": "(Required) ID of patient"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "46c49bab-9206-4a76-b5a5-ec0a15b01b80",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":patientId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "operation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assets",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "patientId",
+                      "description": "(Required) ID of patient"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"organization_id\": \"<integer>\",\n  \"coverage_id\": \"<integer>\",\n  \"system_of_record\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"date_of_birth\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"version\": \"<string>\",\n  \"AB109\": \"<boolean>\",\n  \"chronic_conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"estimated_release_date\": \"<string>\",\n  \"ccd_file\": {\n    \"id\": \"<string>\"\n  },\n  \"booking_history\": \"<string>\",\n  \"booking_date\": {\n    \"date\": \"<string>\",\n    \"timezone_type\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b664730-0f96-4b55-b4cb-c27c517d392e",
+          "name": "Return a user object specified. If the id is set to self the function will return an instance of the currently logged in user",
+          "request": {
+            "name": "Return a user object specified. If the id is set to self the function will return an instance of the currently logged in user",
+            "description": {
+              "content": "Finds patients by last name or elements that match with a provided text.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "data[last_name]",
+                  "value": "<boolean>",
+                  "description": "Filter by last name"
+                },
+                {
+                  "disabled": false,
+                  "key": "data[q]",
+                  "value": "<string>",
+                  "description": "Filter by elements matching the provided text."
+                },
+                {
+                  "disabled": false,
+                  "key": "rest",
+                  "value": "<boolean>",
+                  "description": "ID of user we want to get info."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "98014783-6106-44f3-b2bc-05ae7aea1a18",
+              "name": "Patient Record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "data[last_name]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "data[q]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rest",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"organization_id\": \"<integer>\",\n    \"coverage_id\": \"<integer>\",\n    \"system_of_record\": \"<string>\",\n    \"reference_id\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"date_of_birth\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"created_at\": \"<string>\",\n    \"updated_at\": \"<string>\",\n    \"version\": \"<string>\",\n    \"AB109\": \"<boolean>\",\n    \"chronic_conditions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"estimated_release_date\": \"<string>\",\n    \"ccd_file\": {\n      \"id\": \"<string>\"\n    },\n    \"booking_history\": \"<string>\",\n    \"booking_date\": {\n      \"date\": \"<string>\",\n      \"timezone_type\": \"<integer>\",\n      \"timezone\": \"<string>\"\n    }\n  },\n  {\n    \"id\": \"<integer>\",\n    \"organization_id\": \"<integer>\",\n    \"coverage_id\": \"<integer>\",\n    \"system_of_record\": \"<string>\",\n    \"reference_id\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"date_of_birth\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"created_at\": \"<string>\",\n    \"updated_at\": \"<string>\",\n    \"version\": \"<string>\",\n    \"AB109\": \"<boolean>\",\n    \"chronic_conditions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"estimated_release_date\": \"<string>\",\n    \"ccd_file\": {\n      \"id\": \"<string>\"\n    },\n    \"booking_history\": \"<string>\",\n    \"booking_date\": {\n      \"date\": \"<string>\",\n      \"timezone_type\": \"<integer>\",\n      \"timezone\": \"<string>\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2864ac8-a399-4ea2-a498-c2bf569058f8",
+              "name": "Invalid Credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "data[last_name]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "data[q]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rest",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5384e86d-6887-49c8-8764-b8ed1e96f1f4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "data[last_name]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "data[q]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rest",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2ff651e5-efeb-4fca-8ceb-ddaa4e1cb178",
+              "name": "Patient not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "data[last_name]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "data[q]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rest",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6afae7ed-d7ad-4caf-a4f9-dd07a1749d46",
+          "name": "TopReferral",
+          "request": {
+            "name": "TopReferral",
+            "description": {
+              "content": "it returns a list with the length received of the top patients",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients",
+                "top-patients",
+                ":length"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "length",
+                  "description": "(Required) length of the top patients"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e749c9a4-7bff-4b21-9ed5-2409dd4c2587",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    "top-patients",
+                    ":length"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "length",
+                      "description": "(Required) length of the top patients"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"draw\": 2092,\n  \"recordsTotal\": 5896,\n  \"recordsFiltered\": 5829,\n  \"aaData\": [\n    {\n      \"patient_id\": 7126,\n      \"count\": 8682,\n      \"reference_id\": \"string\",\n      \"onsite_approver_id\": 7169,\n      \"requesting_physician_comment\": \"string\",\n      \"diagnosis\": \"string\",\n      \"service_type\": \"string\",\n      \"priority\": \"string\",\n      \"transfer_method\": \"string\",\n      \"dispositioner_id\": 9266,\n      \"e_signature\": \"string\",\n      \"unscheduled_reason\": \"string\",\n      \"viewed_by\": \"string\"\n    },\n    {\n      \"patient_id\": 4987,\n      \"count\": 6861,\n      \"reference_id\": \"string\",\n      \"onsite_approver_id\": 4254,\n      \"requesting_physician_comment\": \"string\",\n      \"diagnosis\": \"string\",\n      \"service_type\": \"string\",\n      \"priority\": \"string\",\n      \"transfer_method\": \"string\",\n      \"dispositioner_id\": 4498,\n      \"e_signature\": \"string\",\n      \"unscheduled_reason\": \"string\",\n      \"viewed_by\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f831c54-29b5-41af-b92a-57b871efb47b",
+              "name": "Invalid Credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    "top-patients",
+                    ":length"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "length",
+                      "description": "(Required) length of the top patients"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e1139a3c-0fe3-492a-a4eb-73d9f2bcdcc0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    "top-patients",
+                    ":length"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "length",
+                      "description": "(Required) length of the top patients"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a7109c45-22ac-4fd5-82aa-1dd5f28b7ef3",
+              "name": "Patient not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    "top-patients",
+                    ":length"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "length",
+                      "description": "(Required) length of the top patients"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f5b1352-76db-4a93-a48f-10f9a83ff78f",
+          "name": "Patient's History",
+          "request": {
+            "name": "Patient's History",
+            "description": {
+              "content": "Get the patient's history of referrals and econsults",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients",
+                ":patientId",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "patientId",
+                  "description": "(Required) ID of patient to return"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2500597f-1a0f-4968-ae0d-7384eff471de",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":patientId",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "patientId",
+                      "description": "(Required) ID of patient to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"draw\": 5802,\n  \"recordsTotal\": 817,\n  \"recordsFiltered\": 5688,\n  \"aaData\": [\n    {\n      \"DT_RowId\": 2403,\n      \"model\": \"string\",\n      \"empty\": \"string\",\n      \"request_date\": 3779,\n      \"chief_complaint\": \"string\",\n      \"service_type\": \"string\",\n      \"requesting_physician\": \"string\",\n      \"specialty\": \"string\"\n    },\n    {\n      \"DT_RowId\": 7181,\n      \"model\": \"string\",\n      \"empty\": \"string\",\n      \"request_date\": 6383,\n      \"chief_complaint\": \"string\",\n      \"service_type\": \"string\",\n      \"requesting_physician\": \"string\",\n      \"specialty\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1cf5ae7-8d06-41f9-9397-6e7b498ce94a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":patientId",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "patientId",
+                      "description": "(Required) ID of patient to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4325abff-e450-4ca0-8a26-d10857850650",
+              "name": "Patient not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":patientId",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "patientId",
+                      "description": "(Required) ID of patient to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a667f64-a5fc-44f0-b1ff-0f8db441dcef",
+          "name": "Patient's External Identifiers",
+          "request": {
+            "name": "Patient's External Identifiers",
+            "description": {
+              "content": "Get the patient's external identifiers",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients",
+                ":patientId",
+                "identifiers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "identifier_name",
+                  "value": "<long>",
+                  "description": "Identifier name"
+                },
+                {
+                  "disabled": false,
+                  "key": "auth_provider_id",
+                  "value": "<long>",
+                  "description": "Auth Provider ID"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "patientId",
+                  "description": "(Required) ID of patient to return"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7fe7c832-3b62-401a-9ebe-f84ffceddc66",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":patientId",
+                    "identifiers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identifier_name",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "auth_provider_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "patientId",
+                      "description": "(Required) ID of patient to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 6812,\n    \"identifiable_id\": 9448,\n    \"identifier\": \"string\",\n    \"created_at\": {\n      \"date\": \"string\",\n      \"timezone_type\": 6786,\n      \"timezone\": \"string\"\n    },\n    \"updated_at\": {\n      \"date\": \"string\",\n      \"timezone_type\": 6495,\n      \"timezone\": \"string\"\n    },\n    \"identifiable_type\": \"string\",\n    \"identifier_name\": \"string\"\n  },\n  {\n    \"id\": 9809,\n    \"identifiable_id\": 3781,\n    \"identifier\": \"string\",\n    \"created_at\": {\n      \"date\": \"string\",\n      \"timezone_type\": 9031,\n      \"timezone\": \"string\"\n    },\n    \"updated_at\": {\n      \"date\": \"string\",\n      \"timezone_type\": 9073,\n      \"timezone\": \"string\"\n    },\n    \"identifiable_type\": \"string\",\n    \"identifier_name\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71aad428-739c-470e-af60-25e52c6f548a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":patientId",
+                    "identifiers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identifier_name",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "auth_provider_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "patientId",
+                      "description": "(Required) ID of patient to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b76672b9-00a7-4159-9f08-38bf63eb9345",
+              "name": "Patient not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":patientId",
+                    "identifiers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identifier_name",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "auth_provider_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "patientId",
+                      "description": "(Required) ID of patient to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4f70aec5-e509-4004-b1b6-72d02e3b07a7",
+    "name": "Arista MD Patients API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the business logic core that serves all Arista MD sites, tools, and integrations",
+      "type": "text/plain"
+    }
+  }
+}

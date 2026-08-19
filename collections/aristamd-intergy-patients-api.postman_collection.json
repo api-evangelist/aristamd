@@ -1,0 +1,234 @@
+{
+  "item": [
+    {
+      "id": "5d4670f2-9fd8-4f96-ad32-0e0a7d41a4e0",
+      "name": "Intergy/Patients",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "19e4d824-6500-4838-98f0-28e0b66aa9fb",
+          "name": "Retrieves Patient information from Intergy API",
+          "request": {
+            "name": "Retrieves Patient information from Intergy API",
+            "description": {
+              "content": "Retrieves Patient Record, if the patient was already included then we are goin to update patient's information,if not then we are going to return a new patient record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "intergy",
+                "patients",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "practice_id",
+                  "value": "",
+                  "description": "Id of the practice we want to search"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Patient's Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "438be14a-213e-4814-a292-2ac2c89236b0",
+              "name": "Patient Record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "intergy",
+                    "patients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "practice_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Patient's Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1916,\n  \"organization_id\": 3705,\n  \"coverage_id\": 4149,\n  \"system_of_record\": \"string\",\n  \"reference_id\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"date_of_birth\": \"string\",\n  \"gender\": \"string\",\n  \"created_at\": \"string\",\n  \"updated_at\": \"string\",\n  \"version\": \"string\",\n  \"AB109\": true,\n  \"chronic_conditions\": [\n    \"string\",\n    \"string\"\n  ],\n  \"estimated_release_date\": \"string\",\n  \"ccd_file\": {\n    \"id\": \"string\"\n  },\n  \"booking_history\": \"string\",\n  \"booking_date\": {\n    \"date\": \"string\",\n    \"timezone_type\": 7194,\n    \"timezone\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afb0a97f-36d9-4c64-bf13-ad3ca6cdab35",
+              "name": "Invalid Credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "intergy",
+                    "patients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "practice_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Patient's Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b40ac34e-d036-405e-b1c4-4db6db925724",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "intergy",
+                    "patients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "practice_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Patient's Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7d299e1e-4c7e-4900-9d63-b3849a8ec1f1",
+    "name": "Arista MD Intergy/Patients API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the business logic core that serves all Arista MD sites, tools, and integrations",
+      "type": "text/plain"
+    }
+  }
+}

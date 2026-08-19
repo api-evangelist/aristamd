@@ -1,0 +1,199 @@
+openapi: 3.2.0
+info:
+  title: Arista MD Workup Checklists API
+  description: This is the business logic core that serves all Arista MD sites, tools, and integrations
+  version: 1.0.0
+tags:
+- name: Workup Checklists
+paths:
+  /workup-checklists/specialties:
+    get:
+      tags:
+      - Workup Checklists
+      summary: Workup checklists specialties
+      description: Retrieves available specialties for the existent workup checklists
+      operationId: specialties
+      responses:
+        '200':
+          description: Available specialties of current checklists
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Specialty'
+        '400':
+          description: Invalid Credentials
+        '500':
+          description: Internal Server error
+  /workup-checklists/specialties/{specialtyCode}/chief-complaints:
+    get:
+      tags:
+      - Workup Checklists
+      summary: Specialty chief complaints
+      description: Retrieves available specialties for the existent workup checklists
+      operationId: chiefComplaints
+      parameters:
+      - name: specialtyCode
+        in: path
+        description: Specialty code to find chief complaints
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Available chief complaints of selected specialty in the current checklists
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChiefComplaint'
+        '400':
+          description: Invalid Credentials
+        '404':
+          description: Not found
+        '500':
+          description: Internal Server error
+  /workup-checklists/specialties/{specialtyCode}/chief-complaints/{chiefComplaintCode}:
+    get:
+      tags:
+      - Workup Checklists
+      summary: Specialty / Chief Complaint Search
+      description: Search checklist by specialty and chief complaint
+      operationId: searchBySpecialtyAndChiefComplaint
+      parameters:
+      - name: specialtyCode
+        in: path
+        description: Specialty code
+        required: true
+        schema:
+          type: string
+      - name: chiefComplaintCode
+        in: path
+        description: Chief complaint code
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Checklist retrieved from specialty and chief complaint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThirdPartyWorkupChecklist'
+        '400':
+          description: Invalid Credentials or invalid request
+        '404':
+          description: Specialty or Chief complaint not found
+        '204':
+          description: No results available
+        '500':
+          description: Internal Server error
+components:
+  schemas:
+    ThirdPartyWorkupChecklist:
+      properties:
+        id:
+          type: integer
+        specialty:
+          type: string
+        chief_complaint:
+          type: string
+        created_by:
+          type: string
+        assessments:
+          type: array
+          items:
+            properties:
+              id:
+                type: string
+              question:
+                type: string
+              question_type:
+                type: string
+              created_at:
+                type: string
+              updated_at:
+                type: string
+              choices:
+                type: array
+                items:
+                  type: string
+              prompt:
+                type: string
+              alert:
+                type: string
+              filter:
+                type: string
+        diagnostics:
+          type: array
+          items:
+            properties:
+              id:
+                type: string
+              diagnostic_id:
+                type: integer
+              name:
+                type: string
+              category:
+                type: string
+              diagnostic_type:
+                type: string
+              conditions:
+                type: string
+              required:
+                type: boolean
+              alert:
+                type: string
+              conditional:
+                type: boolean
+              requires_aoe:
+                type: boolean
+              created_at:
+                type: string
+              updated_at:
+                type: string
+        special_note:
+          type: string
+      type: object
+      xml:
+        name: ThirdPartyWorkupChecklist
+    ChiefComplaint:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        display_name:
+          type: string
+        specialties:
+          type: array
+          items:
+            $ref: '#/components/schemas/Specialty'
+      type: object
+      xml:
+        name: ChiefComplaint
+    Specialty:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        display_name:
+          type: string
+        parent_specialty_id:
+          type: integer
+        title:
+          type: string
+        keywords:
+          type: string
+        pediatrics_only:
+          type: boolean
+        nameKeywords:
+          type: string
+        specialist_form_version:
+          type: integer
+      type: object
+      xml:
+        name: Specialty
