@@ -15,7 +15,7 @@ image: https://www.aristamd.com/wp-content/uploads/AristaMD-SM.jpg
 url: https://raw.githubusercontent.com/api-evangelist/aristamd/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-06'
 modified: '2026-08-06'
 tags:
