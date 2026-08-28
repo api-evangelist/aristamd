@@ -11,6 +11,18 @@ description: 'AristaMD is a San Diego based specialty care company whose eConsul
   api.aristamd.com/api-docs covering eConsults, patients, panelists, specialties,
   reviews and workup checklists, and operates an OAuth 2.0 authorization server plus
   a SAML 2.0 service-provider endpoint for federated single sign-on.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.aristamd.com/wp-content/uploads/AristaMD-SM.jpg
 url: https://raw.githubusercontent.com/api-evangelist/aristamd/refs/heads/main/apis.yml
 x-type: company
