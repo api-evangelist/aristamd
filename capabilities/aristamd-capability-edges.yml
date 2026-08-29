@@ -18,10 +18,10 @@ edges:
   capability_id: BC-2820.10
   capability_id_l1: BC-2820
   capability_name: Referral Management
-  confidence: 0.7
+  confidence: 0.8
   evidence: '"Creates an EConsult", "Assign econsult to current user", "Find EConsult ids by status",
-    "Log panelist availability"; vendor: "documented specialist recommendations that reduce unnecessary
-    face-to-face referrals"'
-  reason: The eConsult lifecycle — creation, specialist assignment, status tracking, closure — is end-to-end
-    management of a request routed to a specialist, matching Referral Management. Some chance it is better
-    read as outpatient/telehealth care delivery, hence 0.7.
+    "Log panelist availability"; vendor: "asynchronous, documented specialist recommendations that reduce
+    unnecessary face-to-face referrals"'
+  reason: The eConsult lifecycle — creation, assignment to a specialist panelist, status tracking — is
+    electronic referral/consult coordination between primary care and specialists, matching Referral Management
+    within Care Coordination.
