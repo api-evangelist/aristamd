@@ -268,6 +268,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/aristamd-capability-edges.yml
+  name: AristaMD Business Capability Map
 - type: MCPServer
   url: mcp/aristamd-mcp.yml
 - type: Overlay
