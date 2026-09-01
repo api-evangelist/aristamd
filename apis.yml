@@ -194,6 +194,8 @@ apis:
   humanURL: https://www.aristamd.com/specialty-care/care-delivery/econsults/
   baseURL: https://api.aristamd.com
   tags:
+  - specialties
+  tags_raw:
   - Specialties
   properties:
   - type: OpenAPI
