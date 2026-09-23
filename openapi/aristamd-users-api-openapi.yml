@@ -11,8 +11,7 @@ paths:
       tags:
       - Users
       summary: Retrieves a list of users
-      description: Retrieves a list of users based on its offset. Allows to order the records and perform
-        a search
+      description: Retrieves a list of users based on its offset. Allows to order the records and perform a search
       operationId: index
       parameters:
       - name: start
@@ -117,8 +116,7 @@ paths:
     get:
       tags:
       - Users
-      summary: Return a user object specified. If the id is set to self the function will return an instance
-        of the currently logged in user
+      summary: Return a user object specified.
       description: Finds EConsult by ID
       operationId: show
       parameters:
@@ -146,10 +144,8 @@ paths:
     post:
       tags:
       - Users
-      summary: Retrieves a user object specified. If the id is set to self the function will return an
-        instance of the currently logged in user
-      description: Retrieves a list of users based on its offset. Allows to order the records and perform
-        a search
+      summary: Retrieves a user object specified.
+      description: Retrieves a list of users based on its offset. Allows to order the records and perform a search
       operationId: index
       parameters:
       - name: username
@@ -253,7 +249,6 @@ paths:
       tags:
       - Users
       summary: Updates a specific field on a user
-      description: Updates a specific field on a user
       operationId: update
       parameters:
       - name: userId
@@ -277,6 +272,116 @@ paths:
           description: Unexpected failure
 components:
   schemas:
+    Location:
+      properties:
+        id:
+          type: integer
+        display_name:
+          type: string
+        street_address_1:
+          type: string
+        street_address_2:
+          type: string
+        city:
+          type: string
+        county:
+          type: string
+        postal_code:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        time_zone:
+          type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        phone_number:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        type:
+          type: string
+        fax:
+          type: string
+      type: object
+      xml:
+        name: Location
+    User:
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        email:
+          type: string
+        authentication_provider:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        status:
+          type: string
+        last_login:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        suffix:
+          type: string
+        base_dn:
+          type: string
+        primary_site_id:
+          type: integer
+        full_name:
+          type: string
+        organization:
+          type: object
+          $ref: '#/components/schemas/Organization'
+        phone:
+          type: string
+        mobile:
+          type: string
+        last_active_organization_id:
+          type: integer
+        notification_email:
+          type: string
+        notification_phone:
+          type: string
+        organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+      type: object
+      xml:
+        name: User
+    Permission:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        display_name:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        permission_types_id:
+          type: integer
+      type: object
+      xml:
+        name: Permission
     Role:
       properties:
         id:
@@ -367,113 +472,3 @@ components:
       type: object
       xml:
         name: Organization
-    User:
-      properties:
-        id:
-          type: integer
-        username:
-          type: string
-        email:
-          type: string
-        authentication_provider:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        status:
-          type: string
-        last_login:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        suffix:
-          type: string
-        base_dn:
-          type: string
-        primary_site_id:
-          type: integer
-        full_name:
-          type: string
-        organization:
-          type: object
-          $ref: '#/components/schemas/Organization'
-        phone:
-          type: string
-        mobile:
-          type: string
-        last_active_organization_id:
-          type: integer
-        notification_email:
-          type: string
-        notification_phone:
-          type: string
-        organizations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Organization'
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/Role'
-      type: object
-      xml:
-        name: User
-    Permission:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        display_name:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        permission_types_id:
-          type: integer
-      type: object
-      xml:
-        name: Permission
-    Location:
-      properties:
-        id:
-          type: integer
-        display_name:
-          type: string
-        street_address_1:
-          type: string
-        street_address_2:
-          type: string
-        city:
-          type: string
-        county:
-          type: string
-        postal_code:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        time_zone:
-          type: string
-        latitude:
-          type: string
-        longitude:
-          type: string
-        phone_number:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        type:
-          type: string
-        fax:
-          type: string
-      type: object
-      xml:
-        name: Location

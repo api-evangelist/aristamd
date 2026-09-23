@@ -11,8 +11,7 @@ paths:
       tags:
       - Intergy/Patients
       summary: Retrieves Patient information from Intergy API
-      description: Retrieves Patient Record, if the patient was already included then we are goin to update
-        patient's information,if not then we are going to return a new patient record.
+      description: Retrieves Patient Record, if the patient was already included then we are goin to update patient's information,if not then we are going to return a new patient record.
       operationId: index
       parameters:
       - name: id

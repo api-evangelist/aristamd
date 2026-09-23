@@ -40,8 +40,7 @@ paths:
       tags:
       - Patients
       summary: Retrieves a list of patients
-      description: Retrieves a list of patient based on its offset. Allows to order the records and perform
-        a search
+      description: Retrieves a list of patient based on its offset. Allows to order the records and perform a search
       operationId: index
       parameters:
       - name: start
@@ -273,8 +272,7 @@ paths:
     get:
       tags:
       - Patients
-      summary: Return a user object specified. If the id is set to self the function will return an instance
-        of the currently logged in user
+      summary: Return a user object specified.
       description: Finds patients by last name or elements that match with a provided text.
       operationId: show
       parameters:

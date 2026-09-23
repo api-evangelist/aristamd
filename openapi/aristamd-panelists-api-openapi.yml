@@ -11,7 +11,6 @@ paths:
       tags:
       - Panelists
       summary: Find panelists based on provided parameters
-      description: Find panelists based on provided parameters
       operationId: index
       parameters:
       - name: specialty_code
@@ -48,14 +47,23 @@ paths:
       tags:
       - Panelists
       summary: Find the next available panelist for a given specialty
-      description: "Find the next available panelist for a given specialty\n      If patient id is provided\
-        \ and this patient has seen a specialist in the past\n      1. Select last seen specialist if\
-        \ available on the next 24 hrs\n      2. If last seen specialist is not available on the next\
-        \ 24 hrs\n      but he is available in the next 30 days, send both the last seen and next\n  \
-        \    available panelist to frontend so requester can choose either\n      3. If last seen specialist\
-        \ is not available at all, send both the last seen\n      and next available panelist to frontend\
-        \ so requester can choose between\n      consulting the next available panelist or not consulting\
-        \ at all"
+      description: 'Find the next available panelist for a given specialty
+
+        If patient id is provided and this patient has seen a specialist in the past
+
+        1. Select last seen specialist if available on the next 24 hrs
+
+        2. If last seen specialist is not available on the next 24 hrs
+
+        but he is available in the next 30 days, send both the last seen and next
+
+        available panelist to frontend so requester can choose either
+
+        3. If last seen specialist is not available at all, send both the last seen
+
+        and next available panelist to frontend so requester can choose between
+
+        consulting the next available panelist or not consulting at all'
       operationId: index
       parameters:
       - name: code
@@ -153,33 +161,6 @@ paths:
               schema: {}
 components:
   schemas:
-    Role:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        display_name:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        notifications:
-          type: array
-          items:
-            type: string
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        perms:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-      type: object
-      xml:
-        name: Role
     PanelistAvailability:
       properties:
         id:
@@ -193,69 +174,45 @@ components:
       type: object
       xml:
         name: PanelistAvailability
-    Organization:
+    Location:
       properties:
         id:
           type: integer
-        code:
-          type: string
         display_name:
           type: string
-        parent_organization_id:
-          type: integer
+        street_address_1:
+          type: string
+        street_address_2:
+          type: string
+        city:
+          type: string
+        county:
+          type: string
+        postal_code:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        time_zone:
+          type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        phone_number:
+          type: string
         created_at:
           type: string
         updated_at:
           type: string
-        deleted_at:
+        type:
           type: string
-        domain:
+        fax:
           type: string
-        formal_name:
-          type: string
-        namespace:
-          type: string
-        workup_checklist_set_id:
-          type: integer
-        site_name:
-          type: string
-        settings:
-          type: array
-          items:
-            type: object
-        service_types:
-          type: array
-          items:
-            type: string
-        urgency_ratings:
-          type: array
-          items:
-            type: string
-        expected_release_date_options:
-          properties:
-            date:
-              type: string
-            timezone_type:
-              type: integer
-            timezone:
-              type: string
-          type: object
-        pivot:
-          properties:
-            user_id:
-              type: integer
-            organization_id:
-              type: integer
-          type: object
-        parent_organization:
-          type: object
-        locations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Location'
       type: object
       xml:
-        name: Organization
+        name: Location
     User:
       properties:
         id:
@@ -327,68 +284,33 @@ components:
       type: object
       xml:
         name: Permission
-    Specialty:
+    Role:
       properties:
         id:
           type: integer
-        code:
+        name:
           type: string
         display_name:
-          type: string
-        parent_specialty_id:
-          type: integer
-        title:
-          type: string
-        keywords:
-          type: string
-        pediatrics_only:
-          type: boolean
-        nameKeywords:
-          type: string
-        specialist_form_version:
-          type: integer
-      type: object
-      xml:
-        name: Specialty
-    Location:
-      properties:
-        id:
-          type: integer
-        display_name:
-          type: string
-        street_address_1:
-          type: string
-        street_address_2:
-          type: string
-        city:
-          type: string
-        county:
-          type: string
-        postal_code:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        time_zone:
-          type: string
-        latitude:
-          type: string
-        longitude:
-          type: string
-        phone_number:
           type: string
         created_at:
           type: string
         updated_at:
           type: string
-        type:
-          type: string
-        fax:
-          type: string
+        notifications:
+          type: array
+          items:
+            type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        perms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
       type: object
       xml:
-        name: Location
+        name: Role
     PanelistDetail:
       properties:
         id:
@@ -445,3 +367,89 @@ components:
       type: object
       xml:
         name: PanelistDetail
+    Specialty:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        display_name:
+          type: string
+        parent_specialty_id:
+          type: integer
+        title:
+          type: string
+        keywords:
+          type: string
+        pediatrics_only:
+          type: boolean
+        nameKeywords:
+          type: string
+        specialist_form_version:
+          type: integer
+      type: object
+      xml:
+        name: Specialty
+    Organization:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        display_name:
+          type: string
+        parent_organization_id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        deleted_at:
+          type: string
+        domain:
+          type: string
+        formal_name:
+          type: string
+        namespace:
+          type: string
+        workup_checklist_set_id:
+          type: integer
+        site_name:
+          type: string
+        settings:
+          type: array
+          items:
+            type: object
+        service_types:
+          type: array
+          items:
+            type: string
+        urgency_ratings:
+          type: array
+          items:
+            type: string
+        expected_release_date_options:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        pivot:
+          properties:
+            user_id:
+              type: integer
+            organization_id:
+              type: integer
+          type: object
+        parent_organization:
+          type: object
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+      type: object
+      xml:
+        name: Organization

@@ -76,14 +76,12 @@ paths:
     get:
       tags:
       - Specialties
-      summary: Retrieves a list of specialties with available panelists.
-      description: Retrieves a list of specialties with available panelists
+      summary: Retrieves a list of specialties with available panelists
       operationId: index
       parameters:
       - name: filter
         in: path
-        description: 'Filter that we should apply to the specialties list. You can include into the path
-          the filter options: pediatrics or non-pediatrics.'
+        description: 'Filter that we should apply to the specialties list. You can include into the path the filter options: pediatrics or non-pediatrics.'
         required: true
         schema:
           type: string

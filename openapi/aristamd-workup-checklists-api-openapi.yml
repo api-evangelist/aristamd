@@ -92,6 +92,44 @@ paths:
           description: Internal Server error
 components:
   schemas:
+    ChiefComplaint:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        display_name:
+          type: string
+        specialties:
+          type: array
+          items:
+            $ref: '#/components/schemas/Specialty'
+      type: object
+      xml:
+        name: ChiefComplaint
+    Specialty:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        display_name:
+          type: string
+        parent_specialty_id:
+          type: integer
+        title:
+          type: string
+        keywords:
+          type: string
+        pediatrics_only:
+          type: boolean
+        nameKeywords:
+          type: string
+        specialist_form_version:
+          type: integer
+      type: object
+      xml:
+        name: Specialty
     ThirdPartyWorkupChecklist:
       properties:
         id:
@@ -159,41 +197,3 @@ components:
       type: object
       xml:
         name: ThirdPartyWorkupChecklist
-    ChiefComplaint:
-      properties:
-        id:
-          type: integer
-        code:
-          type: string
-        display_name:
-          type: string
-        specialties:
-          type: array
-          items:
-            $ref: '#/components/schemas/Specialty'
-      type: object
-      xml:
-        name: ChiefComplaint
-    Specialty:
-      properties:
-        id:
-          type: integer
-        code:
-          type: string
-        display_name:
-          type: string
-        parent_specialty_id:
-          type: integer
-        title:
-          type: string
-        keywords:
-          type: string
-        pediatrics_only:
-          type: boolean
-        nameKeywords:
-          type: string
-        specialist_form_version:
-          type: integer
-      type: object
-      xml:
-        name: Specialty

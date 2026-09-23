@@ -1,18 +1,7 @@
 {
   "provider": "aristamd",
   "sources": [
-    "aristamd-comments-api-openapi.yml",
-    "aristamd-diagnostic-api-openapi.yml",
-    "aristamd-econsults-api-openapi.yml",
-    "aristamd-intergy-patients-api-openapi.yml",
-    "aristamd-panelists-api-openapi.yml",
-    "aristamd-patients-api-openapi.yml",
-    "aristamd-requests-api-openapi.yml",
-    "aristamd-reviews-api-openapi.yml",
-    "aristamd-specialties-api-openapi.yml",
-    "aristamd-specialty-api-openapi.yml",
-    "aristamd-users-api-openapi.yml",
-    "aristamd-workup-checklists-api-openapi.yml"
+    "_original/aristamd-openapi-original.json"
   ],
   "outputs": [
     "aristamd-comments-api-openapi.yml",
@@ -32,19 +21,34 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "aristamd-comments-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "aristamd-diagnostic-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "aristamd-econsults-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "aristamd-intergy-patients-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "aristamd-panelists-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "aristamd-patients-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "aristamd-requests-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "aristamd-reviews-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "aristamd-specialties-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "aristamd-specialty-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "aristamd-users-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "aristamd-workup-checklists-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "aristamd-openapi-original.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "aristamd-openapi-original.json: declared missing tag: Comments",
+    "aristamd-openapi-original.json: declared missing tag: Diagnostic",
+    "aristamd-openapi-original.json: declared missing tag: EConsults",
+    "aristamd-openapi-original.json: declared missing tag: Intergy/Patients",
+    "aristamd-openapi-original.json: declared missing tag: Panelists",
+    "aristamd-openapi-original.json: declared missing tag: Patients",
+    "aristamd-openapi-original.json: declared missing tag: Requests",
+    "aristamd-openapi-original.json: declared missing tag: Reviews",
+    "aristamd-openapi-original.json: declared missing tag: Specialties",
+    "aristamd-openapi-original.json: declared missing tag: Specialty",
+    "aristamd-openapi-original.json: declared missing tag: Users",
+    "aristamd-openapi-original.json: declared missing tag: Workup Checklists",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "aristamd-comments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aristamd-diagnostic-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aristamd-econsults-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aristamd-intergy-patients-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aristamd-panelists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aristamd-patients-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aristamd-requests-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aristamd-reviews-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aristamd-specialties-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aristamd-specialty-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aristamd-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aristamd-workup-checklists-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
