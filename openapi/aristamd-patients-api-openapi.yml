@@ -139,7 +139,7 @@ paths:
       - Patients
       summary: Creates a Patient
       description: Save a patient object with the input specified.
-      operationId: store
+      operationId: postPatients
       responses:
         '201':
           description: Created Patient
@@ -162,6 +162,8 @@ paths:
               $ref: '#/components/schemas/Patient'
         description: Patient body
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: store
   /patients/{patientId}:
     get:
       tags:
@@ -274,7 +276,7 @@ paths:
       - Patients
       summary: Return a user object specified.
       description: Finds patients by last name or elements that match with a provided text.
-      operationId: show
+      operationId: getPatientsSearch
       parameters:
       - name: data[last_name]
         in: query
@@ -309,6 +311,8 @@ paths:
           description: Patient not found
         '403':
           description: Unauthorized
+      x-operation-id-source: normalized
+      x-operation-id-original: show
   /patients/top-patients/{length}:
     get:
       tags:

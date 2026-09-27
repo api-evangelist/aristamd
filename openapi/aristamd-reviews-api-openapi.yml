@@ -80,7 +80,7 @@ paths:
       - Reviews
       summary: Returns a review from a Request
       description: Returns the review identified by the id from a Request
-      operationId: get
+      operationId: getReviewsById
       parameters:
       - name: id
         in: path
@@ -102,12 +102,14 @@ paths:
           description: Invalid Credentials
         '403':
           description: Unauthorized
+      x-operation-id-source: normalized
+      x-operation-id-original: get
     put:
       tags:
       - Reviews
       summary: Update a review from a Request
       description: Updates the review identified by the id from a Request
-      operationId: post
+      operationId: putReviewsById
       parameters:
       - name: id
         in: path
@@ -134,6 +136,8 @@ paths:
               $ref: '#/components/schemas/Review'
         description: Review to update
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: post
 components:
   schemas:
     Review:
