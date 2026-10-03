@@ -274,6 +274,45 @@ paths:
           description: Unexpected failure
 components:
   schemas:
+    Location:
+      properties:
+        id:
+          type: integer
+        display_name:
+          type: string
+        street_address_1:
+          type: string
+        street_address_2:
+          type: string
+        city:
+          type: string
+        county:
+          type: string
+        postal_code:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        time_zone:
+          type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        phone_number:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        type:
+          type: string
+        fax:
+          type: string
+      type: object
+      xml:
+        name: Location
     Organization:
       properties:
         id:
@@ -337,62 +376,6 @@ components:
       type: object
       xml:
         name: Organization
-    Location:
-      properties:
-        id:
-          type: integer
-        display_name:
-          type: string
-        street_address_1:
-          type: string
-        street_address_2:
-          type: string
-        city:
-          type: string
-        county:
-          type: string
-        postal_code:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        time_zone:
-          type: string
-        latitude:
-          type: string
-        longitude:
-          type: string
-        phone_number:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        type:
-          type: string
-        fax:
-          type: string
-      type: object
-      xml:
-        name: Location
-    Permission:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        display_name:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        permission_types_id:
-          type: integer
-      type: object
-      xml:
-        name: Permission
     User:
       properties:
         id:
@@ -474,3 +457,20 @@ components:
       type: object
       xml:
         name: Role
+    Permission:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        display_name:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        permission_types_id:
+          type: integer
+      type: object
+      xml:
+        name: Permission
