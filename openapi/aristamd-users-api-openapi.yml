@@ -274,6 +274,33 @@ paths:
           description: Unexpected failure
 components:
   schemas:
+    Role:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        display_name:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        notifications:
+          type: array
+          items:
+            type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        perms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+      type: object
+      xml:
+        name: Role
     Location:
       properties:
         id:
@@ -313,6 +340,77 @@ components:
       type: object
       xml:
         name: Location
+    Permission:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        display_name:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        permission_types_id:
+          type: integer
+      type: object
+      xml:
+        name: Permission
+    User:
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        email:
+          type: string
+        authentication_provider:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        status:
+          type: string
+        last_login:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        suffix:
+          type: string
+        base_dn:
+          type: string
+        primary_site_id:
+          type: integer
+        full_name:
+          type: string
+        organization:
+          type: object
+          $ref: '#/components/schemas/Organization'
+        phone:
+          type: string
+        mobile:
+          type: string
+        last_active_organization_id:
+          type: integer
+        notification_email:
+          type: string
+        notification_phone:
+          type: string
+        organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+      type: object
+      xml:
+        name: User
     Organization:
       properties:
         id:
@@ -376,101 +474,3 @@ components:
       type: object
       xml:
         name: Organization
-    User:
-      properties:
-        id:
-          type: integer
-        username:
-          type: string
-        email:
-          type: string
-        authentication_provider:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        status:
-          type: string
-        last_login:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        suffix:
-          type: string
-        base_dn:
-          type: string
-        primary_site_id:
-          type: integer
-        full_name:
-          type: string
-        organization:
-          type: object
-          $ref: '#/components/schemas/Organization'
-        phone:
-          type: string
-        mobile:
-          type: string
-        last_active_organization_id:
-          type: integer
-        notification_email:
-          type: string
-        notification_phone:
-          type: string
-        organizations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Organization'
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/Role'
-      type: object
-      xml:
-        name: User
-    Role:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        display_name:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        notifications:
-          type: array
-          items:
-            type: string
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        perms:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-      type: object
-      xml:
-        name: Role
-    Permission:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        display_name:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        permission_types_id:
-          type: integer
-      type: object
-      xml:
-        name: Permission

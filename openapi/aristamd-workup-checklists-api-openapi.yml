@@ -159,6 +159,21 @@ components:
       type: object
       xml:
         name: ThirdPartyWorkupChecklist
+    ChiefComplaint:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        display_name:
+          type: string
+        specialties:
+          type: array
+          items:
+            $ref: '#/components/schemas/Specialty'
+      type: object
+      xml:
+        name: ChiefComplaint
     Specialty:
       properties:
         id:
@@ -182,18 +197,3 @@ components:
       type: object
       xml:
         name: Specialty
-    ChiefComplaint:
-      properties:
-        id:
-          type: integer
-        code:
-          type: string
-        display_name:
-          type: string
-        specialties:
-          type: array
-          items:
-            $ref: '#/components/schemas/Specialty'
-      type: object
-      xml:
-        name: ChiefComplaint

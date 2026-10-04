@@ -163,6 +163,33 @@ paths:
       x-operation-id-original: index
 components:
   schemas:
+    Role:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        display_name:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        notifications:
+          type: array
+          items:
+            type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        perms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+      type: object
+      xml:
+        name: Role
     Location:
       properties:
         id:
@@ -225,62 +252,36 @@ components:
       type: object
       xml:
         name: Specialty
-    PanelistDetail:
+    Permission:
       properties:
         id:
           type: integer
-        suffix:
+        name:
           type: string
-        website:
+        display_name:
           type: string
-        mobile_number:
-          type: string
-        fax_number:
-          type: string
-        notes:
-          type: string
-        user_id:
-          type: integer
         created_at:
           type: string
         updated_at:
           type: string
-        profile_photo:
-          type: string
-        main_practice_location:
-          type: string
-        source_id:
+        permission_types_id:
           type: integer
-        certifications:
-          type: array
-          items:
-            properties:
-              name:
-                type: string
-              date:
-                type: string
-            type: object
-        education:
-          type: string
-        fellowships:
-          type: array
-          items:
-            properties:
-              name:
-                type: string
-              date:
-                type: string
-            type: object
-        user:
-          type: object
-          $ref: '#/components/schemas/User'
-        availability:
-          type: array
-          items:
-            $ref: '#/components/schemas/PanelistAvailability'
       type: object
       xml:
-        name: PanelistDetail
+        name: Permission
+    PanelistAvailability:
+      properties:
+        id:
+          type: integer
+        available_date:
+          type: string
+        panelist_id:
+          type: integer
+        specialty_id:
+          type: integer
+      type: object
+      xml:
+        name: PanelistAvailability
     Organization:
       properties:
         id:
@@ -344,6 +345,62 @@ components:
       type: object
       xml:
         name: Organization
+    PanelistDetail:
+      properties:
+        id:
+          type: integer
+        suffix:
+          type: string
+        website:
+          type: string
+        mobile_number:
+          type: string
+        fax_number:
+          type: string
+        notes:
+          type: string
+        user_id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        profile_photo:
+          type: string
+        main_practice_location:
+          type: string
+        source_id:
+          type: integer
+        certifications:
+          type: array
+          items:
+            properties:
+              name:
+                type: string
+              date:
+                type: string
+            type: object
+        education:
+          type: string
+        fellowships:
+          type: array
+          items:
+            properties:
+              name:
+                type: string
+              date:
+                type: string
+            type: object
+        user:
+          type: object
+          $ref: '#/components/schemas/User'
+        availability:
+          type: array
+          items:
+            $ref: '#/components/schemas/PanelistAvailability'
+      type: object
+      xml:
+        name: PanelistDetail
     User:
       properties:
         id:
@@ -398,60 +455,3 @@ components:
       type: object
       xml:
         name: User
-    PanelistAvailability:
-      properties:
-        id:
-          type: integer
-        available_date:
-          type: string
-        panelist_id:
-          type: integer
-        specialty_id:
-          type: integer
-      type: object
-      xml:
-        name: PanelistAvailability
-    Role:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        display_name:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        notifications:
-          type: array
-          items:
-            type: string
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        perms:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-      type: object
-      xml:
-        name: Role
-    Permission:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        display_name:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        permission_types_id:
-          type: integer
-      type: object
-      xml:
-        name: Permission
