@@ -472,19 +472,6 @@ paths:
       x-operation-id-original: events
 components:
   schemas:
-    PanelistAvailability:
-      properties:
-        id:
-          type: integer
-        available_date:
-          type: string
-        panelist_id:
-          type: integer
-        specialty_id:
-          type: integer
-      type: object
-      xml:
-        name: PanelistAvailability
     Role:
       properties:
         id:
@@ -512,48 +499,19 @@ components:
       type: object
       xml:
         name: Role
-    Patient:
+    Comment:
       properties:
         id:
           type: integer
-        organization_id:
+        user_id:
           type: integer
-        coverage_id:
+        association_type:
+          type: string
+        association_id:
           type: integer
-        system_of_record:
-          type: string
-        reference_id:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        date_of_birth:
-          type: string
-        gender:
+        text:
           type: string
         created_at:
-          type: string
-        updated_at:
-          type: string
-        version:
-          type: string
-        AB109:
-          type: boolean
-        chronic_conditions:
-          type: array
-          items:
-            type: string
-        estimated_release_date:
-          type: string
-        ccd_file:
-          properties:
-            id:
-              type: string
-          type: object
-        booking_history:
-          type: string
-        booking_date:
           properties:
             date:
               type: string
@@ -562,95 +520,38 @@ components:
             timezone:
               type: string
           type: object
-      type: object
-      xml:
-        name: Patient
-    Asset:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        security_profile:
-          type: string
-        mime_type:
-          type: string
-        hash:
-          type: string
-        size:
-          type: integer
-        created_at:
-          type: string
         updated_at:
-          type: string
-        url:
-          type: string
-      type: object
-      xml:
-        name: Asset
-    Location:
-      properties:
-        id:
-          type: integer
-        display_name:
-          type: string
-        street_address_1:
-          type: string
-        street_address_2:
-          type: string
-        city:
-          type: string
-        county:
-          type: string
-        postal_code:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        time_zone:
-          type: string
-        latitude:
-          type: string
-        longitude:
-          type: string
-        phone_number:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        request_date:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        deleted_at:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
         type:
           type: string
-        fax:
-          type: string
       type: object
       xml:
-        name: Location
-    EConsultHandoff:
-      properties:
-        id:
-          type: integer
-        econsult_id:
-          type: integer
-        from_user_id:
-          type: integer
-        to_user_id:
-          type: integer
-        status:
-          type: string
-        created_at:
-          properties:
-            date:
-              type: string
-            timezone_type:
-              type: integer
-            timezone:
-              type: string
-          type: object
-      type: object
-      xml:
-        name: EConsultHandoff
+        name: Comment
     Specialty:
       properties:
         id:
@@ -674,6 +575,43 @@ components:
       type: object
       xml:
         name: Specialty
+    Coverage:
+      properties:
+        id:
+          type: integer
+        patient_id:
+          type: integer
+        insurance_plan_name:
+          type: string
+        insurance_provider_name:
+          type: string
+        member_id:
+          type: string
+        status:
+          type: string
+        created_at:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        updated_at:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+        payor_organization_id:
+          type: integer
+      type: object
+      xml:
+        name: Coverage
     EConsult:
       properties:
         id:
@@ -824,6 +762,115 @@ components:
       type: object
       xml:
         name: EConsult
+    PanelistDetail:
+      properties:
+        id:
+          type: integer
+        suffix:
+          type: string
+        website:
+          type: string
+        mobile_number:
+          type: string
+        fax_number:
+          type: string
+        notes:
+          type: string
+        user_id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        profile_photo:
+          type: string
+        main_practice_location:
+          type: string
+        source_id:
+          type: integer
+        certifications:
+          type: array
+          items:
+            properties:
+              name:
+                type: string
+              date:
+                type: string
+            type: object
+        education:
+          type: string
+        fellowships:
+          type: array
+          items:
+            properties:
+              name:
+                type: string
+              date:
+                type: string
+            type: object
+        user:
+          type: object
+          $ref: '#/components/schemas/User'
+        availability:
+          type: array
+          items:
+            $ref: '#/components/schemas/PanelistAvailability'
+      type: object
+      xml:
+        name: PanelistDetail
+    Patient:
+      properties:
+        id:
+          type: integer
+        organization_id:
+          type: integer
+        coverage_id:
+          type: integer
+        system_of_record:
+          type: string
+        reference_id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        date_of_birth:
+          type: string
+        gender:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        version:
+          type: string
+        AB109:
+          type: boolean
+        chronic_conditions:
+          type: array
+          items:
+            type: string
+        estimated_release_date:
+          type: string
+        ccd_file:
+          properties:
+            id:
+              type: string
+          type: object
+        booking_history:
+          type: string
+        booking_date:
+          properties:
+            date:
+              type: string
+            timezone_type:
+              type: integer
+            timezone:
+              type: string
+          type: object
+      type: object
+      xml:
+        name: Patient
     Permission:
       properties:
         id:
@@ -841,71 +888,39 @@ components:
       type: object
       xml:
         name: Permission
-    Comment:
+    Asset:
       properties:
         id:
-          type: integer
-        user_id:
-          type: integer
-        association_type:
           type: string
-        association_id:
-          type: integer
-        text:
+        name:
           type: string
+        security_profile:
+          type: string
+        mime_type:
+          type: string
+        hash:
+          type: string
+        size:
+          type: integer
         created_at:
-          properties:
-            date:
-              type: string
-            timezone_type:
-              type: integer
-            timezone:
-              type: string
-          type: object
+          type: string
         updated_at:
-          properties:
-            date:
-              type: string
-            timezone_type:
-              type: integer
-            timezone:
-              type: string
-          type: object
-        request_date:
-          properties:
-            date:
-              type: string
-            timezone_type:
-              type: integer
-            timezone:
-              type: string
-          type: object
-        deleted_at:
-          properties:
-            date:
-              type: string
-            timezone_type:
-              type: integer
-            timezone:
-              type: string
-          type: object
-        type:
+          type: string
+        url:
           type: string
       type: object
       xml:
-        name: Comment
-    Coverage:
+        name: Asset
+    EConsultHandoff:
       properties:
         id:
           type: integer
-        patient_id:
+        econsult_id:
           type: integer
-        insurance_plan_name:
-          type: string
-        insurance_provider_name:
-          type: string
-        member_id:
-          type: string
+        from_user_id:
+          type: integer
+        to_user_id:
+          type: integer
         status:
           type: string
         created_at:
@@ -917,20 +932,9 @@ components:
             timezone:
               type: string
           type: object
-        updated_at:
-          properties:
-            date:
-              type: string
-            timezone_type:
-              type: integer
-            timezone:
-              type: string
-          type: object
-        payor_organization_id:
-          type: integer
       type: object
       xml:
-        name: Coverage
+        name: EConsultHandoff
     User:
       properties:
         id:
@@ -1048,59 +1052,55 @@ components:
       type: object
       xml:
         name: Organization
-    PanelistDetail:
+    Location:
       properties:
         id:
           type: integer
-        suffix:
+        display_name:
           type: string
-        website:
+        street_address_1:
           type: string
-        mobile_number:
+        street_address_2:
           type: string
-        fax_number:
+        city:
           type: string
-        notes:
+        county:
           type: string
-        user_id:
-          type: integer
+        postal_code:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        time_zone:
+          type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        phone_number:
+          type: string
         created_at:
           type: string
         updated_at:
           type: string
-        profile_photo:
+        type:
           type: string
-        main_practice_location:
+        fax:
           type: string
-        source_id:
-          type: integer
-        certifications:
-          type: array
-          items:
-            properties:
-              name:
-                type: string
-              date:
-                type: string
-            type: object
-        education:
-          type: string
-        fellowships:
-          type: array
-          items:
-            properties:
-              name:
-                type: string
-              date:
-                type: string
-            type: object
-        user:
-          type: object
-          $ref: '#/components/schemas/User'
-        availability:
-          type: array
-          items:
-            $ref: '#/components/schemas/PanelistAvailability'
       type: object
       xml:
-        name: PanelistDetail
+        name: Location
+    PanelistAvailability:
+      properties:
+        id:
+          type: integer
+        available_date:
+          type: string
+        panelist_id:
+          type: integer
+        specialty_id:
+          type: integer
+      type: object
+      xml:
+        name: PanelistAvailability

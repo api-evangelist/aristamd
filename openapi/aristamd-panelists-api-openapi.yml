@@ -190,45 +190,6 @@ components:
       type: object
       xml:
         name: Role
-    Location:
-      properties:
-        id:
-          type: integer
-        display_name:
-          type: string
-        street_address_1:
-          type: string
-        street_address_2:
-          type: string
-        city:
-          type: string
-        county:
-          type: string
-        postal_code:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        time_zone:
-          type: string
-        latitude:
-          type: string
-        longitude:
-          type: string
-        phone_number:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        type:
-          type: string
-        fax:
-          type: string
-      type: object
-      xml:
-        name: Location
     Specialty:
       properties:
         id:
@@ -252,6 +213,62 @@ components:
       type: object
       xml:
         name: Specialty
+    PanelistDetail:
+      properties:
+        id:
+          type: integer
+        suffix:
+          type: string
+        website:
+          type: string
+        mobile_number:
+          type: string
+        fax_number:
+          type: string
+        notes:
+          type: string
+        user_id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        profile_photo:
+          type: string
+        main_practice_location:
+          type: string
+        source_id:
+          type: integer
+        certifications:
+          type: array
+          items:
+            properties:
+              name:
+                type: string
+              date:
+                type: string
+            type: object
+        education:
+          type: string
+        fellowships:
+          type: array
+          items:
+            properties:
+              name:
+                type: string
+              date:
+                type: string
+            type: object
+        user:
+          type: object
+          $ref: '#/components/schemas/User'
+        availability:
+          type: array
+          items:
+            $ref: '#/components/schemas/PanelistAvailability'
+      type: object
+      xml:
+        name: PanelistDetail
     Permission:
       properties:
         id:
@@ -269,19 +286,60 @@ components:
       type: object
       xml:
         name: Permission
-    PanelistAvailability:
+    User:
       properties:
         id:
           type: integer
-        available_date:
+        username:
           type: string
-        panelist_id:
+        email:
+          type: string
+        authentication_provider:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        status:
+          type: string
+        last_login:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        suffix:
+          type: string
+        base_dn:
+          type: string
+        primary_site_id:
           type: integer
-        specialty_id:
+        full_name:
+          type: string
+        organization:
+          type: object
+          $ref: '#/components/schemas/Organization'
+        phone:
+          type: string
+        mobile:
+          type: string
+        last_active_organization_id:
           type: integer
+        notification_email:
+          type: string
+        notification_phone:
+          type: string
+        organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
       type: object
       xml:
-        name: PanelistAvailability
+        name: User
     Organization:
       properties:
         id:
@@ -345,113 +403,55 @@ components:
       type: object
       xml:
         name: Organization
-    PanelistDetail:
+    Location:
       properties:
         id:
           type: integer
-        suffix:
+        display_name:
           type: string
-        website:
+        street_address_1:
           type: string
-        mobile_number:
+        street_address_2:
           type: string
-        fax_number:
+        city:
           type: string
-        notes:
+        county:
           type: string
-        user_id:
-          type: integer
-        created_at:
+        postal_code:
           type: string
-        updated_at:
+        state:
           type: string
-        profile_photo:
+        country:
           type: string
-        main_practice_location:
+        time_zone:
           type: string
-        source_id:
-          type: integer
-        certifications:
-          type: array
-          items:
-            properties:
-              name:
-                type: string
-              date:
-                type: string
-            type: object
-        education:
+        latitude:
           type: string
-        fellowships:
-          type: array
-          items:
-            properties:
-              name:
-                type: string
-              date:
-                type: string
-            type: object
-        user:
-          type: object
-          $ref: '#/components/schemas/User'
-        availability:
-          type: array
-          items:
-            $ref: '#/components/schemas/PanelistAvailability'
-      type: object
-      xml:
-        name: PanelistDetail
-    User:
-      properties:
-        id:
-          type: integer
-        username:
+        longitude:
           type: string
-        email:
-          type: string
-        authentication_provider:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        status:
-          type: string
-        last_login:
+        phone_number:
           type: string
         created_at:
           type: string
         updated_at:
           type: string
-        suffix:
+        type:
           type: string
-        base_dn:
+        fax:
           type: string
-        primary_site_id:
-          type: integer
-        full_name:
-          type: string
-        organization:
-          type: object
-          $ref: '#/components/schemas/Organization'
-        phone:
-          type: string
-        mobile:
-          type: string
-        last_active_organization_id:
-          type: integer
-        notification_email:
-          type: string
-        notification_phone:
-          type: string
-        organizations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Organization'
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/Role'
       type: object
       xml:
-        name: User
+        name: Location
+    PanelistAvailability:
+      properties:
+        id:
+          type: integer
+        available_date:
+          type: string
+        panelist_id:
+          type: integer
+        specialty_id:
+          type: integer
+      type: object
+      xml:
+        name: PanelistAvailability
